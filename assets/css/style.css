@@ -443,3 +443,54 @@ footer{
 .social-btn.email:hover{
   box-shadow:0 45px 100px rgba(198,161,91,.75);
 }
+
+/* ===== FOOTER ICON BUTTONS ===== */
+
+.footer-title{
+  font-family:'Playfair Display',serif;
+  font-size:1.8rem;
+  margin-bottom:34px;
+}
+
+.footer-copy{
+  margin-top:42px;
+  color:var(--text-muted);
+  font-size:.85rem;
+}
+
+.social-icons{
+  display:flex;
+  justify-content:center;
+  gap:34px;
+}
+
+/* Icon button */
+.icon-btn{
+  width:58px;
+  height:58px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:rgba(255,255,255,.04);
+  border:1px solid var(--border-subtle);
+  transition:all .4s ease;
+}
+
+.icon-btn svg{
+  width:26px;
+  height:26px;
+  fill:var(--primary);
+  transition:.4s;
+}
+
+/* Hover luxury effect */
+.icon-btn:hover{
+  transform:translateY(-6px);
+  background:linear-gradient(135deg,#d4b36b,#b8944e);
+  box-shadow:0 25px 60px rgba(198,161,91,.6);
+}
+
+.icon-btn:hover svg{
+  fill:#1b1406;
+}
