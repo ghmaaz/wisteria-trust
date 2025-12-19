@@ -358,3 +358,88 @@ footer{
   .nav-links,.nav-cta{display:none}
   .menu-btn{display:flex}
 }
+
+/* ================= FOOTER SOCIAL BUTTONS ================= */
+
+.footer-title{
+  font-family:'Playfair Display',serif;
+  font-size:1.8rem;
+  margin-bottom:36px;
+}
+
+.footer-copy{
+  margin-top:46px;
+  color:var(--text-muted);
+  font-size:.85rem;
+}
+
+.social-buttons{
+  display:flex;
+  justify-content:center;
+  gap:26px;
+  flex-wrap:wrap;
+}
+
+/* Base button */
+.social-btn{
+  position:relative;
+  padding:16px 42px;
+  border-radius:999px;
+  font-weight:700;
+  letter-spacing:.6px;
+  overflow:hidden;
+  transition:transform .35s ease, box-shadow .35s ease;
+}
+
+/* Luxury shine hover */
+.social-btn::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(
+    120deg,
+    transparent,
+    rgba(255,255,255,.35),
+    transparent
+  );
+  transform:translateX(-100%);
+  transition:.8s;
+}
+
+.social-btn:hover::after{
+  transform:translateX(100%);
+}
+
+.social-btn:hover{
+  transform:translateY(-4px);
+}
+
+/* LinkedIn */
+.social-btn.linkedin{
+  background:linear-gradient(135deg,#0a66c2,#004182);
+  color:#fff;
+  box-shadow:0 25px 60px rgba(10,102,194,.45);
+}
+.social-btn.linkedin:hover{
+  box-shadow:0 45px 100px rgba(10,102,194,.65);
+}
+
+/* Instagram */
+.social-btn.instagram{
+  background:linear-gradient(135deg,#f58529,#dd2a7b,#8134af);
+  color:#fff;
+  box-shadow:0 25px 60px rgba(221,42,123,.45);
+}
+.social-btn.instagram:hover{
+  box-shadow:0 45px 100px rgba(221,42,123,.65);
+}
+
+/* Email */
+.social-btn.email{
+  background:linear-gradient(135deg,#d4b36b,#b8944e);
+  color:#1b1406;
+  box-shadow:0 25px 60px rgba(198,161,91,.55);
+}
+.social-btn.email:hover{
+  box-shadow:0 45px 100px rgba(198,161,91,.75);
+}
