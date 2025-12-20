@@ -506,7 +506,7 @@ footer{
   display:block;
   font-family:'Playfair Display',serif;
   font-size:1.2rem;
-  color:#f3e9d2;
+  color:red;
   letter-spacing:.3px;
   margin-bottom:6px;
 }
@@ -520,4 +520,5 @@ footer{
 .icon-btn:hover svg{
   fill:#1b1406;
 }
+
 
