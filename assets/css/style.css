@@ -491,23 +491,46 @@ footer{
   box-shadow:0 25px 60px rgba(198,161,91,.6);
 }
 
+.icon-btn:hover svg{
+  fill:#1b1406;
+}
+
+/* ================= BRAND LOGO ================= */
+.brand{
+  display:flex;
+  align-items:center;
+  gap:14px;
+}
+
+.brand img{
+  height:38px;
+  width:auto;
+}
+
+.brand span{
+  font-family:'Playfair Display',serif;
+  font-size:1.45rem;
+  font-weight:700;
+  letter-spacing:1px;
+  color:#f8fafc;
+}
+
+/* ================= DEVELOPMENT NOTICE ================= */
 .dev-notice{
   max-width:900px;
-  margin:40px auto 0;
+  margin:50px auto 0;
   padding:22px 28px;
   border-radius:16px;
   background:linear-gradient(180deg,#151e33,#0f1627);
   border:1px solid rgba(198,161,91,.45);
   box-shadow:0 25px 70px rgba(0,0,0,.55);
-  text-align:left;
 }
 
 .dev-notice strong{
   display:block;
   font-family:'Playfair Display',serif;
   font-size:1.2rem;
-  color:red;
-  letter-spacing:.3px;
+  color:#f3e9d2;
   margin-bottom:6px;
 }
 
@@ -515,10 +538,6 @@ footer{
   font-size:.95rem;
   color:#cbd5e1;
   line-height:1.6;
-}
-
-.icon-btn:hover svg{
-  fill:#1b1406;
 }
 
 
