@@ -121,4 +121,35 @@ export const getAllVerifications = async (req, res) => {
     res.status(500).json({ success: false, message: "Server error" });
   }
 };
+export const revokeVerification = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const verification = await Verification.findOneAndUpdate(
+      { verificationId: id },
+      { status: "REVOKED" },
+      { new: true }
+    );
+
+    if (!verification) {
+      return res.status(404).json({
+        success: false,
+        message: "Verification not found"
+      });
+    }
+
+    res.json({
+      success: true,
+      message: "Verification revoked",
+      data: verification
+    });
+
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "Server error"
+    });
+  }
+};
+
 
