@@ -17,7 +17,7 @@ document.querySelectorAll('.m-link').forEach(link => {
    REAL VERIFICATION CHECK
 ================================ */
 async function verifySeller() {
- const res = await fetch(`https://wisteria-backend.onrender.com/api/verify/${v}`);
+  const v = document.getElementById('vid').value.trim();   // ✅ FIRST
   const out = document.getElementById('output');
 
   if (!v) {
@@ -28,7 +28,7 @@ async function verifySeller() {
   out.innerHTML = "<div class='result'>Checking verification...</div>";
 
   try {
-    const res = await fetch(`https://wisteriatrust.com/api/verify/${v}`);
+    const res = await fetch(`https://wisteria-backend.onrender.com/api/verify/${v}`);
     const data = await res.json();
 
     if (!res.ok || data.verified === false) {
@@ -40,7 +40,6 @@ async function verifySeller() {
       return;
     }
 
-    // ✅ VERIFIED
     out.innerHTML = `
       <div class="result success">
         ✅ <strong>Seller Verified</strong><br><br>
