@@ -2,7 +2,8 @@ import express from "express";
 import { adminLogin } from "../controllers/admin.controller.js";
 import {
   createVerification,
-  getAllVerifications
+  getAllVerifications,
+  revokeVerification      // ✅ ADD THIS
 } from "../controllers/verification.controller.js";
 import { protectAdmin } from "../middlewares/adminAuth.js";
 
@@ -19,8 +20,17 @@ router.post("/login", adminLogin);
 router.post("/verification", protectAdmin, createVerification);
 
 /**
- * Admin get all verifications (protected)  ✅ NEW
+ * Admin get all verifications (protected)
  */
 router.get("/verifications", protectAdmin, getAllVerifications);
+
+/**
+ * Admin revoke verification (protected) 🔴 NEW
+ */
+router.patch(
+  "/verification/:id/revoke",
+  protectAdmin,
+  revokeVerification
+);
 
 export default router;
