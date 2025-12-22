@@ -17,7 +17,7 @@ document.querySelectorAll('.m-link').forEach(link => {
    REAL VERIFICATION CHECK
 ================================ */
 async function verifySeller() {
-  const v = document.getElementById('vid').value.trim();
+ const res = await fetch(`https://wisteria-backend.onrender.com/api/verify/${v}`);
   const out = document.getElementById('output');
 
   if (!v) {
@@ -60,3 +60,4 @@ async function verifySeller() {
     `;
   }
 }
+
