@@ -83,4 +83,28 @@ async function createVerification() {
     msg.innerText = "Server error";
   }
 }
+async function loadVerifications() {
+  const token = localStorage.getItem("adminToken");
+  const res = await fetch("https://wisteria-backend.onrender.com/api/admin/verifications", {
+    headers: { Authorization: "Bearer " + token }
+  });
+
+  const data = await res.json();
+  if (!data.success) return;
+
+  const tbody = document.getElementById("list");
+  tbody.innerHTML = "";
+
+  data.data.forEach(v => {
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td>${v.verificationId}</td>
+      <td>${v.sellerName}</td>
+      <td>${v.status}</td>
+      <td>${new Date(v.expiryDate).toDateString()}</td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
 
