@@ -14,16 +14,24 @@
       background: #111827;
       padding: 20px;
       border-radius: 10px;
-      max-width: 600px;
+      max-width: 700px;
+    }
+    input, button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
     }
     button {
-      padding: 10px 15px;
-      margin-top: 15px;
       background: #d4af37;
       border: none;
       font-weight: bold;
       cursor: pointer;
     }
+    .msg {
+      margin-top: 15px;
+    }
+    .success { color: #22c55e; }
+    .error { color: #ef4444; }
   </style>
 </head>
 <body>
@@ -31,6 +39,20 @@
   <div class="box">
     <h1>Admin Dashboard</h1>
     <p>Welcome! You are logged in as Admin.</p>
+
+    <h3>Create New Verification</h3>
+
+    <input id="sellerName" placeholder="Seller Name">
+    <input id="businessName" placeholder="Business Name">
+    <input id="email" placeholder="Email">
+    <input id="city" placeholder="City">
+    <input id="expiryDate" type="date">
+
+    <button onclick="createVerification()">Create Verification</button>
+
+    <div id="msg" class="msg"></div>
+
+    <hr style="margin:20px 0">
 
     <button onclick="logout()">Logout</button>
   </div>
