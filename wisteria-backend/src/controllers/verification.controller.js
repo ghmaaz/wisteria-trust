@@ -112,3 +112,13 @@ export const publicVerify = async (req, res) => {
     });
   }
 };
+
+export const getAllVerifications = async (req, res) => {
+  try {
+    const list = await Verification.find().sort({ createdAt: -1 });
+    res.json({ success: true, data: list });
+  } catch (err) {
+    res.status(500).json({ success: false, message: "Server error" });
+  }
+};
+
