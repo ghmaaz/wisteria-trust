@@ -106,5 +106,10 @@ async function loadVerifications() {
     tbody.appendChild(tr);
   });
 }
+// Dashboard page par ho to list load karo
+if (window.location.pathname.includes("dashboard")) {
+  loadVerifications();
+}
+
 
 
