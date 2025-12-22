@@ -43,3 +43,44 @@ function logout() {
   localStorage.removeItem("adminToken");
   window.location.href = "login.html";
 }
+async function createVerification() {
+  const token = localStorage.getItem("adminToken");
+  const msg = document.getElementById("msg");
+
+  const payload = {
+    sellerName: document.getElementById("sellerName").value.trim(),
+    businessName: document.getElementById("businessName").value.trim(),
+    email: document.getElementById("email").value.trim(),
+    city: document.getElementById("city").value.trim(),
+    expiryDate: document.getElementById("expiryDate").value
+  };
+
+  msg.innerText = "";
+
+  try {
+    const res = await fetch("https://wisteria-backend.onrender.com/api/admin/verification", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + token
+      },
+      body: JSON.stringify(payload)
+    });
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      msg.className = "msg error";
+      msg.innerText = data.message || "Failed to create verification";
+      return;
+    }
+
+    msg.className = "msg success";
+    msg.innerText = "✅ Verification created successfully!";
+
+  } catch (err) {
+    msg.className = "msg error";
+    msg.innerText = "Server error";
+  }
+}
+
