@@ -29,3 +29,17 @@ async function adminLogin() {
     msg.innerText = "Server error";
   }
 }
+
+// 🔐 Protect dashboard
+if (window.location.pathname.includes("dashboard")) {
+  const token = localStorage.getItem("adminToken");
+  if (!token) {
+    window.location.href = "login.html";
+  }
+}
+
+// 🚪 Logout
+function logout() {
+  localStorage.removeItem("adminToken");
+  window.location.href = "login.html";
+}
