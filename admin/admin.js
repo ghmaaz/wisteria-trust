@@ -90,6 +90,7 @@ async function loadVerifications() {
   });
 
   const data = await res.json();
+  console.log("API RESPONSE:", data);
   if (!data.success) return;
 
   const tbody = document.getElementById("list");
@@ -110,6 +111,7 @@ async function loadVerifications() {
 if (window.location.pathname.includes("dashboard")) {
   loadVerifications();
 }
+
 
 
 
