@@ -5,11 +5,9 @@ import {
   getAllVerifications,
   revokeVerification,
   expireVerification,
-  extendVerification     // ⭐ NEW
+  extendVerification
 } from "../controllers/verification.controller.js";
-
 import { protectAdmin } from "../middlewares/adminAuth.js";
-import { expireVerification } from "../controllers/verification.controller.js";
 
 const router = express.Router();
 
@@ -29,7 +27,7 @@ router.post("/verification", protectAdmin, createVerification);
 router.get("/verifications", protectAdmin, getAllVerifications);
 
 /**
- * Admin revoke verification (protected) 🔴 NEW
+ * Admin revoke verification (protected)
  */
 router.patch(
   "/verification/:id/revoke",
@@ -37,13 +35,18 @@ router.patch(
   revokeVerification
 );
 
-
+/**
+ * Admin expire verification (protected)
+ */
 router.patch(
   "/verification/:id/expire",
   protectAdmin,
   expireVerification
 );
 
+/**
+ * Admin extend verification expiry (protected)
+ */
 router.patch(
   "/verification/:id/extend",
   protectAdmin,
@@ -51,5 +54,3 @@ router.patch(
 );
 
 export default router;
-
-
