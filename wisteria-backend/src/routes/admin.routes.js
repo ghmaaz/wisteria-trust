@@ -44,5 +44,12 @@ router.patch(
   expireVerification
 );
 
+router.patch(
+  "/verification/:id/extend",
+  protectAdmin,
+  extendVerification
+);
+
 export default router;
+
 
