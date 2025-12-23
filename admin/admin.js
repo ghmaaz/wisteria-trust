@@ -1,6 +1,8 @@
 /* ===============================
    ADMIN LOGIN
 ================================ */
+let ALL_VERIFICATIONS = [];
+
 async function adminLogin() {
   const email = document.getElementById("email").value.trim();
   const password = document.getElementById("password").value.trim();
@@ -121,30 +123,10 @@ async function loadVerifications() {
 
     if (!data.success) return;
 
-    const tbody = document.getElementById("list");
-    tbody.innerHTML = "";
+    // 🔥 STEP 2 IMPORTANT PART
+    ALL_VERIFICATIONS = data.data;   // store full list
+    renderTable(ALL_VERIFICATIONS);  // render using common renderer
 
-    data.data.forEach(v => {
-      let actions = "-";
-
-      if (v.status === "ACTIVE") {
-        actions = `
-          <button onclick="revokeVerification('${v.verificationId}')">Revoke</button>
-          <button onclick="expireVerification('${v.verificationId}')">Expire</button>
-        `;
-      }
-
-      const tr = document.createElement("tr");
-      tr.innerHTML = `
-        <td>${v.verificationId}</td>
-        <td>${v.sellerName}</td>
-        <td>${v.status}</td>
-        <td>${new Date(v.expiryDate).toDateString()}</td>
-        <td>${actions}</td>
-      `;
-
-      tbody.appendChild(tr);
-    });
   } catch (err) {
     console.error("Load verifications failed", err);
   }
@@ -209,4 +191,49 @@ async function expireVerification(id) {
 ================================ */
 if (window.location.pathname.includes("dashboard")) {
   loadVerifications();
+}
+
+function applyFilters() {
+  const search = document.getElementById("searchInput").value.toLowerCase();
+  const status = document.getElementById("statusFilter").value;
+
+  const filtered = ALL_VERIFICATIONS.filter(v => {
+    const matchSearch =
+      v.verificationId.toLowerCase().includes(search) ||
+      v.sellerName.toLowerCase().includes(search);
+
+    const matchStatus =
+      status === "ALL" ? true : v.status === status;
+
+    return matchSearch && matchStatus;
+  });
+
+  renderTable(filtered);
+}
+
+function renderTable(list) {
+  const tbody = document.getElementById("list");
+  tbody.innerHTML = "";
+
+  list.forEach(v => {
+    let actions = "-";
+
+    if (v.status === "ACTIVE") {
+      actions = `
+        <button onclick="revokeVerification('${v.verificationId}')">Revoke</button>
+        <button onclick="expireVerification('${v.verificationId}')">Expire</button>
+      `;
+    }
+
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td>${v.verificationId}</td>
+      <td>${v.sellerName}</td>
+      <td>${v.status}</td>
+      <td>${new Date(v.expiryDate).toDateString()}</td>
+      <td>${actions}</td>
+    `;
+
+    tbody.appendChild(tr);
+  });
 }
