@@ -58,6 +58,22 @@
   </div>
 
   <h3>All Verifications</h3>
+  <div class="controls">
+  <input
+    type="text"
+    id="searchInput"
+    placeholder="Search by ID or Seller"
+    oninput="applyFilters()"
+  />
+
+  <select id="statusFilter" onchange="applyFilters()">
+    <option value="ALL">All</option>
+    <option value="ACTIVE">ACTIVE</option>
+    <option value="REVOKED">REVOKED</option>
+    <option value="EXPIRED">EXPIRED</option>
+  </select>
+</div>
+
 <table border="1" width="100%" cellpadding="8">
   <thead>
     <tr>
