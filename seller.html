@@ -56,11 +56,33 @@
     <li>Paste it where you want the badge to appear on your website</li>
     <li>Replace <strong>WT-XXXX-XXX</strong> with your Verification ID</li>
   </ol>
-
-  <code>
+<div style="position:relative;">
+  <code id="badgeCode">
 &lt;script src="https://wisteriatrust.com/badge.js"
         data-id="WT-XXXX-XXX"&gt;&lt;/script&gt;
   </code>
+
+  <button
+    onclick="copyBadgeCode()"
+    style="
+      position:absolute;
+      top:10px;
+      right:10px;
+      padding:6px 10px;
+      font-size:12px;
+      border:none;
+      border-radius:6px;
+      cursor:pointer;
+      background:#0f9d58;
+      color:white;
+    "
+  >
+    Copy
+  </button>
+</div>
+
+<p id="copyMsg" style="color:#0f9d58;font-weight:600;"></p>
+
 
   <div class="note">
     ✔ The badge updates automatically.  
@@ -87,6 +109,17 @@
   </div>
 
 </div>
+<script>
+  function copyBadgeCode() {
+    const code = document.getElementById("badgeCode").innerText;
+    navigator.clipboard.writeText(code).then(() => {
+      document.getElementById("copyMsg").innerText = "✅ Code copied!";
+      setTimeout(() => {
+        document.getElementById("copyMsg").innerText = "";
+      }, 2000);
+    });
+  }
+</script>
 
 </body>
 </html>
