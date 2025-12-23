@@ -32,6 +32,56 @@
     }
     .success { color: #22c55e; }
     .error { color: #ef4444; }
+
+    .status {
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    }
+
+    .status.ACTIVE {
+      background: #e6f9f0;
+      color: #0f9d58;
+    }
+
+    .status.REVOKED {
+      background: #fdecea;
+      color: #d93025;
+    }
+
+    .status.EXPIRED {
+      background: #fff4e5;
+      color: #f29900;
+    }
+    button {
+      padding: 6px 10px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 13px;
+    }
+
+    button:hover {
+      opacity: 0.9;
+    }
+
+    button:nth-child(1) {
+      background: #d93025;
+      color: white;
+    }
+
+    button:nth-child(2) {
+      background: #f29900;
+      color: white;
+    }
+
+    button:nth-child(3) {
+      background: #1a73e8;
+      color: white;
+    }
+
   </style>
 </head>
 <body>
