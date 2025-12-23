@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Seller Verification — Wisteria Trust</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f8fafc;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .card {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      max-width: 400px;
+      width: 100%;
+      text-align: center;
+    }
+
+    .success { color: #0f9d58; }
+    .error { color: #d93025; }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <h2>Wisteria Trust</h2>
+    <div id="result">Checking verification…</div>
+  </div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get("id");
+    const result = document.getElementById("result");
+
+    if (!id) {
+      result.innerHTML = "<p class='error'>Invalid verification link</p>";
+    } else {
+      fetch(`https://wisteria-backend.onrender.com/api/verify/${id}`)
+        .then(res => res.json())
+        .then(data => {
+          if (!data.verified) {
+            result.innerHTML = `
+              <p class="error">❌ Seller not verified</p>
+              <p>Status: ${data.status || "UNKNOWN"}</p>
+            `;
+            return;
+          }
+
+          result.innerHTML = `
+            <p class="success">✅ Seller Verified</p>
+            <p><strong>${data.sellerName}</strong></p>
+            <p>Valid till: ${new Date(data.validTill).toDateString()}</p>
+          `;
+        })
+        .catch(() => {
+          result.innerHTML = "<p class='error'>Unable to verify</p>";
+        });
+    }
+  </script>
+
+</body>
+</html>
