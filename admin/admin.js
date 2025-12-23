@@ -43,6 +43,7 @@ function logout() {
   localStorage.removeItem("adminToken");
   window.location.href = "login.html";
 }
+
 async function createVerification() {
   const token = localStorage.getItem("adminToken");
   const msg = document.getElementById("msg");
@@ -83,35 +84,89 @@ async function createVerification() {
     msg.innerText = "Server error";
   }
 }
+
 async function loadVerifications() {
   const token = localStorage.getItem("adminToken");
-  const res = await fetch("https://wisteria-backend.onrender.com/api/admin/verifications", {
-    headers: { Authorization: "Bearer " + token }
-  });
+
+  const res = await fetch(
+    "https://wisteria-backend.onrender.com/api/admin/verifications",
+    {
+      headers: { Authorization: "Bearer " + token }
+    }
+  );
 
   const data = await res.json();
-  console.log("API RESPONSE:", data);
   if (!data.success) return;
 
   const tbody = document.getElementById("list");
   tbody.innerHTML = "";
 
   data.data.forEach(v => {
+    let actions = "-";
+
+    if (v.status === "ACTIVE") {
+      actions = `
+        <button onclick="revokeVerification('${v.verificationId}')">Revoke</button>
+        <button onclick="expireVerification('${v.verificationId}')">Expire</button>
+      `;
+    }
+
     const tr = document.createElement("tr");
     tr.innerHTML = `
       <td>${v.verificationId}</td>
       <td>${v.sellerName}</td>
       <td>${v.status}</td>
       <td>${new Date(v.expiryDate).toDateString()}</td>
+      <td>${actions}</td>
     `;
+
     tbody.appendChild(tr);
   });
 }
-// Dashboard page par ho to list load karo
-if (window.location.pathname.includes("dashboard")) {
+
+async function revokeVerification(id) {
+  if (!confirm("Are you sure you want to revoke this verification?")) return;
+
+  const token = localStorage.getItem("adminToken");
+
+  const res = await fetch(
+    `https://wisteria-backend.onrender.com/api/admin/verification/${id}/revoke`,
+    {
+      method: "PATCH",
+      headers: {
+        Authorization: "Bearer " + token
+      }
+    }
+  );
+
+  if (!res.ok) {
+    alert("Failed to revoke verification");
+    return;
+  }
+
+  alert("Verification revoked");
   loadVerifications();
 }
+async function expireVerification(id) {
+  if (!confirm("Are you sure you want to expire this verification?")) return;
 
+  const token = localStorage.getItem("adminToken");
 
+  const res = await fetch(
+    `https://wisteria-backend.onrender.com/api/admin/verification/${id}/expire`,
+    {
+      method: "PATCH",
+      headers: {
+        Authorization: "Bearer " + token
+      }
+    }
+  );
 
+  if (!res.ok) {
+    alert("Failed to expire verification");
+    return;
+  }
 
+  alert("Verification expired");
+  loadVerifications();
+}
