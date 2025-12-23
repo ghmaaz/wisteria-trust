@@ -23,9 +23,15 @@
         return;
       }
 
-      badge.innerHTML = `
-        ✅ <strong>Verified by Wisteria Trust</strong>
-      `;
+     badge.innerHTML = `
+  <span style="color:#0f9d58;font-weight:600;">✔ Verified by</span>
+  <a href="https://wisteriatrust.com/verify.html?id=${verificationId}"
+     target="_blank"
+     style="color:#0f9d58;text-decoration:none;font-weight:700;">
+     Wisteria Trust
+  </a>
+`;
+
     })
     .catch(() => {
       badge.innerHTML = "⚠️ Verification unavailable";
