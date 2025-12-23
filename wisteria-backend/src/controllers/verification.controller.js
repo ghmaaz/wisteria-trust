@@ -151,5 +151,36 @@ export const revokeVerification = async (req, res) => {
     });
   }
 };
+export const expireVerification = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const verification = await Verification.findOneAndUpdate(
+      { verificationId: id },
+      { status: "EXPIRED" },
+      { new: true }
+    );
+
+    if (!verification) {
+      return res.status(404).json({
+        success: false,
+        message: "Verification not found"
+      });
+    }
+
+    res.json({
+      success: true,
+      message: "Verification expired",
+      data: verification
+    });
+
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "Server error"
+    });
+  }
+};
+
 
 
