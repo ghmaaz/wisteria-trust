@@ -3,8 +3,11 @@ import { adminLogin } from "../controllers/admin.controller.js";
 import {
   createVerification,
   getAllVerifications,
-  revokeVerification      // ✅ ADD THIS
+  revokeVerification,
+  expireVerification,
+  extendVerification     // ⭐ NEW
 } from "../controllers/verification.controller.js";
+
 import { protectAdmin } from "../middlewares/adminAuth.js";
 import { expireVerification } from "../controllers/verification.controller.js";
 
@@ -42,3 +45,4 @@ router.patch(
 );
 
 export default router;
+
