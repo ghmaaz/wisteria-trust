@@ -232,7 +232,7 @@ function renderTable(list) {
     tr.innerHTML = `
       <td>${v.verificationId}</td>
       <td>${v.sellerName}</td>
-      <td>${v.status}</td>
+      <td><span class="status ${v.status}">${v.status}</span></td>
       <td>${new Date(v.expiryDate).toDateString()}</td>
       <td>${actions}</td>
     `;
