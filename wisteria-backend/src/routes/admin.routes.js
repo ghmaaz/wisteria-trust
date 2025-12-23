@@ -6,6 +6,7 @@ import {
   revokeVerification      // ✅ ADD THIS
 } from "../controllers/verification.controller.js";
 import { protectAdmin } from "../middlewares/adminAuth.js";
+import { expireVerification } from "../controllers/verification.controller.js";
 
 const router = express.Router();
 
@@ -31,6 +32,13 @@ router.patch(
   "/verification/:id/revoke",
   protectAdmin,
   revokeVerification
+);
+
+
+router.patch(
+  "/verification/:id/expire",
+  protectAdmin,
+  expireVerification
 );
 
 export default router;
