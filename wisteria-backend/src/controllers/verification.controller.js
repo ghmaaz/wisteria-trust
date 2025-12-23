@@ -182,5 +182,43 @@ export const expireVerification = async (req, res) => {
   }
 };
 
+export const extendVerification = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { expiryDate } = req.body;
+
+    if (!expiryDate) {
+      return res.status(400).json({
+        success: false,
+        message: "Expiry date is required"
+      });
+    }
+
+    const verification = await Verification.findOneAndUpdate(
+      { verificationId: id },
+      { expiryDate },
+      { new: true }
+    );
+
+    if (!verification) {
+      return res.status(404).json({
+        success: false,
+        message: "Verification not found"
+      });
+    }
+
+    res.json({
+      success: true,
+      message: "Expiry date updated",
+      data: verification
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "Server error"
+    });
+  }
+};
+
 
 
