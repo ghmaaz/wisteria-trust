@@ -1,3 +1,6 @@
+/* ===============================
+   ADMIN LOGIN
+================================ */
 async function adminLogin() {
   const email = document.getElementById("email").value.trim();
   const password = document.getElementById("password").value.trim();
@@ -6,11 +9,14 @@ async function adminLogin() {
   msg.innerText = "";
 
   try {
-    const res = await fetch("https://wisteria-backend.onrender.com/api/admin/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password })
-    });
+    const res = await fetch(
+      "https://wisteria-backend.onrender.com/api/admin/login",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password })
+      }
+    );
 
     const data = await res.json();
 
@@ -22,15 +28,16 @@ async function adminLogin() {
     // ✅ Save token
     localStorage.setItem("adminToken", data.token);
 
-    // ➡ Redirect
+    // ➡ Redirect to dashboard
     window.location.href = "dashboard.html";
-
   } catch (err) {
     msg.innerText = "Server error";
   }
 }
 
-// 🔐 Protect dashboard
+/* ===============================
+   PROTECT DASHBOARD
+================================ */
 if (window.location.pathname.includes("dashboard")) {
   const token = localStorage.getItem("adminToken");
   if (!token) {
@@ -38,12 +45,17 @@ if (window.location.pathname.includes("dashboard")) {
   }
 }
 
-// 🚪 Logout
+/* ===============================
+   LOGOUT
+================================ */
 function logout() {
   localStorage.removeItem("adminToken");
   window.location.href = "login.html";
 }
 
+/* ===============================
+   CREATE VERIFICATION
+================================ */
 async function createVerification() {
   const token = localStorage.getItem("adminToken");
   const msg = document.getElementById("msg");
@@ -59,14 +71,17 @@ async function createVerification() {
   msg.innerText = "";
 
   try {
-    const res = await fetch("https://wisteria-backend.onrender.com/api/admin/verification", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": "Bearer " + token
-      },
-      body: JSON.stringify(payload)
-    });
+    const res = await fetch(
+      "https://wisteria-backend.onrender.com/api/admin/verification",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + token
+        },
+        body: JSON.stringify(payload)
+      }
+    );
 
     const data = await res.json();
 
@@ -79,51 +94,65 @@ async function createVerification() {
     msg.className = "msg success";
     msg.innerText = "✅ Verification created successfully!";
 
+    // 🔄 reload list
+    loadVerifications();
   } catch (err) {
     msg.className = "msg error";
     msg.innerText = "Server error";
   }
 }
 
+/* ===============================
+   LOAD VERIFICATIONS (LIST)
+================================ */
 async function loadVerifications() {
   const token = localStorage.getItem("adminToken");
 
-  const res = await fetch(
-    "https://wisteria-backend.onrender.com/api/admin/verifications",
-    {
-      headers: { Authorization: "Bearer " + token }
-    }
-  );
+  try {
+    const res = await fetch(
+      "https://wisteria-backend.onrender.com/api/admin/verifications",
+      {
+        headers: { Authorization: "Bearer " + token }
+      }
+    );
 
-  const data = await res.json();
-  if (!data.success) return;
+    const data = await res.json();
+    console.log("API RESPONSE:", data);
 
-  const tbody = document.getElementById("list");
-  tbody.innerHTML = "";
+    if (!data.success) return;
 
-  data.data.forEach(v => {
-    let actions = "-";
+    const tbody = document.getElementById("list");
+    tbody.innerHTML = "";
 
-    if (v.status === "ACTIVE") {
-      actions = `
-        <button onclick="revokeVerification('${v.verificationId}')">Revoke</button>
-        <button onclick="expireVerification('${v.verificationId}')">Expire</button>
+    data.data.forEach(v => {
+      let actions = "-";
+
+      if (v.status === "ACTIVE") {
+        actions = `
+          <button onclick="revokeVerification('${v.verificationId}')">Revoke</button>
+          <button onclick="expireVerification('${v.verificationId}')">Expire</button>
+        `;
+      }
+
+      const tr = document.createElement("tr");
+      tr.innerHTML = `
+        <td>${v.verificationId}</td>
+        <td>${v.sellerName}</td>
+        <td>${v.status}</td>
+        <td>${new Date(v.expiryDate).toDateString()}</td>
+        <td>${actions}</td>
       `;
-    }
 
-    const tr = document.createElement("tr");
-    tr.innerHTML = `
-      <td>${v.verificationId}</td>
-      <td>${v.sellerName}</td>
-      <td>${v.status}</td>
-      <td>${new Date(v.expiryDate).toDateString()}</td>
-      <td>${actions}</td>
-    `;
-
-    tbody.appendChild(tr);
-  });
+      tbody.appendChild(tr);
+    });
+  } catch (err) {
+    console.error("Load verifications failed", err);
+  }
 }
 
+/* ===============================
+   REVOKE VERIFICATION
+================================ */
 async function revokeVerification(id) {
   if (!confirm("Are you sure you want to revoke this verification?")) return;
 
@@ -144,9 +173,13 @@ async function revokeVerification(id) {
     return;
   }
 
-  alert("Verification revoked");
+  alert("Verification revoked successfully");
   loadVerifications();
 }
+
+/* ===============================
+   EXPIRE VERIFICATION
+================================ */
 async function expireVerification(id) {
   if (!confirm("Are you sure you want to expire this verification?")) return;
 
@@ -167,6 +200,13 @@ async function expireVerification(id) {
     return;
   }
 
-  alert("Verification expired");
+  alert("Verification expired successfully");
+  loadVerifications();
+}
+
+/* ===============================
+   AUTO LOAD ON DASHBOARD
+================================ */
+if (window.location.pathname.includes("dashboard")) {
   loadVerifications();
 }
