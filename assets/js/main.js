@@ -31,14 +31,22 @@ async function verifySeller() {
     const res = await fetch(`https://wisteria-backend.onrender.com/api/verify/${v}`);
     const data = await res.json();
 
-    if (!res.ok || data.verified === false) {
-      out.innerHTML = `
-        <div class="result error">
-          ❌ This seller is not verified by Wisteria Trust.
-        </div>
-      `;
+      if (!res.ok || data.verified === false) {
+
+      let msg = "❌ This seller is not verified by Wisteria Trust.";
+
+      if (data.status === "REVOKED") {
+        msg = "❌ This verification has been revoked by Wisteria Trust.";
+      }
+
+      if (data.status === "EXPIRED") {
+        msg = "⏰ This verification has expired.";
+      }
+
+      out.innerHTML = `<div class="result error">${msg}</div>`;
       return;
     }
+
 
     out.innerHTML = `
       <div class="result success">
@@ -59,4 +67,3 @@ async function verifySeller() {
     `;
   }
 }
-
