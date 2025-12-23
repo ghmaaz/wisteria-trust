@@ -218,12 +218,15 @@ function renderTable(list) {
   list.forEach(v => {
     let actions = "-";
 
-    if (v.status === "ACTIVE") {
+        if (v.status === "ACTIVE")
+   {
       actions = `
         <button onclick="revokeVerification('${v.verificationId}')">Revoke</button>
         <button onclick="expireVerification('${v.verificationId}')">Expire</button>
+        <button onclick="extendExpiry('${v.verificationId}')">Extend</button>
       `;
     }
+
 
     const tr = document.createElement("tr");
     tr.innerHTML = `
@@ -236,4 +239,33 @@ function renderTable(list) {
 
     tbody.appendChild(tr);
   });
+}
+
+async function extendExpiry(id) {
+  const newDate = prompt("Enter new expiry date (YYYY-MM-DD):");
+  if (!newDate) return;
+
+  const token = localStorage.getItem("adminToken");
+
+  const res = await fetch(
+    `https://wisteria-backend.onrender.com/api/admin/verification/${id}/extend`,
+    {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token
+      },
+      body: JSON.stringify({ expiryDate: newDate })
+    }
+  );
+
+  const data = await res.json();
+
+  if (!res.ok) {
+    alert(data.message || "Failed to update expiry");
+    return;
+  }
+
+  alert("Expiry date updated successfully");
+  loadVerifications();
 }
