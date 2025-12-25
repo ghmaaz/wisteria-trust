@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Seller Verification | Wisteria Trust</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f6f7fb;
+      margin: 0;
+      padding: 40px;
+    }
+    .container {
+      max-width: 600px;
+      margin: auto;
+      background: #fff;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    }
+    h1 {
+      margin-top: 0;
+      font-size: 22px;
+    }
+    .status {
+      margin: 15px 0;
+      font-weight: bold;
+    }
+    .ACTIVE { color: green; }
+    .REVOKED { color: red; }
+    .EXPIRED { color: orange; }
+    .error {
+      color: red;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Seller Verification</h1>
+
+    <div id="content">
+      Loading verification details...
+    </div>
+  </div>
+
+  <script src="seller.js"></script>
+</body>
+</html>
