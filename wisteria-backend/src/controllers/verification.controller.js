@@ -219,6 +219,52 @@ export const extendVerification = async (req, res) => {
     });
   }
 };
+export const updateVerification = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const {
+      sellerName,
+      businessName,
+      city,
+      email,
+      expiryDate
+    } = req.body;
+
+    const updated = await Verification.findOneAndUpdate(
+      { verificationId: id },
+      {
+        sellerName,
+        businessName,
+        city,
+        email,
+        expiryDate
+      },
+      { new: true }
+    );
+
+    if (!updated) {
+      return res.status(404).json({
+        success: false,
+        message: "Verification not found"
+      });
+    }
+
+    res.json({
+      success: true,
+      message: "Verification updated successfully",
+      data: updated
+    });
+
+  } catch (err) {
+    console.error("Update verification error:", err);
+    res.status(500).json({
+      success: false,
+      message: "Server error"
+    });
+  }
+};
+
 
 
 
