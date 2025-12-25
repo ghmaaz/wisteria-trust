@@ -1,28 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <title>Wisteria Trust Verification</title>
   <meta name="robots" content="noindex">
 </head>
 <body>
 
 <script>
-  /*
-    GitHub Pages trick:
-    /v/WT-2025-002  → pathname: /v/WT-2025-002
-  */
+  const params = new URLSearchParams(window.location.search);
+  const id = params.get("id");
 
-  const path = window.location.pathname;
-  const parts = path.split("/");
-
-  // last part is ID
-  const verificationId = parts[parts.length - 1];
-
-  if (verificationId && verificationId !== "v") {
-    window.location.replace(
-      `/verify.html?id=${verificationId}`
-    );
+  if (id) {
+    window.location.replace(`/verify.html?id=${id}`);
   } else {
     window.location.replace("/verify.html");
   }
