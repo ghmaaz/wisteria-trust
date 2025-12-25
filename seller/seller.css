@@ -1,109 +1,82 @@
 * {
-  margin: 0;
-  padding: 0;
   box-sizing: border-box;
   font-family: system-ui, -apple-system, BlinkMacSystemFont;
 }
 
 body {
-  background: radial-gradient(circle at top, #0f172a, #020617);
-  color: #fff;
-  min-height: 100vh;
+  margin: 0;
+  background: #0b1220;
+  color: #e5e7eb;
 }
 
-.page {
-  max-width: 420px;
+.container {
+  max-width: 520px;
   margin: auto;
-  padding: 40px 20px;
+  padding: 32px 16px;
+}
+
+header {
   text-align: center;
-  animation: fadeIn 0.6s ease;
+  margin-bottom: 32px;
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.badge-wrap img {
-  width: 160px;
-  margin-bottom: 20px;
-  transition: transform 0.3s ease;
-}
-
-.badge-wrap img:hover {
-  transform: scale(1.05);
-}
-
-.card {
-  background: rgba(255,255,255,0.05);
-  border-radius: 16px;
-  padding: 24px;
-  backdrop-filter: blur(10px);
-  box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-}
-
-h1 {
+header img {
+  width: 140px;
   margin-bottom: 12px;
 }
 
-.status {
-  display: inline-block;
-  padding: 6px 14px;
-  border-radius: 999px;
-  font-size: 13px;
-  margin-bottom: 20px;
+h1 {
+  margin: 0;
 }
 
-.status.ACTIVE { background: #16a34a; }
-.status.EXPIRED { background: #f59e0b; }
-.status.REVOKED { background: #dc2626; }
-.status.loading { background: #64748b; }
-
-.info {
-  text-align: left;
-  margin-bottom: 20px;
-}
-
-.info div {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 8px;
+.subtitle {
   font-size: 14px;
+  opacity: 0.8;
 }
 
-.info span {
-  opacity: 0.6;
+.box {
+  background: #111827;
+  border-radius: 14px;
+  padding: 20px;
+  margin-bottom: 20px;
 }
 
-.actions button,
-.actions a {
+.box h2 {
+  margin-top: 0;
+}
+
+.box p {
+  font-size: 14px;
+  opacity: 0.85;
+}
+
+.code {
+  background: #020617;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 13px;
+  margin: 10px 0;
+  word-break: break-all;
+}
+
+pre.code {
+  white-space: pre-wrap;
+}
+
+button,
+.download {
   display: block;
   width: 100%;
-  margin-bottom: 10px;
   padding: 12px;
   border-radius: 10px;
   border: none;
-  cursor: pointer;
   font-weight: 600;
+  cursor: pointer;
+  text-align: center;
 }
 
-#copyLink {
+button {
   background: #eab308;
-  color: #000;
-}
-
-.code-box {
-  background: #020617;
-  border-radius: 10px;
-  padding: 12px;
-  margin-bottom: 10px;
-  font-size: 12px;
-  text-align: left;
-}
-
-#copyCode {
-  margin-top: 6px;
-  background: #38bdf8;
   color: #000;
 }
 
@@ -113,13 +86,21 @@ h1 {
   text-decoration: none;
 }
 
-.actions button:hover,
-.actions a:hover {
+button:hover,
+.download:hover {
   opacity: 0.9;
 }
 
+.info div {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 6px;
+  font-size: 14px;
+}
+
 footer {
-  margin-top: 20px;
+  text-align: center;
   font-size: 12px;
   opacity: 0.6;
+  margin-top: 24px;
 }
