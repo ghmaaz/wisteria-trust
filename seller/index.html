@@ -1,83 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Wisteria Trust — Seller Verification Kit</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <head>
+    <meta charset="UTF-8">
+    <title>Wisteria Trust — Seller Verification Kit</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <link rel="stylesheet" href="seller.css">
-</head>
-<body>
+    <link rel="stylesheet" href="seller.css">
+    </head>
+    <body>
 
-<div class="container">
+        <div class="container">
 
-  <header>
-    <img src="badge.png" alt="Wisteria Verified Seller Badge">
-    <h1>Seller Verification Kit</h1>
-    <p class="subtitle">
-      Use the tools below to show buyers that you are officially verified by
-      <strong>Wisteria Trust</strong>.
-    </p>
-  </header>
+            <header>
+                <img src="badge.png" alt="Wisteria Verified Seller Badge">
+                <h1>Seller Verification Kit</h1>
+                <p class="subtitle">
+                Use the tools below to show buyers that you are officially verified by
+                <strong>Wisteria Trust</strong>.
+                </p>
+            </header>
+                <!-- INFO -->
+                <section class="box info">
+                    <h2>ℹ️ Your Verification Details</h2>
+                    <div><span>Verification ID</span><strong id="vid">—</strong></div>
+                    <div><span>Seller Name</span><strong id="sellerName">—</strong></div>
+                    <div><span>Business</span><strong id="businessName">—</strong></div>
+                    <div><span>Status</span><strong id="status">—</strong></div>
+                    <div><span>Valid Till</span><strong id="validTill">—</strong></div>
+                </section>
+            <!-- SECTION 1 -->
+            <section class="box">
+                <h2>🔗 For Social Media / Bio</h2>
+                <p>
+                Use this link in your Instagram bio, WhatsApp profile, Google Business,
+                or anywhere online.
+                <br>
+                When a buyer clicks this link, they will be taken directly to
+                Wisteria Trust’s verification page with your ID already filled.
+                </p>
 
-  <!-- SECTION 1 -->
-  <section class="box">
-    <h2>🔗 For Social Media / Bio</h2>
-    <p>
-      Use this link in your Instagram bio, WhatsApp profile, Google Business,
-      or anywhere online.
-      <br>
-      When a buyer clicks this link, they will be taken directly to
-      Wisteria Trust’s verification page with your ID already filled.
-    </p>
+                <div class="code" id="verifyLink">Loading…</div>
+                <button id="copyLink">Copy Verification Link</button>
+            </section>
 
-    <div class="code" id="verifyLink">Loading…</div>
-    <button id="copyLink">Copy Verification Link</button>
-  </section>
+            <!-- SECTION 2 -->
+            <section class="box">
+                <h2>🖥️ For Your Website (Footer / About Page)</h2>
+                <p>
+                Place the following code on your website.
+                <br>
+                When visitors click the badge, they will be redirected to
+                Wisteria Trust’s verification page.
+                </p>
 
-  <!-- SECTION 2 -->
-  <section class="box">
-    <h2>🖥️ For Your Website (Footer / About Page)</h2>
-    <p>
-      Place the following code on your website.
-      <br>
-      When visitors click the badge, they will be redirected to
-      Wisteria Trust’s verification page.
-    </p>
+                <pre class="code" id="embedCode"></pre>
+                <button id="copyCode">Copy Website Code</button>
+            </section>
 
-    <pre class="code" id="embedCode"></pre>
-    <button id="copyCode">Copy Website Code</button>
-  </section>
+            <!-- SECTION 3 -->
+            <section class="box">
+                <h2>🖼️ Verified Seller Badge</h2>
+                <p>
+                Download the official Wisteria Trust Verified Seller badge and
+                upload it to your website footer or marketing materials.
+                </p>
 
-  <!-- SECTION 3 -->
-  <section class="box">
-    <h2>🖼️ Verified Seller Badge</h2>
-    <p>
-      Download the official Wisteria Trust Verified Seller badge and
-      upload it to your website footer or marketing materials.
-    </p>
+                <a class="download" href="badge.png" download>
+                Download Badge (PNG)
+                </a>
+            </section>
 
-    <a class="download" href="badge.png" download>
-      Download Badge (PNG)
-    </a>
-  </section>
-
-  <!-- INFO -->
-  <section class="box info">
-    <h2>ℹ️ Your Verification Details</h2>
-    <div><span>Verification ID</span><strong id="vid">—</strong></div>
-    <div><span>Seller Name</span><strong id="sellerName">—</strong></div>
-    <div><span>Business</span><strong id="businessName">—</strong></div>
-    <div><span>Status</span><strong id="status">—</strong></div>
-    <div><span>Valid Till</span><strong id="validTill">—</strong></div>
-  </section>
-
-  <footer>
-    © Wisteria Trust — Official Seller Verification System
-  </footer>
-
-</div>
-
-<script src="seller.js"></script>
-</body>
+            <footer>
+                © Wisteria Trust — Official Seller Verification System
+            </footer>
+            
+        </div>
+       <script src="seller.js"></script>
+    </body>
 </html>
