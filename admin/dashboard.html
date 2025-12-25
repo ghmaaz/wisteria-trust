@@ -124,19 +124,43 @@
   </select>
 </div>
 
-<table border="1" width="100%" cellpadding="8">
+<table border="1" width="100%">
   <thead>
     <tr>
       <th>ID</th>
       <th>Seller</th>
+      <th>Business</th>
+      <th>City</th>
+      <th>Email</th>
       <th>Status</th>
       <th>Expiry</th>
+      <th>Created</th>
+      <th>Seller Page</th>
+      <th>Actions</th>
     </tr>
   </thead>
   <tbody id="list"></tbody>
 </table>
 
+<!-- EDIT MODAL -->
+<div id="editModal" style="display:none; position:fixed; inset:0; background:#0009">
+  <div style="background:#fff; padding:20px; max-width:400px; margin:10% auto">
+    <h3>Edit Verification</h3>
+
+    <input id="eSeller" placeholder="Seller Name"><br><br>
+    <input id="eBusiness" placeholder="Business Name"><br><br>
+    <input id="eCity" placeholder="City"><br><br>
+    <input id="eEmail" placeholder="Email"><br><br>
+    <input id="eExpiry" type="date"><br><br>
+
+    <button onclick="saveEdit()">Save</button>
+    <button onclick="closeModal()">Cancel</button>
+  </div>
+</div>
+
+
 
   <script src="admin.js"></script>
 </body>
 </html>
+
