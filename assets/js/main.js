@@ -67,3 +67,21 @@ async function verifySeller() {
     `;
   }
 }
+
+// Auto-fill & auto-verify from URL
+window.addEventListener("DOMContentLoaded", () => {
+  const params = new URLSearchParams(window.location.search);
+  const id = params.get("id");
+
+  if (id) {
+    const input = document.getElementById("vid");
+    if (input) {
+      input.value = id;
+
+      // auto verify
+      if (typeof verifySeller === "function") {
+        verifySeller();
+      }
+    }
+  }
+});
