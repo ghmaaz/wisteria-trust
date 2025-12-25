@@ -3,28 +3,27 @@
 <head>
   <meta charset="UTF-8" />
   <title>Wisteria Trust Verification</title>
-
-  <!-- SEO / Social clean -->
-  <meta name="robots" content="noindex" />
+  <meta name="robots" content="noindex">
 </head>
 <body>
 
 <script>
   /*
-    URL example:
-    /v/WT-2025-002
+    GitHub Pages trick:
+    /v/WT-2025-002  → pathname: /v/WT-2025-002
   */
 
-  const pathParts = window.location.pathname.split("/");
-  const verificationId = pathParts[pathParts.length - 1];
+  const path = window.location.pathname;
+  const parts = path.split("/");
 
-  if (verificationId) {
-    // redirect to main verify page with ID
+  // last part is ID
+  const verificationId = parts[parts.length - 1];
+
+  if (verificationId && verificationId !== "v") {
     window.location.replace(
       `/verify.html?id=${verificationId}`
     );
   } else {
-    // fallback
     window.location.replace("/verify.html");
   }
 </script>
