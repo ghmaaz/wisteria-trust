@@ -223,23 +223,18 @@ export const updateVerification = async (req, res) => {
   try {
     const { id } = req.params;
 
-    const {
-      sellerName,
-      businessName,
-      city,
-      email,
-      expiryDate
-    } = req.body;
+    const updateData = {};
+    const fields = ["sellerName", "businessName", "city", "email", "expiryDate"];
+
+    fields.forEach(f => {
+      if (req.body[f] !== undefined) {
+        updateData[f] = req.body[f];
+      }
+    });
 
     const updated = await Verification.findOneAndUpdate(
       { verificationId: id },
-      {
-        sellerName,
-        businessName,
-        city,
-        email,
-        expiryDate
-      },
+      { $set: updateData },
       { new: true }
     );
 
@@ -252,19 +247,16 @@ export const updateVerification = async (req, res) => {
 
     res.json({
       success: true,
-      message: "Verification updated successfully",
+      message: "Verification updated",
       data: updated
     });
-
   } catch (err) {
-    console.error("Update verification error:", err);
     res.status(500).json({
       success: false,
       message: "Server error"
     });
   }
 };
-
 
 
 
