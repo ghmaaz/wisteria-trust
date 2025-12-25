@@ -2,54 +2,64 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Seller Verification | Wisteria Trust</title>
+  <title>Wisteria Trust — Verified Seller</title>
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f6f7fb;
-      margin: 0;
-      padding: 40px;
-    }
-    .container {
-      max-width: 600px;
-      margin: auto;
-      background: #ffffff;
-      padding: 30px;
-      border-radius: 8px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-    }
-    h1 {
-      margin-top: 0;
-      font-size: 22px;
-    }
-    .row {
-      margin-bottom: 10px;
-    }
-    .status {
-      font-weight: bold;
-    }
-    .ACTIVE { color: green; }
-    .REVOKED { color: red; }
-    .EXPIRED { color: orange; }
-    .error {
-      color: red;
-      font-weight: bold;
-    }
-  </style>
+  <link rel="stylesheet" href="seller.css" />
 </head>
-
 <body>
-  <div class="container">
-    <h1>Seller Verification</h1>
 
-    <div id="content">
-      Loading verification details...
+  <div class="page">
+
+    <!-- HERO -->
+    <div class="badge-wrap">
+      <img src="badge.png" alt="Wisteria Verified Seller Badge" />
     </div>
+
+    <!-- CARD -->
+    <div class="card">
+
+      <h1>Verified Seller</h1>
+
+      <div id="status" class="status loading">Checking…</div>
+
+      <div class="info">
+        <div><span>Seller</span><strong id="sellerName">—</strong></div>
+        <div><span>Business</span><strong id="businessName">—</strong></div>
+        <div><span>City</span><strong id="city">—</strong></div>
+        <div><span>Verification ID</span><strong id="vid">—</strong></div>
+        <div><span>Valid Till</span><strong id="validTill">—</strong></div>
+      </div>
+
+      <!-- ACTIONS -->
+      <div class="actions">
+
+        <button id="copyLink">Copy Verification Link</button>
+
+        <div class="code-box">
+<pre id="embedCode">&lt;a href="" target="_blank"&gt;
+  &lt;img src="https://wisteriatrust.com/seller/badge.png"
+       alt="Verified by Wisteria Trust"
+       width="140"&gt;
+&lt;/a&gt;</pre>
+          <button id="copyCode">Copy Website Code</button>
+        </div>
+
+        <a class="download" href="badge.png" download>
+          Download Badge (PNG)
+        </a>
+
+      </div>
+
+    </div>
+
+    <footer>
+      Verified by <strong>Wisteria Trust</strong>
+    </footer>
+
   </div>
 
-  <!-- Seller JS -->
   <script src="seller.js"></script>
 </body>
 </html>
