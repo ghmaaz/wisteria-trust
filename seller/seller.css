@@ -99,9 +99,11 @@ button:hover,
 }
 
 footer {
+  color: #111827;
   text-align: center;
   font-size: 12px;
   opacity: 0.6;
   margin-top: 24px;
 }
+
 
