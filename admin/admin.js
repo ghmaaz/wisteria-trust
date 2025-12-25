@@ -199,3 +199,4 @@ async function extendExpiry(id) {
 if (location.pathname.includes("dashboard")) {
   loadVerifications();
 }
+
