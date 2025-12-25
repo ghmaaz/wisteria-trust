@@ -1,47 +1,55 @@
 (async function () {
   const content = document.getElementById("content");
 
-  // 🔹 Get ID from URL: /seller/WT-2025-002
-  const parts = window.location.pathname.split("/");
-  const verificationId = parts[parts.length - 1];
+  // 🔹 Get verification ID from query string
+  // Example: /seller/?id=WT-2025-002
+  const params = new URLSearchParams(window.location.search);
+  const verificationId = params.get("id");
 
   if (!verificationId) {
-    content.innerHTML = "<div class='error'>Invalid seller link</div>";
+    content.innerHTML =
+      "<div class='error'>Invalid seller link. Verification ID missing.</div>";
     return;
   }
 
   try {
-    const res = await fetch(
-      `https://wisteria-backend.onrender.com/api/verify/${verificationId}`
-    );
+    const apiUrl =
+      `https://wisteria-backend.onrender.com/api/verify/${encodeURIComponent(verificationId)}`;
 
+    const res = await fetch(apiUrl);
     const data = await res.json();
 
+    // ❌ Not verified / revoked / expired
     if (!res.ok || data.verified === false) {
-      content.innerHTML = `
-        <div class="error">
-          Verification not found or not active.
-        </div>
-      `;
+      let msg = "Verification not found.";
+
+      if (data.status === "REVOKED") {
+        msg = "This verification has been revoked.";
+      }
+
+      if (data.status === "EXPIRED") {
+        msg = "This verification has expired.";
+      }
+
+      content.innerHTML = `<div class="error">${msg}</div>`;
       return;
     }
 
+    // ✅ Verified
     content.innerHTML = `
-      <p><strong>Verification ID:</strong> ${data.verificationId}</p>
-      <p><strong>Seller Name:</strong> ${data.sellerName}</p>
-      <p><strong>Business:</strong> ${data.businessName || "N/A"}</p>
-      <p><strong>Status:</strong>
+      <div class="row"><strong>Verification ID:</strong> ${data.verificationId}</div>
+      <div class="row"><strong>Seller Name:</strong> ${data.sellerName}</div>
+      <div class="row"><strong>Business Name:</strong> ${data.businessName || "N/A"}</div>
+      <div class="row"><strong>Status:</strong>
         <span class="status ${data.status}">${data.status}</span>
-      </p>
-      <p><strong>Valid Till:</strong>
+      </div>
+      <div class="row"><strong>Valid Till:</strong>
         ${new Date(data.validTill).toDateString()}
-      </p>
-    `;
-  } catch (err) {
-    content.innerHTML = `
-      <div class="error">
-        Unable to load seller verification.
       </div>
     `;
+  } catch (error) {
+    console.error("Seller page error:", error);
+    content.innerHTML =
+      "<div class='error'>Unable to load seller verification.</div>";
   }
 })();
