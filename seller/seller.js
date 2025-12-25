@@ -1,64 +1,60 @@
 const params = new URLSearchParams(window.location.search);
 const id = params.get("id");
 
-const statusEl = document.getElementById("status");
+const vid = document.getElementById("vid");
 const sellerName = document.getElementById("sellerName");
 const businessName = document.getElementById("businessName");
-const city = document.getElementById("city");
-const vid = document.getElementById("vid");
+const statusEl = document.getElementById("status");
 const validTill = document.getElementById("validTill");
+
+const verifyLinkEl = document.getElementById("verifyLink");
+const embedCodeEl = document.getElementById("embedCode");
 
 const copyLinkBtn = document.getElementById("copyLink");
 const copyCodeBtn = document.getElementById("copyCode");
-const embedCode = document.getElementById("embedCode");
 
 if (!id) {
-  statusEl.textContent = "Invalid link";
-  statusEl.className = "status REVOKED";
-  throw new Error("No ID in URL");
+  verifyLinkEl.textContent = "Invalid verification link";
+  throw new Error("Missing ID");
 }
 
-fetch(`https://wisteria-backend.onrender.com/api/verify/${id}`)
-  .then(res => res.json())
-  .then(data => {
+// ✅ MAIN VERIFICATION PAGE LINK (IMPORTANT)
+const verificationLink = `https://wisteriatrust.com/?id=${id}`;
 
-    if (!data.verified) {
-      statusEl.textContent = data.status || "NOT VERIFIED";
-      statusEl.className = `status ${data.status || "REVOKED"}`;
-      return;
-    }
+verifyLinkEl.textContent = verificationLink;
 
-    statusEl.textContent = data.status;
-    statusEl.className = `status ${data.status}`;
-
-    sellerName.textContent = data.sellerName;
-    businessName.textContent = data.businessName || "—";
-    city.textContent = data.city || "—";
-    vid.textContent = data.verificationId;
-    validTill.textContent = new Date(data.validTill).toDateString();
-
-    const link = `https://wisteriatrust.com/seller/?id=${data.verificationId}`;
-
-    embedCode.textContent = `<a href="${link}" target="_blank">
+// Embed code (badge → main verification page)
+embedCodeEl.textContent = `<a href="${verificationLink}" target="_blank">
   <img src="https://wisteriatrust.com/seller/badge.png"
        alt="Verified by Wisteria Trust"
        width="140">
 </a>`;
 
-    copyLinkBtn.onclick = () => {
-      navigator.clipboard.writeText(link);
-      copyLinkBtn.textContent = "Copied ✓";
-      setTimeout(() => copyLinkBtn.textContent = "Copy Verification Link", 1500);
-    };
+copyLinkBtn.onclick = () => {
+  navigator.clipboard.writeText(verificationLink);
+  copyLinkBtn.textContent = "Copied ✓";
+  setTimeout(() => copyLinkBtn.textContent = "Copy Verification Link", 1500);
+};
 
-    copyCodeBtn.onclick = () => {
-      navigator.clipboard.writeText(embedCode.textContent);
-      copyCodeBtn.textContent = "Copied ✓";
-      setTimeout(() => copyCodeBtn.textContent = "Copy Website Code", 1500);
-    };
+copyCodeBtn.onclick = () => {
+  navigator.clipboard.writeText(embedCodeEl.textContent);
+  copyCodeBtn.textContent = "Copied ✓";
+  setTimeout(() => copyCodeBtn.textContent = "Copy Website Code", 1500);
+};
 
+// Fetch seller info (display only)
+fetch(`https://wisteria-backend.onrender.com/api/verify/${id}`)
+  .then(res => res.json())
+  .then(data => {
+    vid.textContent = id;
+    sellerName.textContent = data.sellerName || "—";
+    businessName.textContent = data.businessName || "—";
+    statusEl.textContent = data.status || "—";
+
+    if (data.validTill) {
+      validTill.textContent = new Date(data.validTill).toDateString();
+    }
   })
   .catch(() => {
-    statusEl.textContent = "Error loading verification";
-    statusEl.className = "status REVOKED";
+    statusEl.textContent = "Unavailable";
   });
