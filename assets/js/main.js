@@ -19,6 +19,16 @@ if (menuBtn && mobileMenu) {
 }
 
 /* ===============================
+   HELPER: SCROLL TO VERIFY BOX
+================================ */
+function scrollToVerifyBox() {
+  const box = document.getElementById("verify");
+  if (box) {
+    box.scrollIntoView({ behavior: "smooth" });
+  }
+}
+
+/* ===============================
    REAL VERIFICATION CHECK
 ================================ */
 async function verifySeller() {
@@ -27,15 +37,17 @@ async function verifySeller() {
 
   if (!input || !out) return;
 
-  const v = input.value.trim(); // ✅ ALWAYS READ HERE
+  const v = input.value.trim();
 
   if (!v) {
     out.innerHTML =
       "<div class='result error'>Please enter a Verification ID.</div>";
+    scrollToVerifyBox();
     return;
   }
 
   out.innerHTML = "<div class='result'>Checking verification...</div>";
+  scrollToVerifyBox();
 
   try {
     const res = await fetch(
@@ -57,6 +69,7 @@ async function verifySeller() {
       }
 
       out.innerHTML = `<div class="result error">${msg}</div>`;
+      scrollToVerifyBox();
       return;
     }
 
@@ -72,6 +85,8 @@ async function verifySeller() {
         ).toDateString()}
       </div>
     `;
+
+    scrollToVerifyBox();
   } catch (err) {
     console.error("Verification error:", err);
     out.innerHTML = `
@@ -79,6 +94,7 @@ async function verifySeller() {
         ⚠️ Unable to verify at the moment. Please try again later.
       </div>
     `;
+    scrollToVerifyBox();
   }
 }
 
@@ -93,9 +109,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const input = document.getElementById("vid");
     if (input) {
       input.value = id.trim();
-
-      // 🔥 AUTO VERIFY
-      verifySeller();
+      verifySeller(); // auto verify + auto scroll
     }
   }
 });
