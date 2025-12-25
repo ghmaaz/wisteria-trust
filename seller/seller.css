@@ -1,0 +1,125 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont;
+}
+
+body {
+  background: radial-gradient(circle at top, #0f172a, #020617);
+  color: #fff;
+  min-height: 100vh;
+}
+
+.page {
+  max-width: 420px;
+  margin: auto;
+  padding: 40px 20px;
+  text-align: center;
+  animation: fadeIn 0.6s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.badge-wrap img {
+  width: 160px;
+  margin-bottom: 20px;
+  transition: transform 0.3s ease;
+}
+
+.badge-wrap img:hover {
+  transform: scale(1.05);
+}
+
+.card {
+  background: rgba(255,255,255,0.05);
+  border-radius: 16px;
+  padding: 24px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+}
+
+h1 {
+  margin-bottom: 12px;
+}
+
+.status {
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 13px;
+  margin-bottom: 20px;
+}
+
+.status.ACTIVE { background: #16a34a; }
+.status.EXPIRED { background: #f59e0b; }
+.status.REVOKED { background: #dc2626; }
+.status.loading { background: #64748b; }
+
+.info {
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+.info div {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.info span {
+  opacity: 0.6;
+}
+
+.actions button,
+.actions a {
+  display: block;
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 12px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+#copyLink {
+  background: #eab308;
+  color: #000;
+}
+
+.code-box {
+  background: #020617;
+  border-radius: 10px;
+  padding: 12px;
+  margin-bottom: 10px;
+  font-size: 12px;
+  text-align: left;
+}
+
+#copyCode {
+  margin-top: 6px;
+  background: #38bdf8;
+  color: #000;
+}
+
+.download {
+  background: #22c55e;
+  color: #000;
+  text-decoration: none;
+}
+
+.actions button:hover,
+.actions a:hover {
+  opacity: 0.9;
+}
+
+footer {
+  margin-top: 20px;
+  font-size: 12px;
+  opacity: 0.6;
+}
