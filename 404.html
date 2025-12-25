@@ -1,19 +1,1 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Redirecting…</title>
-</head>
-<body>
 
-<script>
-  // Redirect all unknown /v/* paths to /v/
-  if (window.location.pathname.startsWith("/v/")) {
-    window.location.replace("/v" + window.location.pathname.substring(2));
-  } else {
-    window.location.replace("/");
-  }
-</script>
-
-</body>
-</html>
