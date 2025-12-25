@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Verifying…</title>
+  <script>
+    (function () {
+      const path = window.location.pathname;
+      const parts = path.split("/");
+
+      // /verify/WT-2025-001
+      const verificationId = parts[2];
+
+      if (verificationId) {
+        // Redirect to homepage with ID
+        window.location.replace(
+          `/?id=${encodeURIComponent(verificationId)}#verify`
+        );
+      } else {
+        // Fallback: homepage
+        window.location.replace("/");
+      }
+    })();
+  </script>
+</head>
+<body>
+  Redirecting to verification…
+</body>
+</html>
