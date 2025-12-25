@@ -8,6 +8,7 @@ import {
   extendVerification
 } from "../controllers/verification.controller.js";
 import { protectAdmin } from "../middlewares/adminAuth.js";
+import { updateVerification } from "../controllers/verification.controller.js";
 
 const router = express.Router();
 
@@ -51,6 +52,12 @@ router.patch(
   "/verification/:id/extend",
   protectAdmin,
   extendVerification
+);
+
+router.patch(
+  "/verification/:id/update",
+  protectAdmin,
+  updateVerification
 );
 
 export default router;
