@@ -1,25 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Redirecting...</title>
+  <meta charset="UTF-8" />
+  <title>Wisteria Trust Verification</title>
 
-  <script>
-    (function () {
-      const parts = window.location.pathname.split("/");
-      const verificationId = parts[parts.length - 1];
-
-      if (!verificationId) {
-        window.location.href = "/verify.html";
-        return;
-      }
-
-      window.location.href =
-        "/verify.html?id=" + encodeURIComponent(verificationId);
-    })();
-  </script>
+  <!-- SEO / Social clean -->
+  <meta name="robots" content="noindex" />
 </head>
 <body>
-  Redirecting to verification...
+
+<script>
+  /*
+    URL example:
+    /v/WT-2025-002
+  */
+
+  const pathParts = window.location.pathname.split("/");
+  const verificationId = pathParts[pathParts.length - 1];
+
+  if (verificationId) {
+    // redirect to main verify page with ID
+    window.location.replace(
+      `/verify.html?id=${verificationId}`
+    );
+  } else {
+    // fallback
+    window.location.replace("/verify.html");
+  }
+</script>
+
 </body>
 </html>
