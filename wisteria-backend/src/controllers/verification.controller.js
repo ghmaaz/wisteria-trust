@@ -258,5 +258,34 @@ export const updateVerification = async (req, res) => {
   }
 };
 
+export const deleteVerification = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const deleted = await Verification.findOneAndDelete({
+      verificationId: id
+    });
+
+    if (!deleted) {
+      return res.status(404).json({
+        success: false,
+        message: "Verification not found"
+      });
+    }
+
+    return res.json({
+      success: true,
+      message: "Verification deleted"
+    });
+  } catch (err) {
+    console.error("Delete verification error:", err);
+    return res.status(500).json({
+      success: false,
+      message: "Server error"
+    });
+  }
+};
+
+
 
 
