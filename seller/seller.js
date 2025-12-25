@@ -1,82 +1,64 @@
-(async function () {
-  const content = document.getElementById("content");
+const params = new URLSearchParams(window.location.search);
+const id = params.get("id");
 
-  const params = new URLSearchParams(window.location.search);
-  const verificationId = params.get("id");
+const statusEl = document.getElementById("status");
+const sellerName = document.getElementById("sellerName");
+const businessName = document.getElementById("businessName");
+const city = document.getElementById("city");
+const vid = document.getElementById("vid");
+const validTill = document.getElementById("validTill");
 
-  if (!verificationId) {
-    content.innerHTML =
-      "<div class='error'>Invalid seller link. Verification ID missing.</div>";
-    return;
-  }
+const copyLinkBtn = document.getElementById("copyLink");
+const copyCodeBtn = document.getElementById("copyCode");
+const embedCode = document.getElementById("embedCode");
 
-  const buyerLink = `https://wisteriatrust.com/?id=${verificationId}`;
+if (!id) {
+  statusEl.textContent = "Invalid link";
+  statusEl.className = "status REVOKED";
+  throw new Error("No ID in URL");
+}
 
-  try {
-    const res = await fetch(
-      `https://wisteria-backend.onrender.com/api/verify/${encodeURIComponent(verificationId)}`
-    );
+fetch(`https://wisteria-backend.onrender.com/api/verify/${id}`)
+  .then(res => res.json())
+  .then(data => {
 
-    const data = await res.json();
-
-    if (!res.ok || data.verified === false) {
-      let msg = "Verification not found.";
-
-      if (data.status === "REVOKED") msg = "This verification has been revoked.";
-      if (data.status === "EXPIRED") msg = "This verification has expired.";
-
-      content.innerHTML = `<div class="error">${msg}</div>`;
+    if (!data.verified) {
+      statusEl.textContent = data.status || "NOT VERIFIED";
+      statusEl.className = `status ${data.status || "REVOKED"}`;
       return;
     }
 
-    content.innerHTML = `
-      <div class="row"><strong>Verification ID:</strong> ${data.verificationId}</div>
-      <div class="row"><strong>Seller Name:</strong> ${data.sellerName}</div>
-      <div class="row"><strong>Business Name:</strong> ${data.businessName || "N/A"}</div>
-      <div class="row"><strong>Status:</strong>
-        <span class="status ${data.status}">${data.status}</span>
-      </div>
-      <div class="row"><strong>Valid Till:</strong>
-        ${new Date(data.validTill).toDateString()}
-      </div>
+    statusEl.textContent = data.status;
+    statusEl.className = `status ${data.status}`;
 
-      <hr>
+    sellerName.textContent = data.sellerName;
+    businessName.textContent = data.businessName || "—";
+    city.textContent = data.city || "—";
+    vid.textContent = data.verificationId;
+    validTill.textContent = new Date(data.validTill).toDateString();
 
-      <h3>Buyer Verification Link</h3>
-      <input type="text" value="${buyerLink}" readonly style="width:100%;padding:8px">
-      <button onclick="copyText('${buyerLink}')">Copy Link</button>
+    const link = `https://wisteriatrust.com/seller/?id=${data.verificationId}`;
 
-      <hr>
+    embedCode.textContent = `<a href="${link}" target="_blank">
+  <img src="https://wisteriatrust.com/seller/badge.png"
+       alt="Verified by Wisteria Trust"
+       width="140">
+</a>`;
 
-      <h3>Verified Badge</h3>
-      <img src="https://wisteriatrust.com/assets/images/wisteria-verified.png"
-           alt="Verified Badge"
-           style="max-width:180px;display:block;margin-bottom:10px">
+    copyLinkBtn.onclick = () => {
+      navigator.clipboard.writeText(link);
+      copyLinkBtn.textContent = "Copied ✓";
+      setTimeout(() => copyLinkBtn.textContent = "Copy Verification Link", 1500);
+    };
 
-      <h3>Website Embed Code</h3>
-      <textarea id="embedCode" rows="4" style="width:100%" readonly>
-<a href="${buyerLink}" target="_blank">
-  <img src="https://wisteriatrust.com/assets/images/wisteria-verified.png"
-       alt="Verified Wisteria Seller">
-</a>
-      </textarea>
-      <button onclick="copyEmbed()">Copy Code</button>
-    `;
-  } catch (error) {
-    console.error("Seller page error:", error);
-    content.innerHTML =
-      "<div class='error'>Unable to load seller verification.</div>";
-  }
-})();
+    copyCodeBtn.onclick = () => {
+      navigator.clipboard.writeText(embedCode.textContent);
+      copyCodeBtn.textContent = "Copied ✓";
+      setTimeout(() => copyCodeBtn.textContent = "Copy Website Code", 1500);
+    };
 
-// 🔹 Copy helpers
-function copyText(text) {
-  navigator.clipboard.writeText(text);
-  alert("Link copied!");
-}
-
-function copyEmbed() {
-  const code = document.getElementById("embedCode").value;
-  navigator.clipboard.writeText(code);
-  alert("Embed code copied!");
-}
+  })
+  .catch(() => {
+    statusEl.textContent = "Error loading verification";
+    statusEl.className = "status REVOKED";
+  });
