@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Redirecting...</title>
+
+  <script>
+    (function () {
+      const parts = window.location.pathname.split("/");
+      const verificationId = parts[parts.length - 1];
+
+      if (!verificationId) {
+        window.location.href = "/verify.html";
+        return;
+      }
+
+      window.location.href =
+        "/verify.html?id=" + encodeURIComponent(verificationId);
+    })();
+  </script>
+</head>
+<body>
+  Redirecting to verification...
+</body>
+</html>
