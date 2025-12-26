@@ -2,33 +2,27 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>All Verifications | Admin</title>
-  <link rel="stylesheet" href="admin.css">
+  <title>All Verifications | Wisteria Trust</title>
+  <link rel="stylesheet" href="admin.css" />
 </head>
 <body>
 
-<div class="admin-wrapper">
+<header class="admin-header">
+  <h1>Wisteria Trust – Admin</h1>
+  <nav>
+    <a href="create.html">Create</a>
+    <a href="dashboard.html" class="active">All Verifications</a>
+    <button onclick="logout()">Logout</button>
+  </nav>
+</header>
 
-  <!-- HEADER -->
-  <header class="admin-header">
-    <h1>Wisteria Trust – Admin</h1>
-    <nav>
-      <a href="create.html">Create</a>
-      <a href="dashboard.html" class="active">All Verifications</a>
-      <button onclick="logout()">Logout</button>
-    </nav>
-  </header>
+<main class="admin-container">
 
-  <!-- MAIN CARD -->
   <section class="card">
     <h2>All Verifications</h2>
 
     <div class="controls">
-      <input
-        id="searchInput"
-        placeholder="Search ID or Seller"
-        oninput="applyFilters()"
-      />
+      <input id="searchInput" placeholder="Search ID or Seller" oninput="applyFilters()" />
       <select id="statusFilter" onchange="applyFilters()">
         <option value="ALL">All</option>
         <option value="ACTIVE">ACTIVE</option>
@@ -37,8 +31,7 @@
       </select>
     </div>
 
-    <!-- DESKTOP TABLE -->
-    <div class="table-scroll desktop-only">
+    <div class="table-scroll">
       <table>
         <thead>
           <tr>
@@ -57,13 +50,9 @@
         <tbody id="list"></tbody>
       </table>
     </div>
-
-    <!-- MOBILE CARDS -->
-    <div id="mobileCards" class="mobile-only"></div>
-
   </section>
 
-</div>
+</main>
 
 <script src="admin.js"></script>
 </body>
