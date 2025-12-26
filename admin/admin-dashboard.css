@@ -1,0 +1,110 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #0b1220;
+  color: #fff;
+  font-family: Inter, system-ui, sans-serif;
+}
+
+.admin-container {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* ======================
+   SIDEBAR
+====================== */
+.admin-sidebar {
+  width: 320px;
+  background: #111827;
+  padding: 20px;
+}
+
+.admin-sidebar h2 {
+  margin-bottom: 20px;
+}
+
+.create-box input,
+.create-box button {
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 10px;
+}
+
+.create-box button {
+  background: #d4af37;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.logout-btn {
+  margin-top: 20px;
+  width: 100%;
+  background: #ef4444;
+  color: white;
+  border: none;
+  padding: 10px;
+}
+
+/* ======================
+   MAIN
+====================== */
+.admin-main {
+  flex: 1;
+  padding: 20px;
+}
+
+.filters {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.filters input,
+.filters select {
+  padding: 8px;
+}
+
+/* ======================
+   TABLE
+====================== */
+.table-wrap {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 900px;
+}
+
+th, td {
+  padding: 10px;
+  border-bottom: 1px solid #1f2937;
+  text-align: left;
+}
+
+.status.ACTIVE { color: #22c55e; }
+.status.REVOKED { color: #ef4444; }
+.status.EXPIRED { color: #f59e0b; }
+
+/* ======================
+   MOBILE
+====================== */
+@media (max-width: 900px) {
+  .admin-container {
+    flex-direction: column;
+  }
+
+  .admin-sidebar {
+    width: 100%;
+  }
+
+  table {
+    min-width: 700px;
+  }
+}
