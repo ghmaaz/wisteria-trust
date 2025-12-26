@@ -3,60 +3,94 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  font-family: Inter, system-ui, Arial, sans-serif;
 }
 
 body {
-  font-family: system-ui, Arial, sans-serif;
   background: #0b1220;
   color: #fff;
 }
 
-/* LAYOUT */
-.admin-wrapper {
-  max-width: 1200px;
-  margin: auto;
-  padding: 16px;
-}
-
 /* HEADER */
 .admin-header {
+  background: #0f172a;
+  padding: 16px 24px;
   display: flex;
-  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
 }
 
 .admin-header h1 {
-  font-size: 20px;
+  font-size: 18px;
 }
 
 .admin-header nav {
   display: flex;
-  gap: 10px;
+  gap: 14px;
+  align-items: center;
 }
 
-.admin-header a,
-.admin-header button {
-  background: #1f2937;
-  color: #fff;
-  border: none;
-  padding: 8px 12px;
+.admin-header a {
+  color: #cbd5f5;
   text-decoration: none;
+  font-size: 14px;
+}
+
+.admin-header a.active {
+  color: #facc15;
+  font-weight: 600;
+}
+
+.admin-header button {
+  background: #dc2626;
+  color: white;
+  border: none;
+  padding: 6px 12px;
   border-radius: 6px;
   cursor: pointer;
 }
 
-.admin-header a.active {
-  background: #d4af37;
-  color: #000;
+/* MAIN */
+.admin-container {
+  padding: 24px;
 }
 
 /* CARD */
 .card {
   background: #111827;
-  padding: 16px;
+  border-radius: 14px;
+  padding: 20px;
+  margin-bottom: 24px;
+}
+
+.card h2 {
+  margin-bottom: 16px;
+  font-size: 18px;
+}
+
+/* FORM */
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.form-grid input {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #374151;
+  background: #020617;
+  color: white;
+}
+
+.primary-btn {
+  background: #facc15;
+  border: none;
+  padding: 12px;
   border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
 }
 
 /* CONTROLS */
@@ -69,9 +103,10 @@ body {
 .controls input,
 .controls select {
   padding: 8px;
-  border-radius: 6px;
-  border: none;
-  width: 100%;
+  border-radius: 8px;
+  border: 1px solid #374151;
+  background: #020617;
+  color: white;
 }
 
 /* TABLE */
@@ -82,76 +117,56 @@ body {
 table {
   width: 100%;
   border-collapse: collapse;
+  min-width: 900px;
 }
 
 th, td {
-  padding: 8px;
-  border-bottom: 1px solid #374151;
-  text-align: left;
-  font-size: 14px;
+  padding: 8px 10px;
+  border-bottom: 1px solid #1f2937;
+  font-size: 13px;
 }
 
 th {
-  background: #1f2937;
-}
-
-/* STATUS */
-.status {
-  padding: 4px 10px;
-  border-radius: 12px;
-  font-size: 12px;
-  font-weight: bold;
-}
-
-.status.ACTIVE { background: #064e3b; color: #6ee7b7; }
-.status.REVOKED { background: #7f1d1d; color: #fecaca; }
-.status.EXPIRED { background: #78350f; color: #fde68a; }
-
-/* MOBILE CARDS */
-.mobile-only { display: none; }
-
-.mobile-card {
   background: #020617;
-  border: 1px solid #1f2937;
-  border-radius: 10px;
-  padding: 12px;
-  margin-bottom: 12px;
+  text-align: left;
 }
 
-.mobile-card h3 {
-  font-size: 16px;
-  margin-bottom: 6px;
+.status.ACTIVE {
+  background: #064e3b;
+  color: #6ee7b7;
+  padding: 4px 8px;
+  border-radius: 12px;
 }
 
-.mobile-card p {
-  font-size: 14px;
-  margin-bottom: 4px;
+.status.REVOKED {
+  background: #7f1d1d;
+  color: #fecaca;
+  padding: 4px 8px;
+  border-radius: 12px;
 }
 
-.mobile-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  margin-top: 8px;
+.status.EXPIRED {
+  background: #78350f;
+  color: #fde68a;
+  padding: 4px 8px;
+  border-radius: 12px;
 }
 
-.mobile-actions button,
-.mobile-actions a {
-  flex: 1;
-  background: #d4af37;
-  color: #000;
-  border: none;
-  padding: 6px;
-  text-align: center;
+/* ACTION BUTTONS */
+td button {
+  margin: 2px;
+  padding: 4px 8px;
   border-radius: 6px;
-  font-size: 13px;
+  border: none;
   cursor: pointer;
+  font-size: 12px;
 }
 
-/* RESPONSIVE */
+/* MOBILE */
 @media (max-width: 768px) {
-  .desktop-only { display: none; }
-  .mobile-only { display: block; }
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
 
   .controls {
     flex-direction: column;
@@ -159,7 +174,7 @@ th {
 
   .admin-header {
     flex-direction: column;
-    gap: 10px;
     align-items: flex-start;
+    gap: 10px;
   }
 }
