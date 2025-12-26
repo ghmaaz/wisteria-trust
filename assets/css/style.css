@@ -515,30 +515,3 @@ footer{
   color:#f8fafc;
 }
 
-/* ================= DEVELOPMENT NOTICE ================= */
-.dev-notice{
-  max-width:900px;
-  margin:50px auto 0;
-  padding:22px 28px;
-  border-radius:16px;
-  background:linear-gradient(180deg,#151e33,#0f1627);
-  border:1px solid rgba(198,161,91,.45);
-  box-shadow:0 25px 70px rgba(0,0,0,.55);
-}
-
-.dev-notice strong{
-  display:block;
-  font-family:'Playfair Display',serif;
-  font-size:1.2rem;
-  color:#f3e9d2;
-  margin-bottom:6px;
-}
-
-.dev-notice p{
-  font-size:.95rem;
-  color:#cbd5e1;
-  line-height:1.6;
-}
-
-
-
