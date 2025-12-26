@@ -1,3 +1,6 @@
+/* ===============================
+   GLOBAL STATE
+================================ */
 let ALL_VERIFICATIONS = [];
 let EDIT_ID = null;
 
@@ -22,11 +25,11 @@ function logout() {
 ================================ */
 async function createVerification() {
   const payload = {
-    sellerName: document.getElementById("sellerName").value.trim(),
-    businessName: document.getElementById("businessName").value.trim(),
-    email: document.getElementById("email").value.trim(),
-    city: document.getElementById("city").value.trim(),
-    expiryDate: document.getElementById("expiryDate").value
+    sellerName: sellerName.value.trim(),
+    businessName: businessName.value.trim(),
+    email: email.value.trim(),
+    city: city.value.trim(),
+    expiryDate: expiryDate.value
   };
 
   if (
@@ -36,31 +39,44 @@ async function createVerification() {
     !payload.city ||
     !payload.expiryDate
   ) {
-    alert("All fields are required");
+    alert("❌ All fields are required");
     return;
   }
 
-  const res = await fetch(
-    "https://wisteria-backend.onrender.com/api/admin/verification",
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + token
-      },
-      body: JSON.stringify(payload)
+  try {
+    const res = await fetch(
+      "https://wisteria-backend.onrender.com/api/admin/verification",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + token
+        },
+        body: JSON.stringify(payload)
+      }
+    );
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      alert(data.message || "Failed to create verification");
+      return;
     }
-  );
 
-  const data = await res.json();
+    alert("✅ Verification created successfully");
 
-  if (!res.ok) {
-    alert(data.message || "Failed to create verification");
-    return;
+    // reset form
+    sellerName.value = "";
+    businessName.value = "";
+    email.value = "";
+    city.value = "";
+    expiryDate.value = "";
+
+    loadVerifications();
+  } catch (err) {
+    console.error(err);
+    alert("Server error");
   }
-
-  alert("✅ Verification created successfully");
-  loadVerifications();
 }
 
 /* ===============================
@@ -97,7 +113,8 @@ function renderTable(list) {
   tbody.innerHTML = "";
 
   list.forEach(v => {
-    const sellerLink = `https://wisteriatrust.com/?id=${v.verificationId}`;
+    const sellerLink =
+      `https://wisteriatrust.com/seller/?id=${v.verificationId}`;
 
     let actions = `
       <button onclick="openEdit('${v.verificationId}')">✏️ Edit</button>
@@ -138,7 +155,7 @@ function renderTable(list) {
 ================================ */
 function copyLink(link) {
   navigator.clipboard.writeText(link);
-  alert("Seller page link copied");
+  alert("✅ Seller page link copied");
 }
 
 /* ===============================
@@ -163,35 +180,40 @@ function closeModal() {
 }
 
 async function saveEdit() {
-  const res = await fetch(
-    `https://wisteria-backend.onrender.com/api/admin/verification/${EDIT_ID}/update`,
-    {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + token
-      },
-      body: JSON.stringify({
-        sellerName: eSeller.value,
-        businessName: eBusiness.value,
-        city: eCity.value,
-        email: eEmail.value,
-        expiryDate: eExpiry.value
-      })
+  try {
+    const res = await fetch(
+      `https://wisteria-backend.onrender.com/api/admin/verification/${EDIT_ID}/update`,
+      {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + token
+        },
+        body: JSON.stringify({
+          sellerName: eSeller.value,
+          businessName: eBusiness.value,
+          city: eCity.value,
+          email: eEmail.value,
+          expiryDate: eExpiry.value
+        })
+      }
+    );
+
+    if (!res.ok) {
+      alert("Update failed");
+      return;
     }
-  );
 
-  if (!res.ok) {
-    alert("Update failed");
-    return;
+    closeModal();
+    loadVerifications();
+  } catch (err) {
+    console.error(err);
+    alert("Update error");
   }
-
-  closeModal();
-  loadVerifications();
 }
 
 /* ===============================
-   DELETE (CONFIRM)
+   DELETE
 ================================ */
 async function deleteVerification(id) {
   if (!confirm("⚠️ This will permanently delete this verification. Continue?"))
@@ -210,7 +232,7 @@ async function deleteVerification(id) {
     return;
   }
 
-  alert("Verification deleted");
+  alert("✅ Verification deleted");
   loadVerifications();
 }
 
