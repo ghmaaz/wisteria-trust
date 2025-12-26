@@ -59,22 +59,25 @@ function renderTable(list) {
       `;
     }
 
-    const tr = document.createElement("tr");
-    tr.innerHTML = `
-      <td>${v.verificationId}</td>
-      <td>${v.sellerName}</td>
-      <td>${v.businessName}</td>
-      <td>${v.city}</td>
-      <td>${v.email}</td>
-      <td>${v.status}</td>
-      <td>${new Date(v.expiryDate).toDateString()}</td>
-      <td>${new Date(v.createdAt).toDateString()}</td>
-      <td>
-        <a href="${sellerLink}" target="_blank">Open</a>
-        <button onclick="copyLink('${sellerLink}')">📋</button>
-      </td>
-      <td>${actions}</td>
-    `;
+          const tr = document.createElement("tr");
+      tr.innerHTML = `
+        <td>${v.verificationId}</td>
+        <td>${v.sellerName}</td>
+        <td>${v.businessName}</td>
+        <td>${v.city}</td>
+        <td>${v.email}</td>
+        <td><span class="status ${v.status}">${v.status}</span></td>
+        <td>${new Date(v.expiryDate).toDateString()}</td>
+        <td>${new Date(v.createdAt).toDateString()}</td>
+        <td>
+          <a href="https://wisteriatrust.com/?id=${v.verificationId}" target="_blank">
+            Open
+          </a>
+          <button onclick="copyLink('https://wisteriatrust.com/?id=${v.verificationId}')">📋</button>
+        </td>
+        <td>${actions}</td>
+      `;
+
     tbody.appendChild(tr);
   });
 }
