@@ -9,6 +9,7 @@
 
 <div class="admin-wrapper">
 
+  <!-- HEADER -->
   <header class="admin-header">
     <h1>Wisteria Trust – Admin</h1>
     <nav>
@@ -18,12 +19,16 @@
     </nav>
   </header>
 
+  <!-- MAIN CARD -->
   <section class="card">
-
     <h2>All Verifications</h2>
 
     <div class="controls">
-      <input id="searchInput" placeholder="Search ID or Seller" oninput="applyFilters()">
+      <input
+        id="searchInput"
+        placeholder="Search ID or Seller"
+        oninput="applyFilters()"
+      />
       <select id="statusFilter" onchange="applyFilters()">
         <option value="ALL">All</option>
         <option value="ACTIVE">ACTIVE</option>
@@ -32,7 +37,8 @@
       </select>
     </div>
 
-    <div class="table-scroll">
+    <!-- DESKTOP TABLE -->
+    <div class="table-scroll desktop-only">
       <table>
         <thead>
           <tr>
@@ -51,6 +57,9 @@
         <tbody id="list"></tbody>
       </table>
     </div>
+
+    <!-- MOBILE CARDS -->
+    <div id="mobileCards" class="mobile-only"></div>
 
   </section>
 
