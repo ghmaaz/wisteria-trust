@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Admin Dashboard | Wisteria Trust</title>
+
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -10,112 +11,114 @@
       color: #fff;
       padding: 40px;
     }
+
     .box {
       background: #111827;
       padding: 20px;
       border-radius: 10px;
       max-width: 700px;
+      margin-bottom: 30px;
     }
-    input, button {
+
+    input, select, button {
       width: 100%;
       padding: 10px;
       margin-top: 10px;
     }
+
     button {
       background: #d4af37;
       border: none;
       font-weight: bold;
       cursor: pointer;
+      border-radius: 6px;
     }
-    .msg {
-      margin-top: 15px;
-    }
+
+    .msg { margin-top: 15px; }
     .success { color: #22c55e; }
     .error { color: #ef4444; }
 
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    th, td {
+      padding: 8px;
+      border: 1px solid #374151;
+      text-align: left;
+    }
+
+    th { background: #1f2937; }
+
     .status {
-    padding: 4px 10px;
-    border-radius: 12px;
-    font-size: 12px;
-    font-weight: 600;
-    text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-size: 12px;
+      font-weight: 600;
     }
 
-    .status.ACTIVE {
-      background: #e6f9f0;
-      color: #0f9d58;
+    .status.ACTIVE { background:#064e3b; color:#6ee7b7; }
+    .status.REVOKED { background:#7f1d1d; color:#fecaca; }
+    .status.EXPIRED { background:#78350f; color:#fde68a; }
+
+    .controls {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 10px;
     }
 
-    .status.REVOKED {
-      background: #fdecea;
-      color: #d93025;
+    /* MODAL */
+    #editModal {
+      display:none;
+      position:fixed;
+      inset:0;
+      background:#0009;
     }
 
-    .status.EXPIRED {
-      background: #fff4e5;
-      color: #f29900;
-    }
-    button {
-      padding: 6px 10px;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 13px;
+    #editModal .modal {
+      background:#111827;
+      color:white;
+      padding:20px;
+      max-width:400px;
+      margin:10% auto;
+      border-radius:10px;
     }
 
-    button:hover {
-      opacity: 0.9;
+    .modal button {
+      width:48%;
+      margin-right:2%;
     }
-
-    button:nth-child(1) {
-      background: #d93025;
-      color: white;
-    }
-
-    button:nth-child(2) {
-      background: #f29900;
-      color: white;
-    }
-
-    button:nth-child(3) {
-      background: #1a73e8;
-      color: white;
-    }
-
   </style>
 </head>
+
 <body>
 
-  <div class="box">
-    <h1>Admin Dashboard</h1>
-    <p>Welcome! You are logged in as Admin.</p>
+<div class="box">
+  <h1>Admin Dashboard</h1>
+  <p>Welcome! You are logged in as Admin.</p>
 
-    <h3>Create New Verification</h3>
+  <h3>Create New Verification</h3>
 
-    <input id="sellerName" placeholder="Seller Name">
-    <input id="businessName" placeholder="Business Name">
-    <input id="email" placeholder="Email">
-    <input id="city" placeholder="City">
-    <input id="expiryDate" type="date">
+  <input id="sellerName" placeholder="Seller Name">
+  <input id="businessName" placeholder="Business Name">
+  <input id="email" placeholder="Email">
+  <input id="city" placeholder="City">
+  <input id="expiryDate" type="date">
 
-    <button onclick="createVerification()">Create Verification</button>
+  <button onclick="createVerification()">Create Verification</button>
+  <div id="msg" class="msg"></div>
 
-    <div id="msg" class="msg"></div>
+  <hr style="margin:20px 0">
 
-    <hr style="margin:20px 0">
+  <button onclick="logout()">Logout</button>
+</div>
 
-    <button onclick="logout()">Logout</button>
-  </div>
+<h3>All Verifications</h3>
 
-  <h3>All Verifications</h3>
-  <div class="controls">
-  <input
-    type="text"
-    id="searchInput"
-    placeholder="Search by ID or Seller"
-    oninput="applyFilters()"
-  />
-
+<div class="controls">
+  <input id="searchInput" placeholder="Search by ID or Seller" oninput="applyFilters()">
   <select id="statusFilter" onchange="applyFilters()">
     <option value="ALL">All</option>
     <option value="ACTIVE">ACTIVE</option>
@@ -124,7 +127,7 @@
   </select>
 </div>
 
-<table border="1" width="100%">
+<table>
   <thead>
     <tr>
       <th>ID</th>
@@ -143,24 +146,25 @@
 </table>
 
 <!-- EDIT MODAL -->
-<div id="editModal" style="display:none; position:fixed; inset:0; background:#0009">
-  <div style="background:#fff; padding:20px; max-width:400px; margin:10% auto">
+<div id="editModal">
+  <div class="modal">
     <h3>Edit Verification</h3>
 
-    <input id="eSeller" placeholder="Seller Name"><br><br>
-    <input id="eBusiness" placeholder="Business Name"><br><br>
-    <input id="eCity" placeholder="City"><br><br>
-    <input id="eEmail" placeholder="Email"><br><br>
-    <input id="eExpiry" type="date"><br><br>
+    <input id="eSeller" placeholder="Seller Name">
+    <input id="eBusiness" placeholder="Business Name">
+    <input id="eCity" placeholder="City">
+    <input id="eEmail" placeholder="Email">
+    <input id="eExpiry" type="date">
 
-    <button onclick="saveEdit()">Save</button>
-    <button onclick="closeModal()">Cancel</button>
+    <div style="margin-top:15px">
+      <button onclick="saveEdit()">Save</button>
+      <button onclick="closeModal()">Cancel</button>
+    </div>
   </div>
 </div>
 
+<!-- ✅ ONLY ONE JS FILE -->
+<script src="admin.js"></script>
 
-<script src="admin-dashboard.js"></script>
-
-  <script src="admin.js"></script>
 </body>
 </html>
