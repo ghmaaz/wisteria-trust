@@ -1,51 +1,125 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Create Verification | Wisteria Trust</title>
-  <link rel="stylesheet" href="admin.css" />
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@300..700&display=swap" rel="stylesheet"/>
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            primary: "#d4af35",
+            bgDark: "#0f172a",
+            cardDark: "#1e293b"
+          },
+          fontFamily: {
+            sans: ["Inter", "sans-serif"]
+          }
+        }
+      }
+    }
+  </script>
 </head>
-<body>
 
-<header class="admin-header">
-  <h1>Wisteria Trust – Admin</h1>
-  <nav>
-    <a href="create.html" class="active">Create</a>
-    <a href="dashboard.html">All Verifications</a>
-    <button onclick="logout()">Logout</button>
-  </nav>
-</header>
+<body class="bg-bgDark text-white font-sans min-h-screen">
 
-<main class="admin-container">
+<div class="flex min-h-screen">
 
-  <section class="card create-card">
-    <h2>Create Verification</h2>
+  <!-- SIDEBAR -->
+  <aside class="hidden lg:flex w-72 flex-col bg-[#0b1220] border-r border-white/10 p-6">
+    <div class="flex items-center gap-3 mb-10">
+      <div class="w-10 h-10 rounded-full bg-primary"></div>
+      <div>
+        <h1 class="font-bold">Wisteria Trust</h1>
+        <p class="text-xs text-gray-400">Admin Console</p>
+      </div>
+    </div>
 
-    <!-- FORM -->
-    <div class="create-form">
-      <label>Seller Name</label>
-      <input id="sellerName" placeholder="Enter seller name" />
-
-      <label>Business Name</label>
-      <input id="businessName" placeholder="Enter business name" />
-
-      <label>Email</label>
-      <input id="email" placeholder="Enter email address" />
-
-      <label>City</label>
-      <input id="city" placeholder="Enter city" />
-
-      <label>Expiry Date</label>
-      <input id="expiryDate" type="date" />
-
-      <button class="primary-btn" onclick="createVerification()">
+    <nav class="flex flex-col gap-2 text-sm">
+      <a href="dashboard.html" class="px-3 py-2 rounded hover:bg-white/10">All Verifications</a>
+      <a href="create.html" class="px-3 py-2 rounded bg-primary text-black font-semibold">
         Create Verification
+      </a>
+    </nav>
+
+    <div class="mt-auto">
+      <button onclick="logout()" class="w-full mt-6 px-4 py-2 rounded bg-red-600 hover:bg-red-700">
+        Logout
       </button>
     </div>
-  </section>
+  </aside>
 
-</main>
+  <!-- MAIN -->
+  <main class="flex-1 p-6 md:p-10 flex justify-center items-start">
+    <div class="w-full max-w-3xl bg-cardDark rounded-xl shadow-xl overflow-hidden">
 
+      <!-- HEADER -->
+      <div class="p-6 border-b border-white/10">
+        <h2 class="text-2xl font-bold">Create Verification</h2>
+        <p class="text-gray-400 text-sm mt-1">
+          Issue a trusted verification ID to a seller
+        </p>
+      </div>
+
+      <!-- FORM -->
+      <div class="p-6 grid gap-6">
+
+        <div>
+          <label class="text-sm">Seller Name</label>
+          <input id="sellerName" type="text"
+            class="w-full mt-1 rounded bg-[#0b1220] border border-white/10 focus:ring-primary focus:border-primary"
+            placeholder="Seller full name"/>
+        </div>
+
+        <div>
+          <label class="text-sm">Business Name</label>
+          <input id="businessName" type="text"
+            class="w-full mt-1 rounded bg-[#0b1220] border border-white/10"
+            placeholder="Business name"/>
+        </div>
+
+        <div>
+          <label class="text-sm">Email</label>
+          <input id="email" type="email"
+            class="w-full mt-1 rounded bg-[#0b1220] border border-white/10"
+            placeholder="contact@email.com"/>
+        </div>
+
+        <div>
+          <label class="text-sm">City</label>
+          <input id="city" type="text"
+            class="w-full mt-1 rounded bg-[#0b1220] border border-white/10"
+            placeholder="City"/>
+        </div>
+
+        <div>
+          <label class="text-sm">Expiry Date</label>
+          <input id="expiryDate" type="date"
+            class="w-full mt-1 rounded bg-[#0b1220] border border-white/10"/>
+        </div>
+
+        <button onclick="createVerification()"
+          class="mt-4 w-full bg-primary hover:bg-yellow-500 text-black font-bold py-3 rounded-lg">
+          Create Verification
+        </button>
+
+      </div>
+    </div>
+  </main>
+
+</div>
+
+<!-- ADMIN JS -->
 <script src="admin.js"></script>
+
 </body>
 </html>
