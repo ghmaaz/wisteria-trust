@@ -3,6 +3,7 @@
 ================================ */
 let ALL_VERIFICATIONS = []
 let EDIT_ID = null
+const SELECTED_IDS = new Set()
 const API_BASE_URL = "https://wisteria-backend.onrender.com"
 
 /* ===============================
@@ -14,7 +15,7 @@ if (!token) {
 }
 
 /* ===============================
-   LOGOUT HANDLER
+   DOM LOADED
 ================================ */
 document.addEventListener("DOMContentLoaded", () => {
   const logoutBtns = document.querySelectorAll(".btn-logout")
@@ -37,6 +38,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const searchInput = document.getElementById("searchInput")
   const statusFilter = document.getElementById("statusFilter")
+  const dateFilter = document.getElementById("dateFilter")
 
   if (searchInput) {
     searchInput.addEventListener("input", filterTable)
@@ -44,6 +46,31 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (statusFilter) {
     statusFilter.addEventListener("change", filterTable)
+  }
+
+  if (dateFilter) {
+    dateFilter.addEventListener("change", filterTable)
+  }
+
+  const selectAllCheckbox = document.getElementById("selectAll")
+  if (selectAllCheckbox) {
+    selectAllCheckbox.addEventListener("change", toggleSelectAll)
+  }
+
+  const bulkDeleteBtn = document.getElementById("bulkDeleteBtn")
+  const bulkRevokeBtn = document.getElementById("bulkRevokeBtn")
+  const exportBtn = document.getElementById("exportBtn")
+
+  if (bulkDeleteBtn) {
+    bulkDeleteBtn.addEventListener("click", bulkDelete)
+  }
+
+  if (bulkRevokeBtn) {
+    bulkRevokeBtn.addEventListener("click", bulkRevoke)
+  }
+
+  if (exportBtn) {
+    exportBtn.addEventListener("click", exportToCSV)
   }
 
   // Load verifications if on dashboard
@@ -137,11 +164,27 @@ async function loadVerifications() {
     if (data.success && data.data) {
       ALL_VERIFICATIONS = data.data
       renderTable(ALL_VERIFICATIONS)
+      updateStats(ALL_VERIFICATIONS)
     }
   } catch (err) {
     console.error("Load failed", err)
     alert("Failed to load verifications")
   }
+}
+
+/* ===============================
+   UPDATE STATS
+================================ */
+function updateStats(list) {
+  const total = list.length
+  const active = list.filter((v) => v.status === "ACTIVE").length
+  const expired = list.filter((v) => v.status === "EXPIRED").length
+  const revoked = list.filter((v) => v.status === "REVOKED").length
+
+  document.getElementById("statTotal").textContent = total
+  document.getElementById("statActive").textContent = active
+  document.getElementById("statExpired").textContent = expired
+  document.getElementById("statRevoked").textContent = revoked
 }
 
 /* ===============================
@@ -156,7 +199,7 @@ function renderTable(list) {
   if (list.length === 0) {
     tbody.innerHTML = `
       <tr>
-        <td colspan="10" style="text-align: center; padding: 2rem; color: var(--text-muted);">
+        <td colspan="11" style="text-align: center; padding: 2rem; color: var(--text-muted);">
           No verifications found
         </td>
       </tr>
@@ -166,6 +209,7 @@ function renderTable(list) {
 
   list.forEach((v) => {
     const sellerLink = `https://wisteriatrust.com/seller/?id=${v.verificationId}`
+    const isSelected = SELECTED_IDS.has(v.verificationId)
 
     let statusActions = ""
     if (v.status === "ACTIVE") {
@@ -180,6 +224,9 @@ function renderTable(list) {
 
     const tr = document.createElement("tr")
     tr.innerHTML = `
+      <td class="checkbox-cell">
+        <input type="checkbox" class="table-checkbox row-checkbox" data-id="${v.verificationId}" ${isSelected ? "checked" : ""}>
+      </td>
       <td><span class="id-badge">${v.verificationId}</span></td>
       <td>${v.sellerName}</td>
       <td>${v.businessName}</td>
@@ -216,6 +263,10 @@ function renderTable(list) {
 
     tbody.appendChild(tr)
   })
+
+  document.querySelectorAll(".row-checkbox").forEach((checkbox) => {
+    checkbox.addEventListener("change", handleCheckboxChange)
+  })
 }
 
 /* ===============================
@@ -224,11 +275,13 @@ function renderTable(list) {
 function filterTable() {
   const searchInput = document.getElementById("searchInput")
   const statusFilter = document.getElementById("statusFilter")
+  const dateFilter = document.getElementById("dateFilter")
 
   const searchTerm = searchInput ? searchInput.value.toLowerCase() : ""
   const statusValue = statusFilter ? statusFilter.value : ""
+  const dateValue = dateFilter ? dateFilter.value : ""
 
-  const filtered = ALL_VERIFICATIONS.filter((v) => {
+  let filtered = ALL_VERIFICATIONS.filter((v) => {
     const matchesSearch =
       v.verificationId.toLowerCase().includes(searchTerm) ||
       v.sellerName.toLowerCase().includes(searchTerm) ||
@@ -240,7 +293,180 @@ function filterTable() {
     return matchesSearch && matchesStatus
   })
 
+  if (dateValue) {
+    const now = new Date()
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate())
+
+    filtered = filtered.filter((v) => {
+      const createdDate = new Date(v.createdAt)
+      const expiryDate = new Date(v.expiryDate)
+
+      switch (dateValue) {
+        case "today":
+          return createdDate >= today
+        case "week":
+          const weekAgo = new Date(today)
+          weekAgo.setDate(weekAgo.getDate() - 7)
+          return createdDate >= weekAgo
+        case "month":
+          const monthAgo = new Date(today)
+          monthAgo.setMonth(monthAgo.getMonth() - 1)
+          return createdDate >= monthAgo
+        case "expiring":
+          const sevenDaysLater = new Date(today)
+          sevenDaysLater.setDate(sevenDaysLater.getDate() + 7)
+          return expiryDate <= sevenDaysLater && expiryDate >= today && v.status === "ACTIVE"
+        default:
+          return true
+      }
+    })
+  }
+
   renderTable(filtered)
+  updateStats(filtered)
+}
+
+/* ===============================
+   BULK SELECTION
+================================ */
+function toggleSelectAll(e) {
+  const checked = e.target.checked
+  const checkboxes = document.querySelectorAll(".row-checkbox")
+
+  if (checked) {
+    checkboxes.forEach((cb) => {
+      cb.checked = true
+      SELECTED_IDS.add(cb.dataset.id)
+    })
+  } else {
+    checkboxes.forEach((cb) => {
+      cb.checked = false
+    })
+    SELECTED_IDS.clear()
+  }
+
+  updateBulkButtons()
+}
+
+function handleCheckboxChange(e) {
+  const id = e.target.dataset.id
+  if (e.target.checked) {
+    SELECTED_IDS.add(id)
+  } else {
+    SELECTED_IDS.delete(id)
+    document.getElementById("selectAll").checked = false
+  }
+  updateBulkButtons()
+}
+
+function updateBulkButtons() {
+  const bulkDeleteBtn = document.getElementById("bulkDeleteBtn")
+  const bulkRevokeBtn = document.getElementById("bulkRevokeBtn")
+
+  const hasSelection = SELECTED_IDS.size > 0
+
+  if (bulkDeleteBtn) {
+    bulkDeleteBtn.disabled = !hasSelection
+  }
+
+  if (bulkRevokeBtn) {
+    bulkRevokeBtn.disabled = !hasSelection
+  }
+}
+
+/* ===============================
+   BULK OPERATIONS
+================================ */
+async function bulkDelete() {
+  if (SELECTED_IDS.size === 0) return
+
+  if (!confirm(`Are you sure you want to delete ${SELECTED_IDS.size} verification(s)? This action cannot be undone.`)) {
+    return
+  }
+
+  const promises = Array.from(SELECTED_IDS).map((id) =>
+    fetch(`${API_BASE_URL}/api/admin/verification/${id}`, {
+      method: "DELETE",
+      headers: { Authorization: `Bearer ${token}` },
+    }),
+  )
+
+  try {
+    await Promise.all(promises)
+    alert(`Successfully deleted ${SELECTED_IDS.size} verification(s)`)
+    SELECTED_IDS.clear()
+    document.getElementById("selectAll").checked = false
+    loadVerifications()
+  } catch (err) {
+    console.error(err)
+    alert("Some deletions failed. Please try again.")
+    loadVerifications()
+  }
+}
+
+async function bulkRevoke() {
+  if (SELECTED_IDS.size === 0) return
+
+  if (!confirm(`Are you sure you want to revoke ${SELECTED_IDS.size} verification(s)?`)) {
+    return
+  }
+
+  const promises = Array.from(SELECTED_IDS).map((id) =>
+    fetch(`${API_BASE_URL}/api/admin/verification/${id}/revoke`, {
+      method: "PATCH",
+      headers: { Authorization: `Bearer ${token}` },
+    }),
+  )
+
+  try {
+    await Promise.all(promises)
+    alert(`Successfully revoked ${SELECTED_IDS.size} verification(s)`)
+    SELECTED_IDS.clear()
+    document.getElementById("selectAll").checked = false
+    loadVerifications()
+  } catch (err) {
+    console.error(err)
+    alert("Some revocations failed. Please try again.")
+    loadVerifications()
+  }
+}
+
+/* ===============================
+   EXPORT TO CSV
+================================ */
+function exportToCSV() {
+  if (ALL_VERIFICATIONS.length === 0) {
+    alert("No data to export")
+    return
+  }
+
+  const headers = ["ID", "Seller Name", "Business Name", "City", "Email", "Status", "Expiry Date", "Created Date"]
+  const csvRows = [headers.join(",")]
+
+  ALL_VERIFICATIONS.forEach((v) => {
+    const row = [
+      v.verificationId,
+      `"${v.sellerName}"`,
+      `"${v.businessName}"`,
+      `"${v.city}"`,
+      v.email,
+      v.status,
+      new Date(v.expiryDate).toLocaleDateString(),
+      new Date(v.createdAt).toLocaleDateString(),
+    ]
+    csvRows.push(row.join(","))
+  })
+
+  const csvContent = csvRows.join("\n")
+  const blob = new Blob([csvContent], { type: "text/csv" })
+  const url = window.URL.createObjectURL(blob)
+  const a = document.createElement("a")
+  a.href = url
+  a.download = `wisteria-verifications-${new Date().toISOString().split("T")[0]}.csv`
+  document.body.appendChild(a)
+  a.click()
+  document.body.removeChild(a)
+  window.URL.revokeObjectURL(url)
 }
 
 /* ===============================
