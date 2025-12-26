@@ -18,20 +18,30 @@
 
 <main class="admin-container">
 
-  <section class="card">
+  <section class="card create-card">
     <h2>Create Verification</h2>
 
-    <div class="form-grid">
-      <input id="sellerName" placeholder="Seller Name" />
-      <input id="businessName" placeholder="Business Name" />
-      <input id="email" placeholder="Email" />
-      <input id="city" placeholder="City" />
-      <input id="expiryDate" type="date" />
-    </div>
+    <!-- FORM -->
+    <div class="create-form">
+      <label>Seller Name</label>
+      <input id="sellerName" placeholder="Enter seller name" />
 
-    <button class="primary-btn" onclick="createVerification()">
-      Create Verification
-    </button>
+      <label>Business Name</label>
+      <input id="businessName" placeholder="Enter business name" />
+
+      <label>Email</label>
+      <input id="email" placeholder="Enter email address" />
+
+      <label>City</label>
+      <input id="city" placeholder="Enter city" />
+
+      <label>Expiry Date</label>
+      <input id="expiryDate" type="date" />
+
+      <button class="primary-btn" onclick="createVerification()">
+        Create Verification
+      </button>
+    </div>
   </section>
 
 </main>
