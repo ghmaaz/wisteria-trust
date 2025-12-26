@@ -2,35 +2,39 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Create Verification | Admin</title>
-  <link rel="stylesheet" href="admin.css">
+  <title>Create Verification | Wisteria Trust</title>
+  <link rel="stylesheet" href="admin.css" />
 </head>
 <body>
 
-<div class="admin-wrapper">
+<header class="admin-header">
+  <h1>Wisteria Trust – Admin</h1>
+  <nav>
+    <a href="create.html" class="active">Create</a>
+    <a href="dashboard.html">All Verifications</a>
+    <button onclick="logout()">Logout</button>
+  </nav>
+</header>
 
-  <header class="admin-header">
-    <h1>Wisteria Trust – Admin</h1>
-    <nav>
-      <a href="create.html" class="active">Create</a>
-      <a href="dashboard.html">All Verifications</a>
-      <button onclick="logout()">Logout</button>
-    </nav>
-  </header>
+<main class="admin-container">
 
   <section class="card">
     <h2>Create Verification</h2>
 
-    <input id="sellerName" placeholder="Seller Name">
-    <input id="businessName" placeholder="Business Name">
-    <input id="email" placeholder="Email">
-    <input id="city" placeholder="City">
-    <input id="expiryDate" type="date">
+    <div class="form-grid">
+      <input id="sellerName" placeholder="Seller Name" />
+      <input id="businessName" placeholder="Business Name" />
+      <input id="email" placeholder="Email" />
+      <input id="city" placeholder="City" />
+      <input id="expiryDate" type="date" />
+    </div>
 
-    <button onclick="createVerification()">Create Verification</button>
+    <button class="primary-btn" onclick="createVerification()">
+      Create Verification
+    </button>
   </section>
 
-</div>
+</main>
 
 <script src="admin.js"></script>
 </body>
