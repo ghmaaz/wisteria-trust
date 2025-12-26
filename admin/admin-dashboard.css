@@ -207,3 +207,79 @@ td button {
     width: 100%;
   }
 }
+/* ===============================
+   MOBILE RESPONSIVE FIX
+================================ */
+
+@media (max-width: 900px) {
+
+  body {
+    padding: 0;
+  }
+
+  .admin-container {
+    flex-direction: column;
+  }
+
+  /* SIDEBAR TOP */
+  .admin-sidebar {
+    width: 100%;
+    position: relative;
+    padding: 15px;
+    border-right: none;
+    border-bottom: 1px solid #1f2937;
+  }
+
+  .admin-sidebar h1 {
+    font-size: 20px;
+  }
+
+  .admin-sidebar .box {
+    margin-top: 15px;
+  }
+
+  /* MAIN CONTENT */
+  .admin-main {
+    width: 100%;
+    padding: 15px;
+  }
+
+  .controls {
+    flex-direction: column;
+  }
+
+  .controls input,
+  .controls select {
+    width: 100%;
+  }
+
+  /* TABLE SCROLL FIX */
+  .table-wrap {
+    overflow-x: auto;
+    width: 100%;
+  }
+
+  table {
+    min-width: 900px;
+    border-collapse: collapse;
+  }
+
+  th, td {
+    font-size: 12px;
+    padding: 6px;
+    white-space: nowrap;
+  }
+
+  /* ACTION BUTTONS STACK */
+  td:last-child {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  td:last-child button {
+    width: 100%;
+    font-size: 12px;
+  }
+}
+
