@@ -4,163 +4,17 @@
   <meta charset="UTF-8">
   <title>Admin Dashboard | Wisteria Trust</title>
 
-  <!-- MAIN DASHBOARD CSS -->
-  <style>
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      font-family: Inter, Arial, sans-serif;
-      background: #0b1220;
-      color: #fff;
-    }
-
-    /* ======================
-       LAYOUT
-    ====================== */
-    .admin-container {
-      display: flex;
-      min-height: 100vh;
-    }
-
-    /* ======================
-       SIDEBAR
-    ====================== */
-    .admin-sidebar {
-      width: 340px;
-      background: #111827;
-      padding: 20px;
-    }
-
-    .admin-sidebar h1 {
-      margin-top: 0;
-    }
-
-    .box {
-      background: #0f172a;
-      padding: 20px;
-      border-radius: 12px;
-    }
-
-    input, select, button {
-      width: 100%;
-      padding: 10px;
-      margin-top: 10px;
-      border-radius: 6px;
-      border: none;
-    }
-
-    button {
-      background: #d4af37;
-      font-weight: 600;
-      cursor: pointer;
-    }
-
-    button:hover {
-      opacity: 0.9;
-    }
-
-    .logout-btn {
-      margin-top: 15px;
-      background: #ef4444;
-      color: white;
-    }
-
-    /* ======================
-       MAIN
-    ====================== */
-    .admin-main {
-      flex: 1;
-      padding: 20px;
-    }
-
-    .controls {
-      display: flex;
-      gap: 10px;
-      margin-bottom: 10px;
-    }
-
-    .controls input,
-    .controls select {
-      padding: 8px;
-    }
-
-    .table-wrap {
-      overflow-x: auto;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      min-width: 1000px;
-    }
-
-    th, td {
-      padding: 10px;
-      border-bottom: 1px solid #1f2937;
-      text-align: left;
-    }
-
-    th {
-      background: #1f2937;
-    }
-
-    .status {
-      padding: 4px 10px;
-      border-radius: 12px;
-      font-size: 12px;
-      font-weight: 600;
-    }
-
-    .status.ACTIVE { background:#064e3b; color:#6ee7b7; }
-    .status.REVOKED { background:#7f1d1d; color:#fecaca; }
-    .status.EXPIRED { background:#78350f; color:#fde68a; }
-
-    /* ======================
-       MODAL
-    ====================== */
-    #editModal {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.7);
-    }
-
-    #editModal .modal {
-      background: #111827;
-      padding: 20px;
-      max-width: 420px;
-      margin: 10% auto;
-      border-radius: 12px;
-    }
-
-    .modal button {
-      width: 48%;
-      margin-top: 10px;
-    }
-
-    /* ======================
-       MOBILE
-    ====================== */
-    @media (max-width: 900px) {
-      .admin-container {
-        flex-direction: column;
-      }
-
-      .admin-sidebar {
-        width: 100%;
-      }
-    }
-  </style>
+  <!-- DASHBOARD STYLES -->
+  <link rel="stylesheet" href="admin-dashboard.css">
 </head>
 
 <body>
 
 <div class="admin-container">
 
-  <!-- SIDEBAR -->
+  <!-- ======================
+       SIDEBAR
+  ====================== -->
   <aside class="admin-sidebar">
     <h1>Admin Dashboard</h1>
     <p>Logged in as Admin</p>
@@ -174,18 +28,26 @@
       <input id="city" placeholder="City">
       <input id="expiryDate" type="date">
 
-      <button onclick="createVerification()">Create Verification</button>
+      <button class="extend" onclick="createVerification()">
+        Create Verification
+      </button>
     </div>
 
     <button class="logout-btn" onclick="logout()">Logout</button>
   </aside>
 
-  <!-- MAIN -->
+  <!-- ======================
+       MAIN CONTENT
+  ====================== -->
   <main class="admin-main">
     <h2>All Verifications</h2>
 
     <div class="controls">
-      <input id="searchInput" placeholder="Search by ID or Seller" oninput="applyFilters()">
+      <input
+        id="searchInput"
+        placeholder="Search by ID or Seller"
+        oninput="applyFilters()"
+      >
       <select id="statusFilter" onchange="applyFilters()">
         <option value="ALL">All</option>
         <option value="ACTIVE">ACTIVE</option>
@@ -210,6 +72,7 @@
             <th>Actions</th>
           </tr>
         </thead>
+
         <tbody id="list"></tbody>
       </table>
     </div>
@@ -217,7 +80,9 @@
 
 </div>
 
-<!-- EDIT MODAL -->
+<!-- ======================
+     EDIT MODAL
+====================== -->
 <div id="editModal">
   <div class="modal">
     <h3>Edit Verification</h3>
@@ -228,14 +93,16 @@
     <input id="eEmail" placeholder="Email">
     <input id="eExpiry" type="date">
 
-    <div style="display:flex; gap:10px">
-      <button onclick="saveEdit()">Save</button>
-      <button onclick="closeModal()">Cancel</button>
+    <div style="display:flex; gap:10px; margin-top:10px">
+      <button class="extend" onclick="saveEdit()">Save</button>
+      <button class="edit" onclick="closeModal()">Cancel</button>
     </div>
   </div>
 </div>
 
-<!-- ONLY JS -->
+<!-- ======================
+     JS
+====================== -->
 <script src="admin.js"></script>
 
 </body>
