@@ -1,0 +1,30 @@
+async function adminLogin() {
+  const email = document.getElementById("email").value.trim();
+  const password = document.getElementById("password").value.trim();
+  const msg = document.getElementById("msg");
+
+  msg.innerText = "";
+
+  try {
+    const res = await fetch(
+      "https://wisteria-backend.onrender.com/api/admin/login",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password })
+      }
+    );
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      msg.innerText = data.message || "Login failed";
+      return;
+    }
+
+    localStorage.setItem("adminToken", data.token);
+    window.location.href = "dashboard.html";
+  } catch (err) {
+    msg.innerText = "Server error";
+  }
+}
