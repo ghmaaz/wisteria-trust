@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
   loginForm.addEventListener("submit", async (e) => {
     e.preventDefault()
 
-    const username = document.getElementById("username").value.trim()
+    const email = document.getElementById("email").value.trim()
     const password = document.getElementById("password").value
 
     // Clear previous error
@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ username, password }),
+        body: JSON.stringify({ email, password }),
       })
 
       const data = await response.json()
@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
         window.location.href = "dashboard.html"
       } else {
         // Show error message
-        errorMessage.textContent = data.message || "Invalid username or password"
+        errorMessage.textContent = data.message || "Invalid credentials"
         errorMessage.style.display = "block"
         loginBtn.disabled = false
         loginBtn.textContent = "Sign In"
