@@ -4,53 +4,108 @@
   <meta charset="UTF-8">
   <title>Admin Dashboard | Wisteria Trust</title>
 
+  <!-- MAIN DASHBOARD CSS -->
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
-      font-family: Arial, sans-serif;
+      margin: 0;
+      font-family: Inter, Arial, sans-serif;
       background: #0b1220;
       color: #fff;
-      padding: 40px;
+    }
+
+    /* ======================
+       LAYOUT
+    ====================== */
+    .admin-container {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* ======================
+       SIDEBAR
+    ====================== */
+    .admin-sidebar {
+      width: 340px;
+      background: #111827;
+      padding: 20px;
+    }
+
+    .admin-sidebar h1 {
+      margin-top: 0;
     }
 
     .box {
-      background: #111827;
+      background: #0f172a;
       padding: 20px;
-      border-radius: 10px;
-      max-width: 700px;
-      margin-bottom: 30px;
+      border-radius: 12px;
     }
 
     input, select, button {
       width: 100%;
       padding: 10px;
       margin-top: 10px;
+      border-radius: 6px;
+      border: none;
     }
 
     button {
       background: #d4af37;
-      border: none;
-      font-weight: bold;
+      font-weight: 600;
       cursor: pointer;
-      border-radius: 6px;
     }
 
-    .msg { margin-top: 15px; }
-    .success { color: #22c55e; }
-    .error { color: #ef4444; }
+    button:hover {
+      opacity: 0.9;
+    }
+
+    .logout-btn {
+      margin-top: 15px;
+      background: #ef4444;
+      color: white;
+    }
+
+    /* ======================
+       MAIN
+    ====================== */
+    .admin-main {
+      flex: 1;
+      padding: 20px;
+    }
+
+    .controls {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .controls input,
+    .controls select {
+      padding: 8px;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+    }
 
     table {
       width: 100%;
       border-collapse: collapse;
-      margin-top: 20px;
+      min-width: 1000px;
     }
 
     th, td {
-      padding: 8px;
-      border: 1px solid #374151;
+      padding: 10px;
+      border-bottom: 1px solid #1f2937;
       text-align: left;
     }
 
-    th { background: #1f2937; }
+    th {
+      background: #1f2937;
+    }
 
     .status {
       padding: 4px 10px;
@@ -63,87 +118,104 @@
     .status.REVOKED { background:#7f1d1d; color:#fecaca; }
     .status.EXPIRED { background:#78350f; color:#fde68a; }
 
-    .controls {
-      display: flex;
-      gap: 10px;
-      margin-bottom: 10px;
-    }
-
-    /* MODAL */
+    /* ======================
+       MODAL
+    ====================== */
     #editModal {
-      display:none;
-      position:fixed;
-      inset:0;
-      background:#0009;
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.7);
     }
 
     #editModal .modal {
-      background:#111827;
-      color:white;
-      padding:20px;
-      max-width:400px;
-      margin:10% auto;
-      border-radius:10px;
+      background: #111827;
+      padding: 20px;
+      max-width: 420px;
+      margin: 10% auto;
+      border-radius: 12px;
     }
 
     .modal button {
-      width:48%;
-      margin-right:2%;
+      width: 48%;
+      margin-top: 10px;
+    }
+
+    /* ======================
+       MOBILE
+    ====================== */
+    @media (max-width: 900px) {
+      .admin-container {
+        flex-direction: column;
+      }
+
+      .admin-sidebar {
+        width: 100%;
+      }
     }
   </style>
 </head>
 
 <body>
 
-<div class="box">
-  <h1>Admin Dashboard</h1>
-  <p>Welcome! You are logged in as Admin.</p>
+<div class="admin-container">
 
-  <h3>Create New Verification</h3>
+  <!-- SIDEBAR -->
+  <aside class="admin-sidebar">
+    <h1>Admin Dashboard</h1>
+    <p>Logged in as Admin</p>
 
-  <input id="sellerName" placeholder="Seller Name">
-  <input id="businessName" placeholder="Business Name">
-  <input id="email" placeholder="Email">
-  <input id="city" placeholder="City">
-  <input id="expiryDate" type="date">
+    <div class="box">
+      <h3>Create Verification</h3>
 
-  <button onclick="createVerification()">Create Verification</button>
-  <div id="msg" class="msg"></div>
+      <input id="sellerName" placeholder="Seller Name">
+      <input id="businessName" placeholder="Business Name">
+      <input id="email" placeholder="Email">
+      <input id="city" placeholder="City">
+      <input id="expiryDate" type="date">
 
-  <hr style="margin:20px 0">
+      <button onclick="createVerification()">Create Verification</button>
+    </div>
 
-  <button onclick="logout()">Logout</button>
+    <button class="logout-btn" onclick="logout()">Logout</button>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="admin-main">
+    <h2>All Verifications</h2>
+
+    <div class="controls">
+      <input id="searchInput" placeholder="Search by ID or Seller" oninput="applyFilters()">
+      <select id="statusFilter" onchange="applyFilters()">
+        <option value="ALL">All</option>
+        <option value="ACTIVE">ACTIVE</option>
+        <option value="REVOKED">REVOKED</option>
+        <option value="EXPIRED">EXPIRED</option>
+      </select>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Seller</th>
+            <th>Business</th>
+            <th>City</th>
+            <th>Email</th>
+            <th>Status</th>
+            <th>Expiry</th>
+            <th>Created</th>
+            <th>Seller Page</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="list"></tbody>
+      </table>
+    </div>
+  </main>
+
 </div>
-
-<h3>All Verifications</h3>
-
-<div class="controls">
-  <input id="searchInput" placeholder="Search by ID or Seller" oninput="applyFilters()">
-  <select id="statusFilter" onchange="applyFilters()">
-    <option value="ALL">All</option>
-    <option value="ACTIVE">ACTIVE</option>
-    <option value="REVOKED">REVOKED</option>
-    <option value="EXPIRED">EXPIRED</option>
-  </select>
-</div>
-
-<table>
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>Seller</th>
-      <th>Business</th>
-      <th>City</th>
-      <th>Email</th>
-      <th>Status</th>
-      <th>Expiry</th>
-      <th>Created</th>
-      <th>Seller Page</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody id="list"></tbody>
-</table>
 
 <!-- EDIT MODAL -->
 <div id="editModal">
@@ -156,14 +228,14 @@
     <input id="eEmail" placeholder="Email">
     <input id="eExpiry" type="date">
 
-    <div style="margin-top:15px">
+    <div style="display:flex; gap:10px">
       <button onclick="saveEdit()">Save</button>
       <button onclick="closeModal()">Cancel</button>
     </div>
   </div>
 </div>
 
-<!-- ✅ ONLY ONE JS FILE -->
+<!-- ONLY JS -->
 <script src="admin.js"></script>
 
 </body>
