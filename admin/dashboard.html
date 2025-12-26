@@ -24,22 +24,116 @@
     <!-- Main Content -->
     <main class="main-content">
         <div class="container">
+            <!-- Added analytics cards section -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon stat-icon-primary">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M9 11l3 3L22 4"/>
+                            <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+                        </svg>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-label">Total Verifications</div>
+                        <div class="stat-value" id="statTotal">0</div>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon stat-icon-success">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="9 11 12 14 16 14"/>
+                            <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+                        </svg>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-label">Active</div>
+                        <div class="stat-value" id="statActive">0</div>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon stat-icon-warning">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <polyline points="12 6 12 12 16 14"/>
+                        </svg>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-label">Expired</div>
+                        <div class="stat-value" id="statExpired">0</div>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon stat-icon-danger">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <line x1="15" y1="9" x2="9" y2="15"/>
+                            <line x1="9" y1="9" x2="15" y2="15"/>
+                        </svg>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-label">Revoked</div>
+                        <div class="stat-value" id="statRevoked">0</div>
+                    </div>
+                </div>
+            </div>
+
             <div class="card">
                 <div class="card-header">
-                    <h2>All Verifications</h2>
+                    <div class="card-header-content">
+                        <h2>All Verifications</h2>
+                        <!-- Added bulk action controls -->
+                        <div class="bulk-actions">
+                            <button class="btn-bulk" id="bulkDeleteBtn" disabled>
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="3 6 5 6 21 6"/>
+                                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+                                </svg>
+                                Delete Selected
+                            </button>
+                            <button class="btn-bulk btn-bulk-revoke" id="bulkRevokeBtn" disabled>
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="15" y1="9" x2="9" y2="15"/>
+                                    <line x1="9" y1="9" x2="15" y2="15"/>
+                                </svg>
+                                Revoke Selected
+                            </button>
+                            <button class="btn-export" id="exportBtn">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                                    <polyline points="7 10 12 15 17 10"/>
+                                    <line x1="12" y1="15" x2="12" y2="3"/>
+                                </svg>
+                                Export CSV
+                            </button>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Controls -->
                 <div class="controls-row">
                     <div class="search-group">
-                        <input type="text" id="searchInput" placeholder="Search by ID or Seller..." class="input-search">
+                        <input type="text" id="searchInput" placeholder="Search by ID, Seller, Business, or Email..." class="input-search">
                     </div>
+                    <!-- Added advanced filters -->
                     <div class="filter-group">
                         <select id="statusFilter" class="input-select">
                             <option value="">All Status</option>
                             <option value="ACTIVE">Active</option>
                             <option value="REVOKED">Revoked</option>
                             <option value="EXPIRED">Expired</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <select id="dateFilter" class="input-select">
+                            <option value="">All Time</option>
+                            <option value="today">Today</option>
+                            <option value="week">This Week</option>
+                            <option value="month">This Month</option>
+                            <option value="expiring">Expiring Soon (7 days)</option>
                         </select>
                     </div>
                 </div>
@@ -49,6 +143,10 @@
                     <table class="verification-table">
                         <thead>
                             <tr>
+                                <!-- Added checkbox column for bulk selection -->
+                                <th class="checkbox-cell">
+                                    <input type="checkbox" id="selectAll" class="table-checkbox">
+                                </th>
                                 <th>ID</th>
                                 <th>Seller</th>
                                 <th>Business</th>
@@ -64,6 +162,7 @@
                         <tbody id="verificationsTable">
                             <!-- Sample Data -->
                             <tr>
+                                <td><input type="checkbox" class="table-checkbox"></td>
                                 <td><span class="id-badge">VER-001</span></td>
                                 <td>John Smith</td>
                                 <td>Smith Electronics</td>
@@ -98,6 +197,7 @@
                                 </td>
                             </tr>
                             <tr>
+                                <td><input type="checkbox" class="table-checkbox"></td>
                                 <td><span class="id-badge">VER-002</span></td>
                                 <td>Sarah Johnson</td>
                                 <td>Johnson & Co</td>
@@ -132,6 +232,7 @@
                                 </td>
                             </tr>
                             <tr>
+                                <td><input type="checkbox" class="table-checkbox"></td>
                                 <td><span class="id-badge">VER-003</span></td>
                                 <td>Michael Chen</td>
                                 <td>Chen Imports</td>
