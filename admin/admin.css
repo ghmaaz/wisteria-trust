@@ -178,3 +178,69 @@ td button {
     gap: 10px;
   }
 }
+/* =========================
+   CREATE VERIFICATION FIX
+========================= */
+
+.create-card {
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+.create-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 10px;
+}
+
+.create-form label {
+  font-size: 14px;
+  color: #cbd5f5;
+  font-weight: 500;
+}
+
+.create-form input {
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid #374151;
+  background: #020617;
+  color: #fff;
+  font-size: 15px;
+}
+
+.create-form input::placeholder {
+  color: #64748b;
+}
+
+.primary-btn {
+  margin-top: 10px;
+  padding: 14px;
+  font-size: 15px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #facc15, #eab308);
+  color: #111;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* FIX BACKGROUND UNEVEN LOOK */
+body {
+  background: linear-gradient(180deg, #020617 0%, #0b1220 100%);
+}
+
+/* MOBILE */
+@media (max-width: 600px) {
+  .create-card {
+    max-width: 100%;
+  }
+
+  .create-form input {
+    font-size: 16px;
+  }
+
+  .primary-btn {
+    font-size: 16px;
+  }
+}
+
