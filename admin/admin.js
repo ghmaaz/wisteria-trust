@@ -2,33 +2,49 @@ let ALL_VERIFICATIONS = [];
 let EDIT_ID = null;
 
 /* ===============================
-   LOAD
+   AUTH GUARD
 ================================ */
-async function loadVerifications() {
-  const token = localStorage.getItem("adminToken");
-
-  const res = await fetch(
-    "https://wisteria-backend.onrender.com/api/admin/verifications",
-    { headers: { Authorization: "Bearer " + token } }
-  );
-
-  const data = await res.json();
-  if (!data.success) return;
-
-  ALL_VERIFICATIONS = data.data;
-  renderTable(ALL_VERIFICATIONS);
+const token = localStorage.getItem("adminToken");
+if (!token) {
+  window.location.href = "login.html";
 }
 
 /* ===============================
-   TABLE
+   LOAD VERIFICATIONS
+================================ */
+async function loadVerifications() {
+  try {
+    const res = await fetch(
+      "https://wisteria-backend.onrender.com/api/admin/verifications",
+      { headers: { Authorization: "Bearer " + token } }
+    );
+
+    if (res.status === 401) {
+      alert("Session expired. Please login again.");
+      localStorage.removeItem("adminToken");
+      window.location.href = "login.html";
+      return;
+    }
+
+    const data = await res.json();
+    if (!data.success) return;
+
+    ALL_VERIFICATIONS = data.data;
+    renderTable(ALL_VERIFICATIONS);
+  } catch (err) {
+    console.error("Load failed", err);
+  }
+}
+
+/* ===============================
+   TABLE RENDER
 ================================ */
 function renderTable(list) {
   const tbody = document.getElementById("list");
   tbody.innerHTML = "";
 
   list.forEach(v => {
-    const sellerPage =
-      `https://wisteriatrust.com/seller/?id=${v.verificationId}`;
+    const sellerLink = `https://wisteriatrust.com/?id=${v.verificationId}`;
 
     let actions = `
       <button onclick="openEdit('${v.verificationId}')">✏️ Edit</button>
@@ -54,8 +70,8 @@ function renderTable(list) {
       <td>${new Date(v.expiryDate).toDateString()}</td>
       <td>${new Date(v.createdAt).toDateString()}</td>
       <td>
-        <a href="${sellerPage}" target="_blank">Open</a>
-        <button onclick="copyLink('${sellerPage}')">📋</button>
+        <a href="${sellerLink}" target="_blank">Open</a>
+        <button onclick="copyLink('${sellerLink}')">📋</button>
       </td>
       <td>${actions}</td>
     `;
@@ -64,11 +80,11 @@ function renderTable(list) {
 }
 
 /* ===============================
-   COPY
+   COPY LINK
 ================================ */
 function copyLink(link) {
   navigator.clipboard.writeText(link);
-  alert("Seller page link copied");
+  alert("Seller link copied");
 }
 
 /* ===============================
@@ -83,7 +99,7 @@ function openEdit(id) {
   eBusiness.value = v.businessName;
   eCity.value = v.city;
   eEmail.value = v.email;
-  eExpiry.value = new Date(v.expiryDate).toISOString().split("T")[0];
+  eExpiry.value = v.expiryDate.split("T")[0];
 
   editModal.style.display = "block";
 }
@@ -93,16 +109,6 @@ function closeModal() {
 }
 
 async function saveEdit() {
-  const token = localStorage.getItem("adminToken");
-
-  const payload = {
-    sellerName: eSeller.value,
-    businessName: eBusiness.value,
-    city: eCity.value,
-    email: eEmail.value,
-    expiryDate: eExpiry.value
-  };
-
   await fetch(
     `https://wisteria-backend.onrender.com/api/admin/verification/${EDIT_ID}/update`,
     {
@@ -111,7 +117,13 @@ async function saveEdit() {
         "Content-Type": "application/json",
         Authorization: "Bearer " + token
       },
-      body: JSON.stringify(payload)
+      body: JSON.stringify({
+        sellerName: eSeller.value,
+        businessName: eBusiness.value,
+        city: eCity.value,
+        email: eEmail.value,
+        expiryDate: eExpiry.value
+      })
     }
   );
 
@@ -120,63 +132,41 @@ async function saveEdit() {
 }
 
 /* ===============================
-   DELETE (CONFIRM)
+   DELETE
 ================================ */
 async function deleteVerification(id) {
-  if (!confirm("⚠️ This will permanently delete this verification. Continue?"))
-    return;
+  if (!confirm("Delete permanently?")) return;
 
-  const token = localStorage.getItem("adminToken");
-
-  const res = await fetch(
+  await fetch(
     `https://wisteria-backend.onrender.com/api/admin/verification/${id}`,
-    {
-      method: "DELETE",
-      headers: { Authorization: "Bearer " + token }
-    }
+    { method: "DELETE", headers: { Authorization: "Bearer " + token } }
   );
 
-  if (!res.ok) {
-    alert("Delete failed");
-    return;
-  }
-
-  alert("Verification deleted");
   loadVerifications();
 }
 
 /* ===============================
-   REVOKE / EXPIRE / EXTEND
+   STATUS ACTIONS
 ================================ */
 async function revokeVerification(id) {
-  if (!confirm("Revoke this verification?")) return;
-  const token = localStorage.getItem("adminToken");
-
   await fetch(
     `https://wisteria-backend.onrender.com/api/admin/verification/${id}/revoke`,
     { method: "PATCH", headers: { Authorization: "Bearer " + token } }
   );
-
   loadVerifications();
 }
 
 async function expireVerification(id) {
-  if (!confirm("Expire this verification?")) return;
-  const token = localStorage.getItem("adminToken");
-
   await fetch(
     `https://wisteria-backend.onrender.com/api/admin/verification/${id}/expire`,
     { method: "PATCH", headers: { Authorization: "Bearer " + token } }
   );
-
   loadVerifications();
 }
 
 async function extendExpiry(id) {
-  const newDate = prompt("Enter new expiry date (YYYY-MM-DD):");
-  if (!newDate) return;
-
-  const token = localStorage.getItem("adminToken");
+  const d = prompt("New expiry (YYYY-MM-DD)");
+  if (!d) return;
 
   await fetch(
     `https://wisteria-backend.onrender.com/api/admin/verification/${id}/extend`,
@@ -186,7 +176,7 @@ async function extendExpiry(id) {
         "Content-Type": "application/json",
         Authorization: "Bearer " + token
       },
-      body: JSON.stringify({ expiryDate: newDate })
+      body: JSON.stringify({ expiryDate: d })
     }
   );
 
@@ -194,9 +184,6 @@ async function extendExpiry(id) {
 }
 
 /* ===============================
-   AUTO LOAD
+   INIT
 ================================ */
-if (location.pathname.includes("dashboard")) {
-  loadVerifications();
-}
-
+loadVerifications();
