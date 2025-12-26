@@ -3,13 +3,14 @@
 ================================ */
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-  margin: 0;
-  font-family: Inter, system-ui, Arial, sans-serif;
+  font-family: Arial, sans-serif;
   background: #0b1220;
-  color: #ffffff;
+  color: #fff;
 }
 
 /* ===============================
@@ -21,123 +22,113 @@ body {
 }
 
 /* ===============================
-   SIDEBAR (LEFT)
+   SIDEBAR
 ================================ */
 .admin-sidebar {
-  width: 340px;
+  width: 320px;
   background: #111827;
   padding: 20px;
+  flex-shrink: 0;
 }
 
 .admin-sidebar h1 {
-  margin-top: 0;
+  font-size: 22px;
+  margin-bottom: 5px;
 }
 
-.box {
-  background: #0f172a;
-  padding: 20px;
-  border-radius: 12px;
+.admin-sidebar p {
+  font-size: 13px;
+  opacity: 0.7;
+  margin-bottom: 15px;
 }
 
-input,
-select {
+.admin-sidebar .box {
+  background: #0b1220;
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.admin-sidebar input,
+.admin-sidebar button {
   width: 100%;
   padding: 10px;
   margin-top: 10px;
-  border-radius: 6px;
-  border: none;
 }
 
-button {
-  padding: 10px;
-  margin-top: 10px;
-  border-radius: 6px;
+.admin-sidebar button {
+  background: #d4af37;
   border: none;
+  font-weight: bold;
   cursor: pointer;
-  font-weight: 600;
-  transition: all 0.2s ease;
+  border-radius: 6px;
 }
-
-button:hover {
-  transform: translateY(-1px);
-  opacity: 0.92;
-}
-
-button:active {
-  transform: translateY(0);
-}
-
-/* Action colors */
-button.edit { background: #374151; color: white; }
-button.extend { background: #2563eb; color: white; }
-button.revoke { background: #f97316; color: white; }
-button.expire { background: #facc15; color: #111; }
-button.delete { background: #dc2626; color: white; }
 
 .logout-btn {
-  background: #dc2626;
+  margin-top: 20px;
+  background: #7f1d1d;
   color: white;
-  width: 100%;
 }
 
 /* ===============================
-   MAIN (RIGHT)
+   MAIN CONTENT
 ================================ */
 .admin-main {
   flex: 1;
-  padding: 20px;
+  padding: 25px;
+  overflow-x: hidden;
 }
 
+.admin-main h2 {
+  margin-bottom: 15px;
+}
+
+/* ===============================
+   CONTROLS
+================================ */
 .controls {
   display: flex;
   gap: 10px;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
 }
 
 .controls input,
 .controls select {
-  padding: 8px;
+  padding: 10px;
 }
 
 /* ===============================
    TABLE
 ================================ */
 .table-wrap {
+  width: 100%;
   overflow-x: auto;
 }
 
 table {
   width: 100%;
+  min-width: 1000px;
   border-collapse: collapse;
-  min-width: 1100px;
 }
 
-th,
-td {
-  padding: 10px;
-  border-bottom: 1px solid #1f2937;
+th, td {
+  border: 1px solid #374151;
+  padding: 8px;
   text-align: left;
+  font-size: 13px;
+  white-space: nowrap;
 }
 
-thead th {
-  position: sticky;
-  top: 0;
+th {
   background: #1f2937;
-  z-index: 5;
 }
 
-tbody tr:hover {
-  background: #0f172a;
-}
-
-/* ===============================
-   STATUS BADGES
-================================ */
+/* STATUS */
 .status {
-  padding: 4px 10px;
-  border-radius: 12px;
-  font-size: 12px;
-  font-weight: 600;
+  padding: 4px 8px;
+  border-radius: 10px;
+  font-size: 11px;
+  font-weight: bold;
 }
 
 .status.ACTIVE {
@@ -145,19 +136,9 @@ tbody tr:hover {
   color: #6ee7b7;
 }
 
-.status.ACTIVE::before {
-  content: "● ";
-  color: #22c55e;
-}
-
 .status.REVOKED {
   background: #7f1d1d;
   color: #fecaca;
-}
-
-.status.REVOKED::before {
-  content: "● ";
-  color: #ef4444;
 }
 
 .status.EXPIRED {
@@ -165,16 +146,19 @@ tbody tr:hover {
   color: #fde68a;
 }
 
-.status.EXPIRED::before {
-  content: "● ";
-  color: #f59e0b;
+/* ACTION BUTTONS */
+td button {
+  padding: 5px 8px;
+  border: none;
+  border-radius: 5px;
+  font-size: 11px;
+  cursor: pointer;
+  margin: 2px 0;
 }
 
-/* ===============================
-   ACTION BUTTON SPACING
-================================ */
-td button {
-  margin: 4px 2px;
+td a {
+  color: #93c5fd;
+  font-size: 12px;
 }
 
 /* ===============================
@@ -190,15 +174,16 @@ td button {
 #editModal .modal {
   background: #111827;
   padding: 20px;
-  max-width: 420px;
+  border-radius: 10px;
+  max-width: 400px;
   margin: 10% auto;
-  border-radius: 12px;
 }
 
 /* ===============================
-   MOBILE
+   MOBILE RESPONSIVE
 ================================ */
 @media (max-width: 900px) {
+
   .admin-container {
     flex-direction: column;
   }
@@ -206,41 +191,8 @@ td button {
   .admin-sidebar {
     width: 100%;
   }
-}
-/* ===============================
-   MOBILE RESPONSIVE FIX
-================================ */
 
-@media (max-width: 900px) {
-
-  body {
-    padding: 0;
-  }
-
-  .admin-container {
-    flex-direction: column;
-  }
-
-  /* SIDEBAR TOP */
-  .admin-sidebar {
-    width: 100%;
-    position: relative;
-    padding: 15px;
-    border-right: none;
-    border-bottom: 1px solid #1f2937;
-  }
-
-  .admin-sidebar h1 {
-    font-size: 20px;
-  }
-
-  .admin-sidebar .box {
-    margin-top: 15px;
-  }
-
-  /* MAIN CONTENT */
   .admin-main {
-    width: 100%;
     padding: 15px;
   }
 
@@ -253,33 +205,12 @@ td button {
     width: 100%;
   }
 
-  /* TABLE SCROLL FIX */
-  .table-wrap {
-    overflow-x: auto;
-    width: 100%;
-  }
-
   table {
     min-width: 900px;
-    border-collapse: collapse;
   }
 
-  th, td {
-    font-size: 12px;
-    padding: 6px;
-    white-space: nowrap;
-  }
-
-  /* ACTION BUTTONS STACK */
   td:last-child {
     display: flex;
     flex-direction: column;
-    gap: 6px;
-  }
-
-  td:last-child button {
-    width: 100%;
-    font-size: 12px;
   }
 }
-
