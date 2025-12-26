@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>All Verifications | Admin</title>
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+<div class="admin-wrapper">
+
+  <header class="admin-header">
+    <h1>Wisteria Trust – Admin</h1>
+    <nav>
+      <a href="create.html">Create</a>
+      <a href="dashboard.html" class="active">All Verifications</a>
+      <button onclick="logout()">Logout</button>
+    </nav>
+  </header>
+
+  <section class="card">
+
+    <h2>All Verifications</h2>
+
+    <div class="controls">
+      <input id="searchInput" placeholder="Search ID or Seller" oninput="applyFilters()">
+      <select id="statusFilter" onchange="applyFilters()">
+        <option value="ALL">All</option>
+        <option value="ACTIVE">ACTIVE</option>
+        <option value="REVOKED">REVOKED</option>
+        <option value="EXPIRED">EXPIRED</option>
+      </select>
+    </div>
+
+    <div class="table-scroll">
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Seller</th>
+            <th>Business</th>
+            <th>City</th>
+            <th>Email</th>
+            <th>Status</th>
+            <th>Expiry</th>
+            <th>Created</th>
+            <th>Seller Page</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="list"></tbody>
+      </table>
+    </div>
+
+  </section>
+
+</div>
+
+<script src="admin.js"></script>
+</body>
+</html>

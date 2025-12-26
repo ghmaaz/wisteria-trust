@@ -1,0 +1,91 @@
+* {
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  margin: 0;
+  background: #0b1220;
+  color: white;
+}
+
+.admin-wrapper {
+  padding: 20px;
+}
+
+.admin-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.admin-header nav a {
+  margin-right: 15px;
+  color: #d4af37;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.admin-header nav a.active {
+  text-decoration: underline;
+}
+
+.admin-header button {
+  background: #7f1d1d;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  cursor: pointer;
+}
+
+.card {
+  background: #111827;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.card input,
+.card select,
+.card button {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+}
+
+.card button {
+  background: #d4af37;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* TABLE */
+.table-scroll {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  min-width: 1100px;
+  border-collapse: collapse;
+  margin-top: 15px;
+}
+
+th, td {
+  border: 1px solid #374151;
+  padding: 8px;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+th {
+  background: #1f2937;
+}
+
+/* STATUS */
+.status.ACTIVE { color: #22c55e; }
+.status.REVOKED { color: #ef4444; }
+.status.EXPIRED { color: #facc15; }
+
+/* ❌ NO RESPONSIVE TRANSFORMATION */

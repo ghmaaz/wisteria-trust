@@ -1,0 +1,216 @@
+/* ===============================
+   RESET
+================================ */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: #0b1220;
+  color: #fff;
+}
+
+/* ===============================
+   LAYOUT
+================================ */
+.admin-container {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* ===============================
+   SIDEBAR
+================================ */
+.admin-sidebar {
+  width: 320px;
+  background: #111827;
+  padding: 20px;
+  flex-shrink: 0;
+}
+
+.admin-sidebar h1 {
+  font-size: 22px;
+  margin-bottom: 5px;
+}
+
+.admin-sidebar p {
+  font-size: 13px;
+  opacity: 0.7;
+  margin-bottom: 15px;
+}
+
+.admin-sidebar .box {
+  background: #0b1220;
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.admin-sidebar input,
+.admin-sidebar button {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+}
+
+.admin-sidebar button {
+  background: #d4af37;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+.logout-btn {
+  margin-top: 20px;
+  background: #7f1d1d;
+  color: white;
+}
+
+/* ===============================
+   MAIN CONTENT
+================================ */
+.admin-main {
+  flex: 1;
+  padding: 25px;
+  overflow-x: hidden;
+}
+
+.admin-main h2 {
+  margin-bottom: 15px;
+}
+
+/* ===============================
+   CONTROLS
+================================ */
+.controls {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.controls input,
+.controls select {
+  padding: 10px;
+}
+
+/* ===============================
+   TABLE
+================================ */
+.table-wrap {
+  width: 100%;
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  min-width: 1000px;
+  border-collapse: collapse;
+}
+
+th, td {
+  border: 1px solid #374151;
+  padding: 8px;
+  text-align: left;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+th {
+  background: #1f2937;
+}
+
+/* STATUS */
+.status {
+  padding: 4px 8px;
+  border-radius: 10px;
+  font-size: 11px;
+  font-weight: bold;
+}
+
+.status.ACTIVE {
+  background: #064e3b;
+  color: #6ee7b7;
+}
+
+.status.REVOKED {
+  background: #7f1d1d;
+  color: #fecaca;
+}
+
+.status.EXPIRED {
+  background: #78350f;
+  color: #fde68a;
+}
+
+/* ACTION BUTTONS */
+td button {
+  padding: 5px 8px;
+  border: none;
+  border-radius: 5px;
+  font-size: 11px;
+  cursor: pointer;
+  margin: 2px 0;
+}
+
+td a {
+  color: #93c5fd;
+  font-size: 12px;
+}
+
+/* ===============================
+   MODAL
+================================ */
+#editModal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+}
+
+#editModal .modal {
+  background: #111827;
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 400px;
+  margin: 10% auto;
+}
+
+/* ===============================
+   MOBILE RESPONSIVE
+================================ */
+@media (max-width: 900px) {
+
+  .admin-container {
+    flex-direction: column;
+  }
+
+  .admin-sidebar {
+    width: 100%;
+  }
+
+  .admin-main {
+    padding: 15px;
+  }
+
+  .controls {
+    flex-direction: column;
+  }
+
+  .controls input,
+  .controls select {
+    width: 100%;
+  }
+
+  table {
+    min-width: 900px;
+  }
+
+  td:last-child {
+    display: flex;
+    flex-direction: column;
+  }
+}
