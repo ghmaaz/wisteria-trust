@@ -1,180 +1,125 @@
 <!DOCTYPE html>
-<html class="dark" lang="en">
+<html lang="en" class="dark">
 <head>
-  <meta charset="utf-8"/>
-  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-  <title>Create Verification - Wisteria Trust</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Create Verification | Wisteria Trust</title>
 
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com" rel="preconnect"/>
-  <link crossorigin href="https://fonts.gstatic.com" rel="preconnect"/>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@300..700&display=swap" rel="stylesheet"/>
 
-  <!-- Material Symbols -->
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
-
-  <!-- Tailwind CSS -->
-  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-
-  <!-- Tailwind Config -->
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
   <script>
     tailwind.config = {
       darkMode: "class",
       theme: {
         extend: {
           colors: {
-            primary: "#f9c006",
-            "background-light": "#f8f8f5",
-            "background-dark": "#231e0f",
-            "surface-dark": "#2c2616",
-            "input-dark": "#352e18",
-            "border-dark": "#4a4021",
+            primary: "#d4af35",
+            bgDark: "#0f172a",
+            cardDark: "#1e293b"
           },
           fontFamily: {
-            display: ["Inter", "sans-serif"]
-          },
-          borderRadius: {
-            DEFAULT: "0.25rem",
-            lg: "0.5rem",
-            xl: "0.75rem",
-            "2xl": "1rem",
-            full: "9999px"
+            sans: ["Inter", "sans-serif"]
           }
         }
       }
     }
   </script>
-
-  <style>
-    ::-webkit-scrollbar { width: 8px; }
-    ::-webkit-scrollbar-track { background: #231e0f; }
-    ::-webkit-scrollbar-thumb { background: #4a4021; border-radius: 4px; }
-    ::-webkit-scrollbar-thumb:hover { background: #6a5c2f; }
-
-    .dark input[type="date"]::-webkit-calendar-picker-indicator {
-      filter: invert(1);
-      opacity: 0.6;
-      cursor: pointer;
-    }
-  </style>
 </head>
 
-<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-white">
-<div class="relative flex min-h-screen flex-col">
+<body class="bg-bgDark text-white font-sans min-h-screen">
 
-  <!-- Header -->
-  <header class="flex items-center justify-between border-b border-gray-200 dark:border-border-dark px-4 sm:px-10 py-4 sticky top-0 bg-background-light/95 dark:bg-background-dark/95 backdrop-blur z-50">
-    <div class="flex items-center gap-3">
-      <div class="size-8 text-primary">
-        <svg viewBox="0 0 48 48" fill="currentColor">
-          <path d="M36.7273 44C33.9891 44 31.6043 39.8386 30.3636 33.69C29.123 39.8386 26.7382 44 24 44C21.2618 44 18.877 39.8386 17.6364 33.69C16.3957 39.8386 14.0109 44 11.2727 44C7.25611 44 4 35.0457 4 24C4 12.9543 7.25611 4 11.2727 4C14.0109 4 16.3957 8.16144 17.6364 14.31C18.877 8.16144 21.2618 4 24 4C26.7382 4 29.123 8.16144 30.3636 14.31C31.6043 8.16144 33.9891 4 36.7273 4C40.7439 4 44 12.9543 44 24C44 35.0457 40.7439 44 36.7273 44Z"/>
-        </svg>
+<div class="flex min-h-screen">
+
+  <!-- SIDEBAR -->
+  <aside class="hidden lg:flex w-72 flex-col bg-[#0b1220] border-r border-white/10 p-6">
+    <div class="flex items-center gap-3 mb-10">
+      <div class="w-10 h-10 rounded-full bg-primary"></div>
+      <div>
+        <h1 class="font-bold">Wisteria Trust</h1>
+        <p class="text-xs text-gray-400">Admin Console</p>
       </div>
-      <h2 class="text-lg font-bold">Wisteria Trust</h2>
     </div>
 
-    <a href="dashboard.html" class="flex items-center gap-2 text-sm text-slate-600 dark:text-gray-300 hover:text-primary">
-      <span class="material-symbols-outlined">close</span>
-      <span class="hidden sm:inline">Cancel</span>
-    </a>
-  </header>
+    <nav class="flex flex-col gap-2 text-sm">
+      <a href="dashboard.html" class="px-3 py-2 rounded hover:bg-white/10">All Verifications</a>
+      <a href="create.html" class="px-3 py-2 rounded bg-primary text-black font-semibold">
+        Create Verification
+      </a>
+    </nav>
 
-  <!-- Main -->
-  <main class="flex-1 flex justify-center px-4 py-8">
-    <div class="w-full max-w-[640px]">
+    <div class="mt-auto">
+      <button onclick="logout()" class="w-full mt-6 px-4 py-2 rounded bg-red-600 hover:bg-red-700">
+        Logout
+      </button>
+    </div>
+  </aside>
 
-      <div class="bg-white dark:bg-surface-dark rounded-2xl shadow-xl border border-gray-200 dark:border-border-dark">
+  <!-- MAIN -->
+  <main class="flex-1 p-6 md:p-10 flex justify-center items-start">
+    <div class="w-full max-w-3xl bg-cardDark rounded-xl shadow-xl overflow-hidden">
 
-        <div class="px-6 sm:px-10 pt-8">
-          <h1 class="text-2xl font-bold mb-2">Create Verification</h1>
-          <p class="text-slate-500 dark:text-gray-400">
-            Enter the details below to generate a new verification link for the seller.
-          </p>
+      <!-- HEADER -->
+      <div class="p-6 border-b border-white/10">
+        <h2 class="text-2xl font-bold">Create Verification</h2>
+        <p class="text-gray-400 text-sm mt-1">
+          Issue a trusted verification ID to a seller
+        </p>
+      </div>
+
+      <!-- FORM -->
+      <div class="p-6 grid gap-6">
+
+        <div>
+          <label class="text-sm">Seller Name</label>
+          <input id="sellerName" type="text"
+            class="w-full mt-1 rounded bg-[#0b1220] border border-white/10 focus:ring-primary focus:border-primary"
+            placeholder="Seller full name"/>
         </div>
 
-   <form id="createVerificationForm" class="px-6 sm:px-10 py-8 flex flex-col gap-6">
+        <div>
+          <label class="text-sm">Business Name</label>
+          <input id="businessName" type="text"
+            class="w-full mt-1 rounded bg-[#0b1220] border border-white/10"
+            placeholder="Business name"/>
+        </div>
 
-  <label class="flex flex-col gap-2">
-    <span class="text-sm font-medium">Seller Name</span>
-    <input
-      id="sellerName"
-      name="sellerName"
-      type="text"
-      required
-      class="form-input h-14 rounded-lg bg-gray-50 dark:bg-input-dark border-gray-300 dark:border-border-dark"/>
-  </label>
+        <div>
+          <label class="text-sm">Email</label>
+          <input id="email" type="email"
+            class="w-full mt-1 rounded bg-[#0b1220] border border-white/10"
+            placeholder="contact@email.com"/>
+        </div>
 
-  <label class="flex flex-col gap-2">
-    <span class="text-sm font-medium">Business Name</span>
-    <input
-      id="businessName"
-      name="businessName"
-      type="text"
-      required
-      class="form-input h-14 rounded-lg bg-gray-50 dark:bg-input-dark border-gray-300 dark:border-border-dark"/>
-  </label>
+        <div>
+          <label class="text-sm">City</label>
+          <input id="city" type="text"
+            class="w-full mt-1 rounded bg-[#0b1220] border border-white/10"
+            placeholder="City"/>
+        </div>
 
-  <label class="flex flex-col gap-2">
-    <span class="text-sm font-medium">Email Address</span>
-    <input
-      id="email"
-      name="email"
-      type="email"
-      required
-      class="form-input h-14 rounded-lg bg-gray-50 dark:bg-input-dark border-gray-300 dark:border-border-dark"/>
-  </label>
+        <div>
+          <label class="text-sm">Expiry Date</label>
+          <input id="expiryDate" type="date"
+            class="w-full mt-1 rounded bg-[#0b1220] border border-white/10"/>
+        </div>
 
-  <label class="flex flex-col gap-2">
-    <span class="text-sm font-medium">City</span>
-    <input
-      id="city"
-      name="city"
-      type="text"
-      required
-      class="form-input h-14 rounded-lg bg-gray-50 dark:bg-input-dark border-gray-300 dark:border-border-dark"/>
-  </label>
-
-  <label class="flex flex-col gap-2">
-    <span class="text-sm font-medium">Expiry Date</span>
-    <input
-      id="expiryDate"
-      name="expiryDate"
-      type="date"
-      required
-      class="form-input h-14 rounded-lg bg-gray-50 dark:bg-input-dark border-gray-300 dark:border-border-dark"/>
-  </label>
-
-  <button
-    type="submit"
-    class="h-14 bg-primary text-slate-900 font-bold rounded-lg shadow-lg hover:bg-[#e0ac05] flex items-center justify-center gap-2">
-    <span class="material-symbols-outlined">add_link</span>
-    Create Verification
-  </button>
-
-</form>
+        <button onclick="createVerification()"
+          class="mt-4 w-full bg-primary hover:bg-yellow-500 text-black font-bold py-3 rounded-lg">
+          Create Verification
+        </button>
 
       </div>
-
-      <p class="text-center text-sm text-slate-500 mt-6">
-        Need help? <a href="#" class="text-primary hover:underline">Contact Support</a>
-      </p>
-
     </div>
   </main>
-</div>
-<!-- DUMMY ELEMENTS REQUIRED BY admin.js (DO NOT REMOVE) -->
-<div class="hidden">
-  <table>
-    <tbody id="verificationTable"></tbody>
-  </table>
 
-  <div id="pagination"></div>
-  <span id="totalCount"></span>
 </div>
 
-<!-- 🔑 SINGLE JS FILE (DO NOT CHANGE LOGIC) -->
-<script src="./admin.js"></script>
+<!-- ADMIN JS -->
+<script src="admin.js"></script>
+
 </body>
 </html>
-
-
