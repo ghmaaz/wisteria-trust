@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Verification - Wisteria Trust Admin</title>
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="admin-header">
+        <div class="header-content">
+            <div class="logo">
+                <h1>Wisteria Trust <span class="admin-badge">Admin</span></h1>
+            </div>
+            <nav class="nav-links">
+                <a href="create.html" class="nav-link active">Create Verification</a>
+                <a href="dashboard.html" class="nav-link">All Verifications</a>
+                <button class="btn-logout">Logout</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <div class="card create-card">
+                <div class="card-header">
+                    <h2>Create New Verification</h2>
+                    <p class="card-subtitle">Add a new verified seller to the platform</p>
+                </div>
+
+                <form class="create-form" onsubmit="return false;">
+                    <div class="form-group">
+                        <label for="sellerName">Seller Name</label>
+                        <input type="text" id="sellerName" class="form-input" placeholder="Enter seller's full name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="businessName">Business Name</label>
+                        <input type="text" id="businessName" class="form-input" placeholder="Enter business name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" class="form-input" placeholder="seller@example.com" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="city">City</label>
+                        <input type="text" id="city" class="form-input" placeholder="Enter city" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="expiryDate">Expiry Date</label>
+                        <input type="date" id="expiryDate" class="form-input" required>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn-primary">Create Verification</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <script src="admin.js"></script>
+</body>
+</html>

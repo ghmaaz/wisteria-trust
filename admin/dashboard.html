@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Verifications - Wisteria Trust Admin</title>
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="admin-header">
+        <div class="header-content">
+            <div class="logo">
+                <h1>Wisteria Trust <span class="admin-badge">Admin</span></h1>
+            </div>
+            <nav class="nav-links">
+                <a href="create.html" class="nav-link">Create Verification</a>
+                <a href="dashboard.html" class="nav-link active">All Verifications</a>
+                <button class="btn-logout">Logout</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <div class="card">
+                <div class="card-header">
+                    <h2>All Verifications</h2>
+                </div>
+
+                <!-- Controls -->
+                <div class="controls-row">
+                    <div class="search-group">
+                        <input type="text" id="searchInput" placeholder="Search by ID or Seller..." class="input-search">
+                    </div>
+                    <div class="filter-group">
+                        <select id="statusFilter" class="input-select">
+                            <option value="">All Status</option>
+                            <option value="ACTIVE">Active</option>
+                            <option value="REVOKED">Revoked</option>
+                            <option value="EXPIRED">Expired</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Table Container -->
+                <div class="table-container">
+                    <table class="verification-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Seller</th>
+                                <th>Business</th>
+                                <th>City</th>
+                                <th>Email</th>
+                                <th>Status</th>
+                                <th>Expiry</th>
+                                <th>Created</th>
+                                <th>Seller Page</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="verificationsTable">
+                            <!-- Sample Data -->
+                            <tr>
+                                <td><span class="id-badge">VER-001</span></td>
+                                <td>John Smith</td>
+                                <td>Smith Electronics</td>
+                                <td>New York</td>
+                                <td>john@example.com</td>
+                                <td><span class="status-badge status-active">ACTIVE</span></td>
+                                <td>2025-12-31</td>
+                                <td>2025-01-15</td>
+                                <td>
+                                    <div class="action-icons">
+                                        <button class="icon-btn" title="Open">
+                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                                                <polyline points="15 3 21 3 21 9"/>
+                                                <line x1="10" y1="14" x2="21" y2="3"/>
+                                            </svg>
+                                        </button>
+                                        <button class="icon-btn" title="Copy">
+                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+                                                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <button class="btn-action btn-edit" onclick="openEditModal('VER-001')">Edit</button>
+                                        <button class="btn-action btn-revoke">Revoke</button>
+                                        <button class="btn-action btn-delete">Delete</button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><span class="id-badge">VER-002</span></td>
+                                <td>Sarah Johnson</td>
+                                <td>Johnson & Co</td>
+                                <td>Los Angeles</td>
+                                <td>sarah@example.com</td>
+                                <td><span class="status-badge status-revoked">REVOKED</span></td>
+                                <td>2025-11-20</td>
+                                <td>2025-01-10</td>
+                                <td>
+                                    <div class="action-icons">
+                                        <button class="icon-btn" title="Open">
+                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                                                <polyline points="15 3 21 3 21 9"/>
+                                                <line x1="10" y1="14" x2="21" y2="3"/>
+                                            </svg>
+                                        </button>
+                                        <button class="icon-btn" title="Copy">
+                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+                                                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <button class="btn-action btn-edit" onclick="openEditModal('VER-002')">Edit</button>
+                                        <button class="btn-action btn-expire">Expire</button>
+                                        <button class="btn-action btn-delete">Delete</button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><span class="id-badge">VER-003</span></td>
+                                <td>Michael Chen</td>
+                                <td>Chen Imports</td>
+                                <td>Chicago</td>
+                                <td>michael@example.com</td>
+                                <td><span class="status-badge status-expired">EXPIRED</span></td>
+                                <td>2024-12-01</td>
+                                <td>2024-06-15</td>
+                                <td>
+                                    <div class="action-icons">
+                                        <button class="icon-btn" title="Open">
+                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                                                <polyline points="15 3 21 3 21 9"/>
+                                                <line x1="10" y1="14" x2="21" y2="3"/>
+                                            </svg>
+                                        </button>
+                                        <button class="icon-btn" title="Copy">
+                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+                                                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <button class="btn-action btn-edit" onclick="openEditModal('VER-003')">Edit</button>
+                                        <button class="btn-action btn-extend">Extend</button>
+                                        <button class="btn-action btn-delete">Delete</button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Edit Modal -->
+    <div id="editModal" class="modal">
+        <div class="modal-overlay" onclick="closeEditModal()"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Edit Verification</h3>
+                <button class="modal-close" onclick="closeEditModal()">&times;</button>
+            </div>
+            <form class="modal-form" onsubmit="return false;">
+                <div class="form-group">
+                    <label for="editSeller">Seller Name</label>
+                    <input type="text" id="editSeller" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label for="editBusiness">Business Name</label>
+                    <input type="text" id="editBusiness" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label for="editCity">City</label>
+                    <input type="text" id="editCity" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label for="editEmail">Email</label>
+                    <input type="email" id="editEmail" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label for="editExpiry">Expiry Date</label>
+                    <input type="date" id="editExpiry" class="form-input" required>
+                </div>
+                <div class="modal-actions">
+                    <button type="submit" class="btn-primary">Save Changes</button>
+                    <button type="button" class="btn-secondary" onclick="closeEditModal()">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="admin.js"></script>
+</body>
+</html>
