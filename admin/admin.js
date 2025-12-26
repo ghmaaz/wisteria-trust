@@ -10,6 +10,60 @@ if (!token) {
 }
 
 /* ===============================
+   LOGOUT
+================================ */
+function logout() {
+  localStorage.removeItem("adminToken");
+  window.location.href = "login.html";
+}
+
+/* ===============================
+   CREATE VERIFICATION
+================================ */
+async function createVerification() {
+  const payload = {
+    sellerName: document.getElementById("sellerName").value.trim(),
+    businessName: document.getElementById("businessName").value.trim(),
+    email: document.getElementById("email").value.trim(),
+    city: document.getElementById("city").value.trim(),
+    expiryDate: document.getElementById("expiryDate").value
+  };
+
+  if (
+    !payload.sellerName ||
+    !payload.businessName ||
+    !payload.email ||
+    !payload.city ||
+    !payload.expiryDate
+  ) {
+    alert("All fields are required");
+    return;
+  }
+
+  const res = await fetch(
+    "https://wisteria-backend.onrender.com/api/admin/verification",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token
+      },
+      body: JSON.stringify(payload)
+    }
+  );
+
+  const data = await res.json();
+
+  if (!res.ok) {
+    alert(data.message || "Failed to create verification");
+    return;
+  }
+
+  alert("✅ Verification created successfully");
+  loadVerifications();
+}
+
+/* ===============================
    LOAD VERIFICATIONS
 ================================ */
 async function loadVerifications() {
@@ -21,8 +75,7 @@ async function loadVerifications() {
 
     if (res.status === 401) {
       alert("Session expired. Please login again.");
-      localStorage.removeItem("adminToken");
-      window.location.href = "login.html";
+      logout();
       return;
     }
 
@@ -59,24 +112,22 @@ function renderTable(list) {
       `;
     }
 
-          const tr = document.createElement("tr");
-      tr.innerHTML = `
-        <td>${v.verificationId}</td>
-        <td>${v.sellerName}</td>
-        <td>${v.businessName}</td>
-        <td>${v.city}</td>
-        <td>${v.email}</td>
-        <td><span class="status ${v.status}">${v.status}</span></td>
-        <td>${new Date(v.expiryDate).toDateString()}</td>
-        <td>${new Date(v.createdAt).toDateString()}</td>
-        <td>
-          <a href="https://wisteriatrust.com/?id=${v.verificationId}" target="_blank">
-            Open
-          </a>
-          <button onclick="copyLink('https://wisteriatrust.com/?id=${v.verificationId}')">📋</button>
-        </td>
-        <td>${actions}</td>
-      `;
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td>${v.verificationId}</td>
+      <td>${v.sellerName}</td>
+      <td>${v.businessName}</td>
+      <td>${v.city}</td>
+      <td>${v.email}</td>
+      <td><span class="status ${v.status}">${v.status}</span></td>
+      <td>${new Date(v.expiryDate).toDateString()}</td>
+      <td>${new Date(v.createdAt).toDateString()}</td>
+      <td>
+        <a href="${sellerLink}" target="_blank">Open</a>
+        <button onclick="copyLink('${sellerLink}')">📋</button>
+      </td>
+      <td>${actions}</td>
+    `;
 
     tbody.appendChild(tr);
   });
@@ -87,11 +138,11 @@ function renderTable(list) {
 ================================ */
 function copyLink(link) {
   navigator.clipboard.writeText(link);
-  alert("Seller link copied");
+  alert("Seller page link copied");
 }
 
 /* ===============================
-   EDIT
+   EDIT MODAL
 ================================ */
 function openEdit(id) {
   const v = ALL_VERIFICATIONS.find(x => x.verificationId === id);
@@ -112,7 +163,7 @@ function closeModal() {
 }
 
 async function saveEdit() {
-  await fetch(
+  const res = await fetch(
     `https://wisteria-backend.onrender.com/api/admin/verification/${EDIT_ID}/update`,
     {
       method: "PATCH",
@@ -130,21 +181,36 @@ async function saveEdit() {
     }
   );
 
+  if (!res.ok) {
+    alert("Update failed");
+    return;
+  }
+
   closeModal();
   loadVerifications();
 }
 
 /* ===============================
-   DELETE
+   DELETE (CONFIRM)
 ================================ */
 async function deleteVerification(id) {
-  if (!confirm("Delete permanently?")) return;
+  if (!confirm("⚠️ This will permanently delete this verification. Continue?"))
+    return;
 
-  await fetch(
+  const res = await fetch(
     `https://wisteria-backend.onrender.com/api/admin/verification/${id}`,
-    { method: "DELETE", headers: { Authorization: "Bearer " + token } }
+    {
+      method: "DELETE",
+      headers: { Authorization: "Bearer " + token }
+    }
   );
 
+  if (!res.ok) {
+    alert("Delete failed");
+    return;
+  }
+
+  alert("Verification deleted");
   loadVerifications();
 }
 
@@ -152,23 +218,29 @@ async function deleteVerification(id) {
    STATUS ACTIONS
 ================================ */
 async function revokeVerification(id) {
+  if (!confirm("Revoke this verification?")) return;
+
   await fetch(
     `https://wisteria-backend.onrender.com/api/admin/verification/${id}/revoke`,
     { method: "PATCH", headers: { Authorization: "Bearer " + token } }
   );
+
   loadVerifications();
 }
 
 async function expireVerification(id) {
+  if (!confirm("Expire this verification?")) return;
+
   await fetch(
     `https://wisteria-backend.onrender.com/api/admin/verification/${id}/expire`,
     { method: "PATCH", headers: { Authorization: "Bearer " + token } }
   );
+
   loadVerifications();
 }
 
 async function extendExpiry(id) {
-  const d = prompt("New expiry (YYYY-MM-DD)");
+  const d = prompt("Enter new expiry date (YYYY-MM-DD)");
   if (!d) return;
 
   await fetch(
