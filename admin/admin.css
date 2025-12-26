@@ -1,63 +1,77 @@
+/* RESET */
 * {
   box-sizing: border-box;
-  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-  margin: 0;
+  font-family: system-ui, Arial, sans-serif;
   background: #0b1220;
-  color: white;
+  color: #fff;
 }
 
+/* LAYOUT */
 .admin-wrapper {
-  padding: 20px;
+  max-width: 1200px;
+  margin: auto;
+  padding: 16px;
 }
 
+/* HEADER */
 .admin-header {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
 }
 
-.admin-header nav a {
-  margin-right: 15px;
-  color: #d4af37;
-  text-decoration: none;
-  font-weight: bold;
+.admin-header h1 {
+  font-size: 20px;
 }
 
-.admin-header nav a.active {
-  text-decoration: underline;
+.admin-header nav {
+  display: flex;
+  gap: 10px;
 }
 
+.admin-header a,
 .admin-header button {
-  background: #7f1d1d;
-  color: white;
+  background: #1f2937;
+  color: #fff;
   border: none;
-  padding: 6px 12px;
+  padding: 8px 12px;
+  text-decoration: none;
+  border-radius: 6px;
   cursor: pointer;
 }
 
+.admin-header a.active {
+  background: #d4af37;
+  color: #000;
+}
+
+/* CARD */
 .card {
   background: #111827;
-  padding: 20px;
+  padding: 16px;
   border-radius: 10px;
 }
 
-.card input,
-.card select,
-.card button {
-  width: 100%;
-  padding: 10px;
-  margin-top: 10px;
+/* CONTROLS */
+.controls {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 12px;
 }
 
-.card button {
-  background: #d4af37;
+.controls input,
+.controls select {
+  padding: 8px;
+  border-radius: 6px;
   border: none;
-  font-weight: bold;
-  cursor: pointer;
+  width: 100%;
 }
 
 /* TABLE */
@@ -67,16 +81,14 @@ body {
 
 table {
   width: 100%;
-  min-width: 1100px;
   border-collapse: collapse;
-  margin-top: 15px;
 }
 
 th, td {
-  border: 1px solid #374151;
   padding: 8px;
-  font-size: 13px;
-  white-space: nowrap;
+  border-bottom: 1px solid #374151;
+  text-align: left;
+  font-size: 14px;
 }
 
 th {
@@ -84,8 +96,70 @@ th {
 }
 
 /* STATUS */
-.status.ACTIVE { color: #22c55e; }
-.status.REVOKED { color: #ef4444; }
-.status.EXPIRED { color: #facc15; }
+.status {
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: bold;
+}
 
-/* ❌ NO RESPONSIVE TRANSFORMATION */
+.status.ACTIVE { background: #064e3b; color: #6ee7b7; }
+.status.REVOKED { background: #7f1d1d; color: #fecaca; }
+.status.EXPIRED { background: #78350f; color: #fde68a; }
+
+/* MOBILE CARDS */
+.mobile-only { display: none; }
+
+.mobile-card {
+  background: #020617;
+  border: 1px solid #1f2937;
+  border-radius: 10px;
+  padding: 12px;
+  margin-bottom: 12px;
+}
+
+.mobile-card h3 {
+  font-size: 16px;
+  margin-bottom: 6px;
+}
+
+.mobile-card p {
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+
+.mobile-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.mobile-actions button,
+.mobile-actions a {
+  flex: 1;
+  background: #d4af37;
+  color: #000;
+  border: none;
+  padding: 6px;
+  text-align: center;
+  border-radius: 6px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .desktop-only { display: none; }
+  .mobile-only { display: block; }
+
+  .controls {
+    flex-direction: column;
+  }
+
+  .admin-header {
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+  }
+}
