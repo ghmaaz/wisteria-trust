@@ -2,13 +2,9 @@
 window.addEventListener("scroll", () => {
   const nav = document.querySelector(".navbar")
   if (window.scrollY > 50) {
-    nav.style.background = "rgba(6, 8, 11, 0.95)"
-    nav.style.padding = "16px 0"
-    nav.style.borderBottom = "1px solid rgba(255, 255, 255, 0.05)"
+    nav.classList.add("scrolled")
   } else {
-    nav.style.background = "linear-gradient(to bottom, rgba(6, 8, 11, 0.8), transparent)"
-    nav.style.padding = "24px 0"
-    nav.style.borderBottom = "none"
+    nav.classList.remove("scrolled")
   }
 })
 
@@ -20,14 +16,36 @@ if (menuBtn && mobileMenu) {
   menuBtn.onclick = () => {
     menuBtn.classList.toggle("menu-open")
     mobileMenu.classList.toggle("active")
+    // Prevent scrolling when menu is open
+    document.body.style.overflow = mobileMenu.classList.contains("active") ? "hidden" : "auto"
   }
 
-  document.querySelectorAll(".m-link").forEach((link) => {
+  document.querySelectorAll(".mobile-link").forEach((link) => {
     link.addEventListener("click", () => {
       mobileMenu.classList.remove("active")
       menuBtn.classList.remove("menu-open")
+      document.body.style.overflow = "auto"
     })
   })
+}
+
+const themeToggle = document.getElementById("themeToggle")
+const body = document.body
+
+// Check for saved theme or default to dark
+const savedTheme = localStorage.getItem("theme") || "dark-theme"
+body.className = savedTheme
+
+if (themeToggle) {
+  themeToggle.onclick = () => {
+    if (body.classList.contains("dark-theme")) {
+      body.classList.replace("dark-theme", "light-theme")
+      localStorage.setItem("theme", "light-theme")
+    } else {
+      body.classList.replace("light-theme", "dark-theme")
+      localStorage.setItem("theme", "dark-theme")
+    }
+  }
 }
 
 /* ===============================
