@@ -48,6 +48,25 @@
   --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4);
   --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
   --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.6);
+
+  /* Added dark mode theme variables and transitions */
+  --bg-primary: #ffffff;
+  --bg-secondary: #f4f7f6;
+  --text-main: #333333;
+  --text-muted: #666666;
+  --card-bg: #ffffff;
+  --border-color: #e0e0e0;
+  --header-bg: #ffffff;
+}
+
+[data-theme="dark"] {
+  --bg-primary: #121212;
+  --bg-secondary: #1e1e1e;
+  --text-main: #e0e0e0;
+  --text-muted: #a0a0a0;
+  --card-bg: #1e1e1e;
+  --border-color: #333333;
+  --header-bg: #181818;
 }
 
 body {
@@ -56,6 +75,41 @@ body {
   color: var(--text-primary);
   min-height: 100vh;
   line-height: 1.6;
+  background-color: var(--bg-primary);
+  color: var(--text-main);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.card,
+.admin-header,
+.form-input,
+.modal-content {
+  background-color: var(--card-bg);
+  color: var(--text-main);
+  border-color: var(--border-color);
+}
+
+/* Theme Toggle Button Styles */
+.theme-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-main);
+  border-radius: 50%;
+  transition: background-color 0.2s;
+}
+
+.theme-toggle:hover {
+  background-color: var(--bg-secondary);
+}
+
+.theme-toggle svg {
+  width: 20px;
+  height: 20px;
 }
 
 /* ================================
@@ -988,68 +1042,4 @@ body {
     padding: 0.75rem 0.875rem;
     font-size: 0.95rem;
   }
-
-  @media (max-width: 480px) {
-    .create-submit-btn {
-      padding: 0.875rem 1.5rem;
-      font-size: 1rem;
-    }
-  }
-
-  .create-submit-btn {
-    padding: 0.875rem 1.5rem;
-    font-size: 1rem;
-  }
 }
-
-/* ================================
-   MODAL
-   ================================ */
-.modal {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1000;
-}
-
-.modal.active {
-  display: block;
-}
-
-.modal-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.75);
-  backdrop-filter: blur(4px);
-}
-
-.modal-content {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: var(--bg-card);
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-xl);
-  width: 90%;
-  max-width: 600px;
-  max-height: 90vh;
-  overflow-y: auto;
-}
-
-.modal-header {
-  padding: var(--spacing-xl);
-  border-bottom: 1px solid var(--border-color);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-
