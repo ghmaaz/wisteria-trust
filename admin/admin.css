@@ -1091,3 +1091,24 @@ body {
 .login-form .form-input:focus {
   outline: none;
 }
+
+/* Enhanced professional footer styling with better spacing, divider, and typography */
+.login-footer {
+  padding: var(--spacing-xl); /* Completed the padding value */
+  text-align: center;
+  border-top: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  margin-top: var(--spacing-xl);
+}
+
+.login-footer a {
+  color: var(--gold-primary);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.login-footer a:hover {
+  color: var(--gold-hover);
+  text-decoration: underline;
+}
