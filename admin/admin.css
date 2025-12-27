@@ -1231,13 +1231,14 @@ body {
 }
 
 /* ===============================
-   MODAL ACTIONS – PROFESSIONAL
+   MODAL ACTIONS – CENTER ALIGNED
    =============================== */
 
 .modal-actions {
   display: flex;
-  justify-content: flex-end;
-  gap: 0.75rem;
+  justify-content: center;   /* 🔥 CENTER */
+  align-items: center;
+  gap: 0.9rem;
   padding-top: 1.5rem;
   margin-top: 1.5rem;
   border-top: 1px solid rgba(212, 175, 55, 0.15);
@@ -1248,9 +1249,9 @@ body {
   background: linear-gradient(135deg, #d4af37, #e5c158);
   color: #0b1028;
   border: none;
-  padding: 0.65rem 1.4rem;
-  border-radius: 10px;
-  font-size: 0.9rem;
+  padding: 0.7rem 1.6rem;
+  border-radius: 12px;
+  font-size: 0.95rem;
   font-weight: 700;
   cursor: pointer;
   box-shadow:
@@ -1266,48 +1267,37 @@ body {
     inset 0 -1px 0 rgba(255, 255, 255, 0.3);
 }
 
-.modal-actions .btn-primary:active {
-  transform: translateY(0);
-  box-shadow:
-    0 4px 10px rgba(212, 175, 55, 0.35);
-}
-
 /* Secondary Action – Cancel */
 .modal-actions .btn-secondary {
   background: transparent;
   color: #e5e7eb;
   border: 1px solid #374151;
-  padding: 0.65rem 1.3rem;
-  border-radius: 10px;
-  font-size: 0.9rem;
+  padding: 0.7rem 1.6rem;
+  border-radius: 12px;
+  font-size: 0.95rem;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
 }
 
 .modal-actions .btn-secondary:hover {
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(255, 255, 255, 0.05);
   border-color: #6b7280;
 }
 
-.modal-actions .btn-secondary:active {
-  background: rgba(255, 255, 255, 0.08);
-}
-
-/* Focus states (accessibility) */
+/* Focus (Accessibility) */
 .modal-actions button:focus-visible {
   outline: none;
   box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.35);
 }
 
-/* Mobile Responsive */
+/* Mobile */
 @media (max-width: 480px) {
   .modal-actions {
-    flex-direction: column-reverse;
+    flex-direction: column;
   }
 
   .modal-actions button {
     width: 100%;
   }
 }
-
