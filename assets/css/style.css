@@ -225,7 +225,7 @@ h2 {
   justify-content: center;
   position: relative;
   overflow: hidden;
-  padding: 120px 0 80px; /* Added more top padding to prevent overlap */
+  padding: 120px 20px 80px; /* Added horizontal padding */
   text-align: center;
 }
 
@@ -809,13 +809,18 @@ footer::before {
   border: none;
   cursor: pointer;
   display: none; /* Desktop hidden */
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 0;
+  z-index: 1001;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 991px) {
+  .nav-links {
+    display: none; /* Hide desktop links on tablet/mobile */
+  }
   .mobile-menu-toggle {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    display: flex; /* Show toggle on mobile/tablet */
   }
 }
 
@@ -1095,11 +1100,4 @@ footer::before {
 ::-webkit-scrollbar-thumb {
   background: var(--border-subtle);
   border-radius: 10px;
-  border: 2px solid var(--bg-main);
 }
-
-::-webkit-scrollbar-thumb:hover {
-  background: var(--primary);
-}
-
-/* Advanced Hover for Interactive Elements */
