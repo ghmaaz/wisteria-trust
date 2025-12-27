@@ -13,12 +13,13 @@ const menuBtn = document.getElementById("menuBtn")
 const mobileMenu = document.getElementById("mobileMenu")
 
 if (menuBtn && mobileMenu) {
-  menuBtn.onclick = () => {
+  const toggleMenu = () => {
     menuBtn.classList.toggle("menu-open")
     mobileMenu.classList.toggle("active")
-    // Prevent scrolling when menu is open
     document.body.style.overflow = mobileMenu.classList.contains("active") ? "hidden" : "auto"
   }
+
+  menuBtn.addEventListener("click", toggleMenu)
 
   document.querySelectorAll(".mobile-link").forEach((link) => {
     link.addEventListener("click", () => {
