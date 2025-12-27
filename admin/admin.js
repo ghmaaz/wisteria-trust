@@ -15,6 +15,12 @@ if (!token) {
 }
 
 /* ===============================
+   THEME INITIALIZATION
+================================ */
+const currentTheme = localStorage.getItem("theme") || "light"
+document.documentElement.setAttribute("data-theme", currentTheme)
+
+/* ===============================
    DOM LOADED
 ================================ */
 document.addEventListener("DOMContentLoaded", () => {
@@ -71,6 +77,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (exportBtn) {
     exportBtn.addEventListener("click", exportToCSV)
+  }
+
+  const themeToggle = document.getElementById("themeToggle")
+  if (themeToggle) {
+    themeToggle.addEventListener("click", () => {
+      const theme = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark"
+      document.documentElement.setAttribute("data-theme", theme)
+      localStorage.setItem("theme", theme)
+    })
   }
 
   // Load verifications if on dashboard
