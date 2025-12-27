@@ -35,15 +35,17 @@
         <div class="container">
             <div class="create-card-wrapper">
                 <!-- Added professional card with icon header -->
-                <div class="create-icon-wrapper">
-                    <svg class="create-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                    </svg>
-                </div>
-                
                 <div class="card create-card">
+                    <!-- Moved logo inline with heading -->
                     <div class="card-header create-header">
-                        <h2>Create New Verification</h2>
+                        <div class="create-title-wrapper">
+                            <div class="create-icon-wrapper">
+                                <svg class="create-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                </svg>
+                            </div>
+                            <h2>Create New Verification</h2>
+                        </div>
                         <p class="card-subtitle">Add a new verified seller to the platform</p>
                     </div>
 
@@ -117,11 +119,12 @@
                         </div>
 
                         <div class="form-actions">
-                            <!-- Enhanced button with icon and animation -->
-                            <button type="submit" class="btn-primary create-submit-btn">
+                            <!-- Enhanced button with professional gold styling -->
+                            <button type="submit" class="btn-primary btn-gold create-submit-btn">
                                 <span>Create Verification</span>
-                                <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                <svg class="btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <path d="M9 12l2 2 4-4"/>
                                 </svg>
                             </button>
                         </div>
