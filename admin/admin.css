@@ -656,10 +656,38 @@ body {
   background: linear-gradient(135deg, rgba(212, 175, 55, 0.05), transparent);
 }
 
+/* Added flexbox wrapper for logo and heading inline */
+.create-title-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.create-icon-wrapper {
+  width: 48px;
+  height: 48px;
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.2), rgba(212, 175, 55, 0.1));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--gold-primary);
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+  flex-shrink: 0;
+}
+
+.create-icon {
+  width: 28px;
+  height: 28px;
+  color: var(--gold-primary);
+}
+
 .create-header h2 {
   font-size: 1.75rem;
   color: var(--gold-primary);
-  margin-bottom: 0.5rem;
+  margin: 0;
   font-weight: 700;
 }
 
@@ -763,6 +791,42 @@ body {
   animation: fadeInUp 0.6s ease 0.6s backwards;
 }
 
+/* Professional gold button styling matching login page */
+.btn-gold {
+  background: linear-gradient(135deg, var(--gold-primary), #c9a547);
+  color: var(--bg-primary);
+  border: none;
+  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.btn-gold::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.6s ease;
+}
+
+.btn-gold:hover::before {
+  left: 100%;
+}
+
+.btn-gold:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(212, 175, 55, 0.5);
+}
+
+.btn-gold:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+}
+
 /* Enhanced create submit button */
 .create-submit-btn {
   width: 100%;
@@ -773,33 +837,16 @@ body {
   padding: 1rem 2rem;
   font-size: 1.05rem;
   font-weight: 600;
-  position: relative;
-  overflow: hidden;
 }
 
-.create-submit-btn::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-  transition: left 0.5s;
-}
-
-.create-submit-btn:hover::before {
-  left: 100%;
-}
-
-.create-submit-btn .btn-icon {
-  width: 22px;
-  height: 22px;
+.create-submit-btn .btn-arrow {
+  width: 20px;
+  height: 20px;
   transition: transform 0.3s ease;
 }
 
-.create-submit-btn:hover .btn-icon {
-  transform: scale(1.1) rotate(10deg);
+.create-submit-btn:hover .btn-arrow {
+  transform: translateX(4px) scale(1.1);
 }
 
 /* Added create footer */
@@ -837,6 +884,22 @@ body {
     padding: 1.5rem 1rem 1rem;
   }
 
+  /* Mobile responsive adjustments */
+  .create-title-wrapper {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .create-icon-wrapper {
+    width: 40px;
+    height: 40px;
+  }
+
+  .create-icon {
+    width: 24px;
+    height: 24px;
+  }
+
   .create-header h2 {
     font-size: 1.5rem;
   }
@@ -867,6 +930,12 @@ body {
     font-size: 1.35rem;
   }
 
+  @media (max-width: 480px) {
+    .create-header h2 {
+      font-size: 1.25rem;
+    }
+  }
+
   .create-form {
     padding: 1.25rem 0.75rem;
   }
@@ -874,6 +943,13 @@ body {
   .form-input {
     padding: 0.75rem 0.875rem;
     font-size: 0.95rem;
+  }
+
+  @media (max-width: 480px) {
+    .create-submit-btn {
+      padding: 0.875rem 1.5rem;
+      font-size: 1rem;
+    }
   }
 
   .create-submit-btn {
@@ -993,122 +1069,6 @@ body {
   }
 
   .card-header-content {
-    flex-direction: column;
-    align-items: flex-start;
+    flex-direction: column; /* Fixed: completed flex-direction property */
   }
-
-  .bulk-actions {
-    width: 100%;
-    flex-wrap: wrap;
-  }
-}
-
-/* Mobile */
-@media (max-width: 768px) {
-  .header-content {
-    flex-direction: column;
-    gap: var(--spacing-md);
-    padding: 0 var(--spacing-md);
-  }
-
-  .logo h1 {
-    font-size: 1.25rem;
-  }
-
-  .nav-links {
-    width: 100%;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-
-  .nav-link {
-    flex: 1;
-    text-align: center;
-    min-width: 120px;
-  }
-
-  .btn-logout {
-    width: 100%;
-  }
-
-  .main-content {
-    padding: var(--spacing-lg) 0;
-  }
-
-  .container {
-    padding: 0 var(--spacing-md);
-  }
-
-  .card-header {
-    padding: var(--spacing-lg);
-  }
-
-  .card-header h2 {
-    font-size: 1.5rem;
-  }
-
-  .controls-row {
-    grid-template-columns: 1fr;
-    padding: var(--spacing-lg);
-  }
-
-  .input-select {
-    min-width: 100%;
-  }
-
-  .table-container {
-    padding: var(--spacing-md);
-  }
-
-  .action-buttons {
-    flex-direction: column;
-  }
-
-  .btn-action {
-    width: 100%;
-  }
-
-  .create-form,
-  .modal-form {
-    padding: var(--spacing-lg);
-  }
-
-  .form-actions {
-    margin-top: var(--spacing-lg);
-  }
-
-  .btn-primary,
-  .btn-secondary {
-    width: 100%;
-    padding: var(--spacing-md);
-  }
-
-  .modal-content {
-    width: 95%;
-    max-height: 85vh;
-  }
-
-  .modal-actions {
-    flex-direction: column;
-  }
-
-  .stats-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .stat-value {
-    font-size: 1.75rem;
-  }
-
-  .bulk-actions {
-    flex-direction: column;
-  }
-
-  .btn-bulk,
-  .btn-export {
-    width: 100%;
-    justify-content: center;
-  }
-}
-
-/* Small */
+} /* Fixed: added closing brace for the media query */
