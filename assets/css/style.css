@@ -2,17 +2,17 @@
    WISTERIA TRUST LUXURY DESIGN SYSTEM
 ===================================================== */
 :root {
-  --bg-main: #06080b;
-  --bg-surface: #0c0f14;
-  --bg-elevated: #141921;
-  --primary: #c5a059; /* Luxury Gold */
-  --primary-glow: rgba(197, 160, 89, 0.4);
+  --bg-main: #0a0c10;
+  --bg-surface: #11141a;
+  --bg-elevated: #1a1f26;
+  --primary: #d4af37; /* Refined Gold */
+  --primary-glow: rgba(212, 175, 55, 0.3);
   --text-main: #f8fafc;
-  --text-muted: #8e949e;
-  --border-subtle: rgba(255, 255, 255, 0.05);
-  --radius-xl: 32px;
-  --radius-lg: 16px;
-  --ease-lux: cubic-bezier(0.23, 1, 0.32, 1);
+  --text-muted: #94a3b8;
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --radius-xl: 24px;
+  --radius-lg: 12px;
+  --ease-lux: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 * {
@@ -31,6 +31,7 @@ body {
   color: var(--text-main);
   line-height: 1.6;
   overflow-x: hidden;
+  background: radial-gradient(circle at 50% 0%, #161b22 0%, var(--bg-main) 70%);
 }
 
 .container {
@@ -84,7 +85,7 @@ h2 {
   left: 0;
   width: 100%;
   z-index: 1000;
-  padding: 24px 0;
+  padding: 16px 0;
   transition: all 0.4s var(--ease-lux);
   background: linear-gradient(to bottom, rgba(6, 8, 11, 0.8), transparent);
   backdrop-filter: blur(10px);
@@ -171,7 +172,8 @@ h2 {
   align-items: center;
   position: relative;
   overflow: hidden;
-  padding-top: 100px;
+  padding-top: 80px;
+  text-align: center;
 }
 
 .hero-bg {
@@ -575,6 +577,10 @@ footer {
   text-align: center;
 }
 
+/* =====================================================
+   MOBILE RESPONSIVENESS & PREMIUM POLISH
+===================================================== */
+
 /* RESPONSIVE */
 @media (max-width: 1024px) {
   .mission-grid {
@@ -602,6 +608,89 @@ footer {
   }
   .portal-card {
     padding: 40px 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    background: rgba(10, 12, 16, 0.95);
+    padding: 12px 0;
+  }
+
+  .brand span {
+    font-size: 1rem;
+  }
+
+  .nav-cta {
+    padding: 8px 16px;
+    font-size: 0.7rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    height: auto;
+    padding: 120px 0 80px;
+  }
+
+  .hero h1 {
+    font-size: 2.8rem;
+    margin-bottom: 16px;
+  }
+
+  .hero p {
+    font-size: 1rem;
+    margin: 0 auto 32px;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+    gap: 16px;
+    align-items: center;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    width: 100%;
+    max-width: 320px;
+    padding: 16px 32px;
+  }
+
+  .hero-stats {
+    flex-direction: row;
+    justify-content: center;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 768px) {
+  .mission-grid,
+  .info-grid,
+  .value-grid,
+  .footer-grid {
+    grid-template-columns: 1fr !important;
+    gap: 40px !important;
+  }
+
+  .mission {
+    padding: 80px 0;
+  }
+
+  .mission-text {
+    text-align: center;
+  }
+
+  .mission-text h2 {
+    margin: 0 auto 20px;
+  }
+
+  .mission-features {
+    text-align: left;
+  }
+
+  .portal-card {
+    padding: 40px 20px;
   }
 }
 
@@ -662,4 +751,19 @@ footer {
 .luxury-card:hover .card-inner img {
   transform: scale(1.05);
   filter: grayscale(0) contrast(1.1);
+}
+
+/* Premium Animations */
+/* Added subtle parallax and reveal effects */
+[data-aos] {
+  transition-timing-function: var(--ease-lux) !important;
+}
+
+.luxury-card {
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+  transition: transform 0.8s var(--ease-lux);
+}
+
+.luxury-card:hover {
+  transform: translateY(-10px) scale(1.02);
 }
