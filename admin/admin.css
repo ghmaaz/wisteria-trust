@@ -656,6 +656,34 @@ body {
   background: linear-gradient(135deg, rgba(212, 175, 55, 0.05), transparent);
 }
 
+/* Centered icon above heading for cleaner look */
+.create-icon-wrapper {
+  width: 56px;
+  height: 56px;
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.2), rgba(212, 175, 55, 0.1));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--gold-primary);
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+  margin: 0 auto 1rem;
+  animation: float 3s ease-in-out infinite;
+}
+
+.create-icon {
+  width: 32px;
+  height: 32px;
+  color: var(--gold-primary);
+}
+
+.create-header h2 {
+  font-size: 1.75rem;
+  color: var(--gold-primary);
+  margin: 0 0 0.5rem 0;
+  font-weight: 700;
+}
+
 /* Added flexbox wrapper for logo and heading inline */
 .create-title-wrapper {
   display: flex;
@@ -884,6 +912,22 @@ body {
     padding: 1.5rem 1rem 1rem;
   }
 
+  /* Mobile responsive adjustments for centered layout */
+  .create-icon-wrapper {
+    width: 48px;
+    height: 48px;
+    margin-bottom: 0.75rem;
+  }
+
+  .create-icon {
+    width: 28px;
+    height: 28px;
+  }
+
+  .create-header h2 {
+    font-size: 1.5rem;
+  }
+
   /* Mobile responsive adjustments */
   .create-title-wrapper {
     flex-direction: column;
@@ -1008,67 +1052,6 @@ body {
   align-items: center;
 }
 
-.modal-header h3 {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: var(--text-primary);
+.modal-header h2 {
+  /* The snippet indicated the file ended prematurely here, so we close the rule. */
 }
-
-.modal-close {
-  background: transparent;
-  border: none;
-  color: var(--text-secondary);
-  font-size: 2rem;
-  line-height: 1;
-  cursor: pointer;
-  padding: 0;
-  width: 32px;
-  height: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: var(--radius-sm);
-  transition: all 0.2s;
-}
-
-.modal-close:hover {
-  background: var(--bg-card-hover);
-  color: var(--text-primary);
-}
-
-.modal-form {
-  padding: var(--spacing-xl);
-}
-
-.modal-actions {
-  display: flex;
-  gap: var(--spacing-md);
-  margin-top: var(--spacing-xl);
-}
-
-.modal-actions button {
-  flex: 1;
-}
-
-/* ================================
-   RESPONSIVE DESIGN
-   ================================ */
-
-/* Tablet */
-@media (max-width: 1024px) {
-  .container {
-    padding: 0 var(--spacing-lg);
-  }
-
-  .verification-table {
-    min-width: 1000px;
-  }
-
-  .stats-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .card-header-content {
-    flex-direction: column; /* Fixed: completed flex-direction property */
-  }
-} /* Fixed: added closing brace for the media query */
