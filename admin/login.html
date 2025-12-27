@@ -7,49 +7,82 @@
   <link rel="stylesheet" href="admin.css">
 </head>
 <body class="login-page">
+  <!-- Enhanced login container with better structure -->
   <div class="login-container">
     <div class="login-card">
       <div class="login-header">
-        <h1>Wisteria Trust</h1>
-        <p>Admin Portal</p>
+        <div class="login-logo-container">
+          <div class="login-logo-icon">W</div>
+          <h1>Wisteria Trust</h1>
+        </div>
+        <p class="login-subtitle">Admin Portal</p>
       </div>
       
       <form id="loginForm" class="login-form">
         <div class="form-group">
-          <!-- Changed from username to email to match old working code -->
-          <label for="email">Username</label>
-          <input 
-            type="text" 
-            id="email" 
-            name="email" 
-            required 
-            autocomplete="username"
-            placeholder="Enter your username"
-          >
+          <label for="email">Email Address</label>
+          <div class="input-wrapper">
+            <span class="input-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+              </svg>
+            </span>
+            <input 
+              type="text" 
+              id="email" 
+              name="email" 
+              required 
+              autocomplete="username"
+              placeholder="Enter your email"
+              class="form-input input-with-icon"
+            >
+          </div>
         </div>
         
         <div class="form-group">
           <label for="password">Password</label>
-          <input 
-            type="password" 
-            id="password" 
-            name="password" 
-            required 
-            autocomplete="current-password"
-            placeholder="Enter your password"
-          >
+          <div class="input-wrapper">
+            <span class="input-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+              </svg>
+            </span>
+            <input 
+              type="password" 
+              id="password" 
+              name="password" 
+              required 
+              autocomplete="current-password"
+              placeholder="Enter your password"
+              class="form-input input-with-icon"
+            >
+          </div>
         </div>
         
         <div id="errorMessage" class="error-message"></div>
         
-        <button type="submit" class="btn-primary" id="loginBtn">
-          Sign In
+        <button type="submit" class="btn-primary btn-login" id="loginBtn">
+          <span class="btn-text">Sign In</span>
+          <svg class="btn-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
         </button>
       </form>
       
       <div class="login-footer">
+        <div class="login-divider"></div>
         <p>&copy; 2025 Wisteria Trust. All rights reserved.</p>
       </div>
+    </div>
+    
+    <!-- Added decorative background elements -->
+    <div class="login-bg-decoration">
+      <div class="login-bg-circle login-bg-circle-1"></div>
+      <div class="login-bg-circle login-bg-circle-2"></div>
+      <div class="login-bg-circle login-bg-circle-3"></div>
     </div>
   </div>
   
