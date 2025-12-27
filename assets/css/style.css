@@ -12,8 +12,8 @@
   --text-muted: #94a3b8;
   --border-subtle: rgba(255, 255, 255, 0.08);
   --nav-bg: rgba(10, 12, 16, 0.8);
-  --radius-xl: 24px;
-  --radius-lg: 12px;
+  --radius-xl: 32px; /* increased radius for circle shape */
+  --radius-lg: 20px; /* increased radius for circle shape */
   --ease-lux: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -126,6 +126,7 @@ h2 {
   letter-spacing: 1px;
 }
 
+/* added circle shape to logo mark */
 .logo-mark {
   width: 40px;
   height: 40px;
@@ -135,6 +136,7 @@ h2 {
   justify-content: center;
   color: var(--primary);
   font-weight: 800;
+  border-radius: 50%;
 }
 
 .nav-links {
@@ -282,7 +284,7 @@ h2 {
   color: #000;
   text-decoration: none;
   font-weight: 700;
-  border-radius: 4px;
+  border-radius: 100px; /* circle/pill shape */
   transition: 0.3s;
 }
 
@@ -293,7 +295,7 @@ h2 {
   text-decoration: none;
   font-weight: 700;
   border: 1px solid var(--border-subtle);
-  border-radius: 4px;
+  border-radius: 100px; /* circle/pill shape */
   transition: 0.3s;
 }
 
@@ -380,6 +382,7 @@ h2 {
   padding: 40px;
   background: var(--bg-elevated);
   border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-xl); /* circle shape */
 }
 
 .luxury-card::before {
@@ -460,6 +463,7 @@ h2 {
   text-align: center;
   position: relative;
   overflow: hidden;
+  border-radius: var(--radius-xl); /* circle shape */
 }
 
 .portal-card::after {
@@ -507,11 +511,12 @@ h2 {
   width: 100%;
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid var(--border-subtle);
-  padding: 20px;
+  padding: 20px 30px;
   font-size: 1.1rem;
   color: #fff;
   font-family: inherit;
   transition: all 0.4s var(--ease-lux);
+  border-radius: 100px; /* circle shape */
 }
 
 .input-group input:focus {
@@ -536,6 +541,7 @@ h2 {
   letter-spacing: 1px;
   cursor: pointer;
   transition: 0.3s;
+  border-radius: 100px; /* circle shape */
 }
 
 .lookup-btn:hover {
@@ -612,6 +618,7 @@ h2 {
   background: var(--bg-surface);
   transition: all 0.6s var(--ease-lux);
   border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg); /* circle shape */
 }
 
 .v-card:hover {
@@ -1050,4 +1057,25 @@ footer::before {
     gap: 24px;
     text-align: center;
   }
+}
+
+/* added horizontal scroll reveal animation for sections */
+[data-aos="reveal-left"] {
+  transform: translateX(-50px);
+  opacity: 0;
+  transition-property: transform, opacity;
+}
+[data-aos="reveal-left"].aos-animate {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+[data-aos="reveal-right"] {
+  transform: translateX(50px);
+  opacity: 0;
+  transition-property: transform, opacity;
+}
+[data-aos="reveal-right"].aos-animate {
+  transform: translateX(0);
+  opacity: 1;
 }
