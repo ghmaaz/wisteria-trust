@@ -16,7 +16,19 @@ if (menuBtn && mobileMenu) {
   const toggleMenu = () => {
     menuBtn.classList.toggle("menu-open")
     mobileMenu.classList.toggle("active")
-    document.body.style.overflow = mobileMenu.classList.contains("active") ? "hidden" : "auto"
+    // Toggle body scroll and ensure menu is fixed properly
+    if (mobileMenu.classList.contains("active")) {
+      document.body.style.overflow = "hidden"
+      mobileMenu.style.display = "flex"
+    } else {
+      document.body.style.overflow = "auto"
+      // Wait for transition before hiding
+      setTimeout(() => {
+        if (!mobileMenu.classList.contains("active")) {
+          mobileMenu.style.display = "none"
+        }
+      }, 400)
+    }
   }
 
   menuBtn.addEventListener("click", toggleMenu)
