@@ -434,7 +434,8 @@ h2 {
   font-size: 8rem;
   font-weight: 900;
   color: var(--primary);
-  opacity: 0.05;
+  /* Increased opacity of the 'W' logo in the luxury card for better visibility */
+  opacity: 0.15;
   position: absolute;
 }
 
@@ -931,6 +932,10 @@ footer::before {
 
 /* RESPONSIVE */
 @media (max-width: 1024px) {
+  /* Optimized grid spacing for tablet/desktop transition */
+  .container {
+    padding: 0 30px;
+  }
   .mission-grid {
     grid-template-columns: 1fr;
     gap: 64px;
@@ -946,16 +951,50 @@ footer::before {
 
 @media (max-width: 768px) {
   .container {
-    padding: 0 24px;
+    padding: 0 20px;
   }
-  .nav-links {
-    display: none;
+  /* Improved hero layout for mobile devices */
+  .hero {
+    padding: 140px 0 60px;
+    text-align: center;
+  }
+  .hero h1 {
+    font-size: 2.4rem; /* Slightly smaller for mobile readability */
+    margin-bottom: 20px;
+  }
+  .hero p {
+    font-size: 0.95rem;
+    margin-bottom: 32px;
   }
   .hero-stats {
+    flex-direction: column; /* Stack stats on mobile for clarity */
     gap: 32px;
+    margin-top: 40px;
+  }
+  .stat-num {
+    font-size: 2rem;
+  }
+  .mission {
+    padding: 60px 0;
+  }
+  .mission-grid {
+    gap: 40px !important;
+  }
+  .luxury-card {
+    padding: 24px;
   }
   .portal-card {
-    padding: 40px 24px;
+    padding: 40px 20px;
+  }
+  .footer-grid {
+    text-align: center;
+  }
+  .footer-links-container {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .f-col a {
+    margin: 0 auto 12px;
   }
 }
 
@@ -1064,45 +1103,3 @@ footer::before {
 }
 
 /* Advanced Hover for Interactive Elements */
-.nav-cta,
-.btn-primary,
-.lookup-btn {
-  position: relative;
-  overflow: hidden;
-  transition: all 0.5s var(--ease-lux);
-}
-
-.nav-cta::before,
-.btn-primary::before,
-.lookup-btn::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-  transition: all 0.6s;
-}
-
-.nav-cta:hover::before,
-.btn-primary:hover::before,
-.lookup-btn:hover::before {
-  left: 100%;
-}
-
-/* Enhanced mission visuals with smooth reveal */
-.luxury-card .card-inner img {
-  transition: transform 1s var(--ease-lux), filter 0.8s ease;
-}
-
-.luxury-card:hover .card-inner img {
-  transform: scale(1.05);
-  filter: grayscale(0) contrast(1.1);
-}
-
-/* Premium Animations */
-/* Added subtle parallax and reveal effects */
-[data-aos] {
-  transition-timing-function: var(--ease-lux);
-}
