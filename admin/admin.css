@@ -50,12 +50,34 @@
   --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.6);
 }
 
+/* Added light theme color variables */
+body.light-theme {
+  --bg-primary: #f7fafc;
+  --bg-secondary: #edf2f7;
+  --bg-card: #ffffff;
+  --bg-card-hover: #f7fafc;
+
+  --gold-primary: #b8860b;
+  --gold-hover: #daa520;
+
+  --text-primary: #1a202c;
+  --text-secondary: #4a5568;
+  --text-muted: #718096;
+
+  --success: #059669;
+  --danger: #dc2626;
+  --warning: #d97706;
+
+  --border-color: #e2e8f0;
+}
+
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
   color: var(--text-primary);
   min-height: 100vh;
   line-height: 1.6;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* ================================
@@ -69,6 +91,7 @@ body {
   position: sticky;
   top: 0;
   z-index: 100;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
 .header-content {
@@ -141,6 +164,70 @@ body {
   color: white;
 }
 
+/* Theme toggle button styles */
+.theme-toggle {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+  background: var(--bg-card);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  padding: 0;
+}
+
+.theme-toggle:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--gold-primary);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(212, 175, 55, 0.2);
+}
+
+.theme-icon {
+  width: 20px;
+  height: 20px;
+  color: var(--text-secondary);
+  transition: all 0.3s ease;
+}
+
+.theme-toggle:hover .theme-icon {
+  color: var(--gold-primary);
+}
+
+/* Show/hide icons based on theme */
+.sun-icon {
+  display: none;
+}
+
+.moon-icon {
+  display: block;
+}
+
+body.light-theme .sun-icon {
+  display: block;
+}
+
+body.light-theme .moon-icon {
+  display: none;
+}
+
+/* Position theme toggle on login page */
+.login-page .theme-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+}
+
+/* Position theme toggle in dashboard/create header */
+.admin-header .theme-toggle {
+  margin-left: var(--spacing-md);
+}
+
 /* ================================
    MAIN CONTENT
    ================================ */
@@ -163,6 +250,7 @@ body {
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-lg);
   overflow: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
 .card-header {
@@ -401,6 +489,7 @@ body {
   width: 100%;
   border-collapse: collapse;
   min-width: 1200px;
+  border-color: var(--border-color);
 }
 
 .verification-table thead {
@@ -452,6 +541,7 @@ body {
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
 .status-active {
@@ -582,6 +672,7 @@ body {
   animation: fadeInUp 0.6s ease;
   position: relative;
   overflow: visible;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
 /* Added create page specific main content */
@@ -782,6 +873,7 @@ body {
   color: var(--text-primary);
   font-size: 1rem;
   transition: all 0.3s ease;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
 /* Enhanced input focus states with glow */
@@ -930,128 +1022,4 @@ body {
 
   /* Mobile responsive adjustments */
   .create-title-wrapper {
-    flex-direction: column;
-    gap: 0.75rem;
-  }
-
-  .create-icon-wrapper {
-    width: 40px;
-    height: 40px;
-  }
-
-  .create-icon {
-    width: 24px;
-    height: 24px;
-  }
-
-  .create-header h2 {
-    font-size: 1.5rem;
-  }
-
-  .create-form {
-    padding: 1.5rem 1rem;
-  }
-
-  .form-group {
-    margin-bottom: 1.25rem;
-  }
-
-  .create-footer {
-    padding: 1rem;
-  }
-
-  .create-footer p {
-    font-size: 0.85rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .create-page-main {
-    padding: 1rem 0.75rem;
-  }
-
-  .create-header h2 {
-    font-size: 1.35rem;
-  }
-
-  @media (max-width: 480px) {
-    .create-header h2 {
-      font-size: 1.25rem;
-    }
-  }
-
-  .create-form {
-    padding: 1.25rem 0.75rem;
-  }
-
-  .form-input {
-    padding: 0.75rem 0.875rem;
-    font-size: 0.95rem;
-  }
-
-  @media (max-width: 480px) {
-    .create-submit-btn {
-      padding: 0.875rem 1.5rem;
-      font-size: 1rem;
-    }
-  }
-
-  .create-submit-btn {
-    padding: 0.875rem 1.5rem;
-    font-size: 1rem;
-  }
-}
-
-/* ================================
-   MODAL
-   ================================ */
-.modal {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1000;
-}
-
-.modal.active {
-  display: block;
-}
-
-.modal-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.75);
-  backdrop-filter: blur(4px);
-}
-
-.modal-content {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: var(--bg-card);
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-xl);
-  width: 90%;
-  max-width: 600px;
-  max-height: 90vh;
-  overflow-y: auto;
-}
-
-.modal-header {
-  padding: var(--spacing-xl);
-  border-bottom: 1px solid var(--border-color);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.modal-header h2 {
-  /* The snippet indicated the file ended prematurely here, so we close the rule. */
-}
+    display: flex;
