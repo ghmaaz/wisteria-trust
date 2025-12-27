@@ -840,7 +840,94 @@ footer::before {
 
 /* =====================================================
    MOBILE RESPONSIVENESS & PREMIUM POLISH
-===================================================== */
+*/
+/* Refined circle UI for all buttons and interactive cards */
+.btn-primary,
+.btn-secondary,
+.nav-cta,
+.lookup-btn,
+.theme-toggle,
+.luxury-card,
+.v-card,
+.portal-card {
+  border-radius: 100px !important; /* Forces perfect circle/pill shape where applicable */
+}
+
+.luxury-card,
+.v-card,
+.portal-card {
+  border-radius: 40px !important; /* Refined rounded corners for larger containers */
+}
+
+/* Added high-fidelity marquee and timeline animations */
+.trust-marquee {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background: rgba(197, 160, 89, 0.05);
+  border-top: 1px solid var(--border-subtle);
+  padding: 12px 0;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.marquee-content {
+  display: inline-block;
+  animation: marquee 40s linear infinite;
+}
+
+.marquee-content span {
+  display: inline-block;
+  padding: 0 40px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--primary);
+  opacity: 0.6;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.authority-timeline {
+  padding: 150px 0;
+  background: var(--bg-main);
+  border-top: 1px solid var(--border-subtle);
+}
+
+.timeline-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+}
+
+.timeline-item {
+  padding: 40px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 32px;
+  position: relative;
+  transition: transform 0.6s var(--ease-lux);
+}
+
+.timeline-item:hover {
+  transform: translateY(-10px);
+  border-color: var(--primary);
+}
+
+.t-year {
+  font-family: "Playfair Display", serif;
+  font-size: 0.8rem;
+  color: var(--primary);
+  margin-bottom: 16px;
+  letter-spacing: 2px;
+}
 
 /* RESPONSIVE */
 @media (max-width: 1024px) {
@@ -1017,65 +1104,5 @@ footer::before {
 /* Premium Animations */
 /* Added subtle parallax and reveal effects */
 [data-aos] {
-  transition-timing-function: var(--ease-lux) !important;
-}
-
-.luxury-card {
-  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
-  transition: transform 0.8s var(--ease-lux);
-}
-
-.luxury-card:hover {
-  transform: translateY(-10px) scale(1.02);
-}
-
-/* Mobile responsive adjustments for the new footer structure */
-@media (max-width: 1024px) {
-  .footer-grid {
-    grid-template-columns: 1fr;
-    gap: 80px;
-  }
-
-  .footer-links-container {
-    gap: 40px;
-  }
-}
-
-@media (max-width: 768px) {
-  .footer-links-container {
-    grid-template-columns: 1fr;
-  }
-
-  .f-col h4 {
-    margin-bottom: 24px;
-    border-bottom: 1px solid var(--border-subtle);
-    padding-bottom: 12px;
-  }
-
-  .bottom-inner {
-    flex-direction: column;
-    gap: 24px;
-    text-align: center;
-  }
-}
-
-/* added horizontal scroll reveal animation for sections */
-[data-aos="reveal-left"] {
-  transform: translateX(-50px);
-  opacity: 0;
-  transition-property: transform, opacity;
-}
-[data-aos="reveal-left"].aos-animate {
-  transform: translateX(0);
-  opacity: 1;
-}
-
-[data-aos="reveal-right"] {
-  transform: translateX(50px);
-  opacity: 0;
-  transition-property: transform, opacity;
-}
-[data-aos="reveal-right"].aos-animate {
-  transform: translateX(0);
-  opacity: 1;
+  transition-timing-function: var(--ease-lux);
 }
