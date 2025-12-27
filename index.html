@@ -15,7 +15,7 @@
   <!-- CSS -->
   <link rel="stylesheet" href="assets/css/style.css" />
 </head>
-<body>
+<body class="dark-theme">
 
 <nav class="navbar">
   <div class="container nav-inner">
@@ -32,8 +32,12 @@
     </div>
 
     <div class="nav-actions">
+      <button class="theme-toggle" id="themeToggle" aria-label="Switch Theme">
+        <svg class="sun-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2m0 18v2M4.22 4.22l1.42 1.42m12.72 12.72l1.42 1.42M1 12h2m18 0h2M4.22 19.78l1.42-1.42M17.66 6.34l1.42-1.42"/></svg>
+        <svg class="moon-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
       <a href="#verify" class="nav-cta">Portal Access</a>
-      <button class="mobile-menu-toggle" id="menuToggle" aria-label="Toggle Menu">
+      <button class="mobile-menu-toggle" id="menuBtn" aria-label="Toggle Menu">
         <span></span>
         <span></span>
         <span></span>
@@ -42,7 +46,7 @@
   </div>
 </nav>
 
-<div class="mobile-overlay" id="mobileOverlay">
+<div class="mobile-overlay" id="mobileMenu">
   <div class="mobile-menu-content">
     <a href="#about" class="mobile-link">Mission</a>
     <a href="#process" class="mobile-link">Protocol</a>
@@ -117,7 +121,12 @@
         <div class="mission-visual" data-aos="fade-left">
           <div class="luxury-card">
             <div class="card-inner">
-              <img src="/placeholder.svg?height=600&width=500" alt="Luxury verification texture">
+              <div class="luxury-visual-placeholder">
+                <div class="shimmer-line"></div>
+                <div class="shimmer-line"></div>
+                <div class="shimmer-line"></div>
+                <div class="logo-ghost">W</div>
+              </div>
             </div>
           </div>
         </div>
@@ -126,7 +135,7 @@
   </section>
 
   <!-- GLOBAL REACH SECTION -->
-  <section class="project-info">
+  <section id="process" class="project-info">
     <div class="container">
       <div class="info-grid">
         <div class="info-item" data-aos="zoom-in">
@@ -241,7 +250,6 @@
           <a href="mailto:wisteriatrust.verify@gmail.com">Direct Inquiry</a>
         </div>
       </div>
-    </div>
     
     <div class="footer-bottom">
       <p>© 2025 Wisteria Trust. Independent Seller Verification Authority. All rights reserved.</p>
