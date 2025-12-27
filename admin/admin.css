@@ -1321,7 +1321,7 @@ body {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.7s ease;
 }
 
 /* Hover state */
@@ -1353,4 +1353,5 @@ body {
     right: 0.75rem;
   }
 }
+
 
