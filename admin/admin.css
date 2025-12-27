@@ -1301,3 +1301,56 @@ body {
     width: 100%;
   }
 }
+/* ===============================
+   MODAL CLOSE BUTTON
+   =============================== */
+
+.modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #e5e7eb;
+  font-size: 1.4rem;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+/* Hover state */
+.modal-close:hover {
+  background: rgba(239, 68, 68, 0.15);
+  border-color: #ef4444;
+  color: #fecaca;
+  transform: rotate(90deg);
+}
+
+/* Active */
+.modal-close:active {
+  transform: scale(0.95) rotate(90deg);
+}
+
+/* Focus (Accessibility) */
+.modal-close:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.35);
+}
+
+/* Mobile tweak */
+@media (max-width: 480px) {
+  .modal-close {
+    width: 32px;
+    height: 32px;
+    font-size: 1.25rem;
+    top: 0.75rem;
+    right: 0.75rem;
+  }
+}
+
