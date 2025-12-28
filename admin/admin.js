@@ -1,23 +1,59 @@
-/* ===============================
-   GLOBAL STATE
-================================ */
+/* Admin Dashboard Core Logic - Fixed for Mobile Responsiveness & Themes */
+
 let ALL_VERIFICATIONS = []
 let EDIT_ID = null
 const SELECTED_IDS = new Set()
 const API_BASE_URL = "https://wisteria-backend.onrender.com"
 
-/* ===============================
-   AUTH GUARD
-================================ */
 const token = localStorage.getItem("adminToken")
 if (!token) {
   window.location.href = "login.html"
 }
 
-/* ===============================
-   DOM LOADED
-================================ */
 document.addEventListener("DOMContentLoaded", () => {
+  // Mobile Menu Logic
+  const mobileMenuBtn = document.getElementById("mobileMenuBtn")
+  const adminNav = document.getElementById("adminNav")
+
+  if (mobileMenuBtn && adminNav) {
+    mobileMenuBtn.addEventListener("click", () => {
+      adminNav.classList.toggle("active")
+      mobileMenuBtn.classList.toggle("active")
+      document.body.classList.toggle("menu-open")
+    })
+
+    // Close menu when clicking outside
+    document.addEventListener("click", (e) => {
+      if (!adminNav.contains(e.target) && !mobileMenuBtn.contains(e.target) && adminNav.classList.contains("active")) {
+        adminNav.classList.remove("active")
+        mobileMenuBtn.classList.remove("active")
+        document.body.classList.remove("menu-open")
+      }
+    })
+
+    adminNav.querySelectorAll("a, button").forEach((el) => {
+      el.addEventListener("click", () => {
+        adminNav.classList.remove("active")
+        mobileMenuBtn.classList.remove("active")
+        document.body.classList.remove("menu-open")
+      })
+    })
+  }
+
+  // Theme Switcher Logic
+  const themeToggle = document.getElementById("themeToggle")
+  const savedTheme = localStorage.getItem("admin-theme") || "dark"
+  document.documentElement.setAttribute("data-theme", savedTheme)
+
+  if (themeToggle) {
+    themeToggle.addEventListener("click", () => {
+      const currentTheme = document.documentElement.getAttribute("data-theme")
+      const newTheme = currentTheme === "dark" ? "light" : "dark"
+      document.documentElement.setAttribute("data-theme", newTheme)
+      localStorage.setItem("admin-theme", newTheme)
+    })
+  }
+
   const logoutBtns = document.querySelectorAll(".btn-logout")
   logoutBtns.forEach((btn) => {
     btn.addEventListener("click", logout)
@@ -181,10 +217,15 @@ function updateStats(list) {
   const expired = list.filter((v) => v.status === "EXPIRED").length
   const revoked = list.filter((v) => v.status === "REVOKED").length
 
-  document.getElementById("statTotal").textContent = total
-  document.getElementById("statActive").textContent = active
-  document.getElementById("statExpired").textContent = expired
-  document.getElementById("statRevoked").textContent = revoked
+  const statTotal = document.getElementById("statTotal")
+  const statActive = document.getElementById("statActive")
+  const statExpired = document.getElementById("statExpired")
+  const statRevoked = document.getElementById("statRevoked")
+
+  if (statTotal) statTotal.textContent = total
+  if (statActive) statActive.textContent = active
+  if (statExpired) statExpired.textContent = expired
+  if (statRevoked) statRevoked.textContent = revoked
 }
 
 /* ===============================
@@ -395,7 +436,8 @@ async function bulkDelete() {
     await Promise.all(promises)
     alert(`Successfully deleted ${SELECTED_IDS.size} verification(s)`)
     SELECTED_IDS.clear()
-    document.getElementById("selectAll").checked = false
+    const selectAll = document.getElementById("selectAll")
+    if (selectAll) selectAll.checked = false
     loadVerifications()
   } catch (err) {
     console.error(err)
@@ -422,7 +464,8 @@ async function bulkRevoke() {
     await Promise.all(promises)
     alert(`Successfully revoked ${SELECTED_IDS.size} verification(s)`)
     SELECTED_IDS.clear()
-    document.getElementById("selectAll").checked = false
+    const selectAll = document.getElementById("selectAll")
+    if (selectAll) selectAll.checked = false
     loadVerifications()
   } catch (err) {
     console.error(err)
@@ -486,22 +529,30 @@ function openEditModal(id) {
 
   EDIT_ID = id
 
-  document.getElementById("editSeller").value = v.sellerName
-  document.getElementById("editBusiness").value = v.businessName
-  document.getElementById("editCity").value = v.city
-  document.getElementById("editEmail").value = v.email
+  const editSeller = document.getElementById("editSeller")
+  const editBusiness = document.getElementById("editBusiness")
+  const editCity = document.getElementById("editCity")
+  const editEmail = document.getElementById("editEmail")
+  const editExpiry = document.getElementById("editExpiry")
 
-  const dateObj = new Date(v.expiryDate)
-  const formattedDate = dateObj.toISOString().split("T")[0]
-  document.getElementById("editExpiry").value = formattedDate
+  if (editSeller) editSeller.value = v.sellerName
+  if (editBusiness) editBusiness.value = v.businessName
+  if (editCity) editCity.value = v.city
+  if (editEmail) editEmail.value = v.email
+
+  if (editExpiry) {
+    const dateObj = new Date(v.expiryDate)
+    const formattedDate = dateObj.toISOString().split("T")[0]
+    editExpiry.value = formattedDate
+  }
 
   const modal = document.getElementById("editModal")
-  modal.style.display = "flex"
+  if (modal) modal.classList.add("active")
 }
 
 function closeEditModal() {
   const modal = document.getElementById("editModal")
-  modal.style.display = "none"
+  if (modal) modal.classList.remove("active")
   EDIT_ID = null
 }
 
