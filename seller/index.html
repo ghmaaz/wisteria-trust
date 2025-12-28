@@ -1,80 +1,132 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
+<head>
     <meta charset="UTF-8">
-    <title>Wisteria Trust — Seller Verification Kit</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <title>Seller Verification | Wisteria Trust</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="stylesheet" href="seller.css">
-    </head>
-    <body>
-
-        <div class="container">
-
-            <header>
-                <h1>VERIFIED WISTERIA SELLER </h1>
-                <h2>Seller Verification Kit</h2>
-                <p class="subtitle">
-                Use the tools below to show buyers that you are officially verified by
-                <strong>Wisteria Trust</strong>.
-                </p>
-            </header>
-                <!-- INFO -->
-                <section class="box info">
-                    <h2>Your Verification Details</h2>
-                    <div><span>Verification ID</span><strong id="vid">—</strong></div>
-                    <div><span>Seller Name</span><strong id="sellerName">—</strong></div>
-                    <div><span>Business</span><strong id="businessName">—</strong></div>
-                    <div><span>Status</span><strong id="status">—</strong></div>
-                    <div><span>Valid Till</span><strong id="validTill">—</strong></div>
-                </section>
-            <!-- SECTION 1 -->
-            <section class="box">
-                <h2>For Social Media / Bio</h2>
-                <p>
-                Use this link in your Instagram bio, WhatsApp profile, Google Business,
-                or anywhere online.
-                <br>
-                When a buyer clicks this link, they will be taken directly to
-                Wisteria Trust’s verification page with your ID already filled.
-                </p>
-
-                <div class="code" id="verifyLink">Loading…</div>
-                <button id="copyLink">Copy Verification Link</button>
-            </section>
-
-            <!-- SECTION 2 -->
-            <section class="box">
-                <h2>For Your Website (Footer / About Page)</h2>
-                <p>
-                Place the following code on your website.
-                <br>
-                When visitors click the badge, they will be redirected to
-                Wisteria Trust’s verification page.
-                </p>
-
-                <pre class="code" id="embedCode"></pre>
-                <button id="copyCode">Copy Website Code</button>
-            </section>
-
-            <!-- SECTION 3 -->
-            <section class="box">
-                <h2>Verified Seller Badge</h2>
-                <p>
-                Download the official Wisteria Trust Verified Seller badge and
-                upload it to your website footer or marketing materials.
-                </p>
-
-                <a class="download" href="badge.png" download>
-                Download Badge (PNG)
-                </a>
-            </section>
-
-            <footer>
-                © Wisteria Trust — Official Seller Verification System
-            </footer>
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+</head>
+<body class="luxury-theme">
+    <div class="grain-overlay"></div>
+    
+    <nav class="luxury-nav">
+        <div class="nav-container">
+            <a href="/" class="brand-logo">
+                <span class="logo-icon">W</span>
+                <span class="logo-text">Wisteria Trust</span>
+            </a>
+            <div class="nav-meta">
+                <span class="status-badge live">System Active</span>
+            </div>
         </div>
-       <script src="seller.js"></script>
-    </body>
+    </nav>
+
+    <main class="seller-container">
+        <header class="seller-header" data-aos="fade-up">
+            <div class="header-content">
+                <p class="eyebrow">Institutional Verification Portal</p>
+                <h1 class="premium-heading">Independent <br><span>Identity Portfolio</span></h1>
+                <p class="subtitle">This sovereign identity report confirms the legitimacy and operational integrity of the entity identified below.</p>
+            </div>
+        </header>
+
+        <section class="verification-profile" data-aos="fade-up">
+            <div class="profile-card glass-morphism">
+                <div class="card-glow"></div>
+                <div class="profile-header">
+                    <div class="verification-badge">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2L3 7V12C3 17.5 7 22 12 24C17 22 21 17.5 21 12V7L12 2Z" fill="url(#gold-grad)"/>
+                            <path d="M9 12L11 14L15 10" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <defs>
+                                <linearGradient id="gold-grad" x1="3" y1="2" x2="21" y2="24" gradientUnits="userSpaceOnUse">
+                                    <stop stop-color="#c5a059"/>
+                                    <stop offset="1" stop-color="#8e6d2f"/>
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                    </div>
+                    <div class="profile-title">
+                        <h2 id="businessName">Loading Entity...</h2>
+                        <p id="vid">WT-0000-000</p>
+                    </div>
+                </div>
+
+                <div class="info-grid">
+                    <div class="info-item">
+                        <span class="label">Principal Representative</span>
+                        <span class="value" id="sellerName">—</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="label">Verification Status</span>
+                        <span class="value status-active" id="status">Verifying...</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="label">Renewal Threshold</span>
+                        <span class="value" id="validTill">—</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="label">Registry Class</span>
+                        <span class="value">Sovereign Tier I</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="trust-assets" data-aos="fade-up">
+            <div class="asset-grid">
+                <div class="asset-card glass-morphism">
+                    <h3>Integration Assets</h3>
+                    <p>Utilize these assets to communicate your verified status across institutional platforms.</p>
+                    
+                    <div class="action-block">
+                        <label>Sovereign Registry Link</label>
+                        <div class="code-box">
+                            <code id="verifyLink">Generating...</code>
+                        </div>
+                        <button id="copyLink" class="pill-button secondary">
+                            <span>Copy Verification Link</span>
+                        </button>
+                    </div>
+
+                    <div class="action-block">
+                        <label>Institutional Badge Embed</label>
+                        <div class="code-box">
+                            <pre id="embedCode">Processing...</pre>
+                        </div>
+                        <button id="copyCode" class="pill-button secondary">
+                            <span>Copy Website Code</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="asset-card glass-morphism dark-accent">
+                    <div class="card-pattern"></div>
+                    <h3>Strategic Mandate</h3>
+                    <p>The Wisteria Trust verification protocol ensures absolute identity transparency through multi-node consensus and forensic data cross-referencing.</p>
+                    <ul class="mandate-list">
+                        <li><span>•</span> Zero-Knowledge Identity Proofing</li>
+                        <li><span>•</span> Immutable Ledger Inclusion</li>
+                        <li><span>•</span> Operational Integrity Audit</li>
+                    </ul>
+                    <a href="/" class="pill-button primary shimmer">
+                        <span>The Protocol</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="luxury-footer">
+        <div class="footer-bottom">
+            <p>&copy; 2025 Wisteria Trust. Independent Seller Verification Authority. Sovereign Infrastructure.</p>
+        </div>
+    </footer>
+
+    <script src="seller-logic.js"></script>
+</body>
 </html>
