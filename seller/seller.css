@@ -177,14 +177,75 @@ body.luxury-theme {
 .asset-card h3 {
   font-family: var(--font-serif);
   font-size: 32px;
-  margin-bottom: 20px;
+  margin-bottom: 12px;
   color: var(--gold-primary);
 }
 
-.asset-card p {
-  opacity: 0.5;
-  margin-bottom: 40px;
-  font-size: 15px;
+/* Added styling for asset descriptions and instructions */
+.asset-description {
+  opacity: 0.6;
+  margin-bottom: 30px;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.instruction-text {
+  font-size: 12px;
+  opacity: 0.4;
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+
+.action-block {
+  margin-bottom: 35px;
+}
+
+.action-block:last-child {
+  margin-bottom: 0;
+}
+
+.action-block label {
+  display: block;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: #fff;
+}
+
+/* Styling for the badge preview section */
+.badge-preview-container {
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 20px;
+  padding: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 30px;
+  border: 1px dashed var(--glass-border);
+}
+
+.badge-preview-img {
+  width: 140px;
+  height: auto;
+  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.3));
+}
+
+.mandate-section {
+  margin-top: 40px;
+  padding-top: 30px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.mandate-section label {
+  display: block;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  opacity: 0.4;
 }
 
 .code-box {
