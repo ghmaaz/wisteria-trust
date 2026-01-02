@@ -2,13 +2,13 @@
    WISTERIA TRUST LUXURY DESIGN SYSTEM
 ===================================================== */
 :root {
-  /* Updated default theme to Premium Light Mode with soft neutrals */
-  --bg-main: #fcfbf9; /* Premium warm parchment */
+  /* Premium Light Theme (Default) */
+  --bg-main: #fcfbf9; /* Warm parchment off-white */
   --bg-surface: #ffffff;
   --bg-elevated: #f7f4f0;
   --primary: #b48a1d; /* Refined luxury gold */
-  --primary-glow: rgba(180, 138, 29, 0.12);
-  --text-main: #1a1c1e; /* Deep charcoal for perfect readability on light background */
+  --primary-glow: rgba(180, 138, 29, 0.15);
+  --text-main: #1a1c1e; /* Deep charcoal for readability */
   --text-muted: #5c646d;
   --border-subtle: rgba(0, 0, 0, 0.08);
   --nav-bg: rgba(252, 251, 249, 0.85);
@@ -17,14 +17,13 @@
   --ease-lux: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Dark Mode is now the secondary option */
 body.dark-theme {
   --bg-main: #0d0f12;
   --bg-surface: #15181c;
   --bg-elevated: #1a1e24;
   --primary: #d4af37;
-  --primary-glow: rgba(212, 175, 55, 0.2);
-  --text-main: #f8fafc; /* Near-white for perfect contrast on dark background */
+  --primary-glow: rgba(212, 175, 55, 0.25);
+  --text-main: #f8fafc;
   --text-muted: #94a3b8;
   --border-subtle: rgba(255, 255, 255, 0.1);
   --nav-bg: rgba(13, 15, 18, 0.9);
@@ -36,7 +35,7 @@ body.dark-theme {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  /* Added global smooth scroll */
+  /* Added smooth scrolling */
   scroll-behavior: smooth;
 }
 
@@ -49,6 +48,7 @@ body {
   font-family: "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   background-color: var(--bg-main);
   color: var(--text-main);
+  /* Improved line-height for premium readability */
   line-height: 1.8; /* Increased line-height for luxury readability */
   letter-spacing: 0.01em;
   overflow-x: hidden;
@@ -94,7 +94,7 @@ h1 {
   line-height: 1.15;
   letter-spacing: -0.03em;
   margin-bottom: 24px;
-  /* Explicitly ensuring heading color is tied to the high-contrast variable */
+  /* Explicitly using text-main for all headings */
   color: var(--text-main);
 }
 
@@ -130,8 +130,9 @@ h2 {
   left: 0;
   width: 100%;
   z-index: 1000;
-  padding: 24px 0; /* Default padding */
+  padding: 24px 0;
   transition: all 0.4s var(--ease-lux);
+  /* Updated to use theme-aware nav-bg variable */
   background: var(--nav-bg);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid transparent;
@@ -547,7 +548,7 @@ h2 {
   border: 1px solid var(--border-subtle);
   padding: 20px 30px;
   font-size: 1.1rem;
-  color: var(--text-main);
+  color: var(--text-main); /* Dynamically changes with theme */
   font-family: inherit;
   transition: all 0.4s var(--ease-lux);
   border-radius: 100px; /* circle shape */
@@ -594,15 +595,17 @@ h2 {
 /* =====================================================
    VERIFICATION REPORT - PROFESSIONAL COMPACT CERTIFICATE
 ===================================================== */
+/* Redesigned Verification Report as a Professional Compact Card */
 .verification-report {
-  max-width: 560px;
-  margin: 0 auto;
+  max-width: 600px;
+  margin: 40px auto;
   background: var(--bg-surface);
   border: 1px solid var(--border-subtle);
-  border-radius: 20px;
-  padding: 32px;
+  border-radius: 24px;
+  padding: 40px;
   position: relative;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  text-align: left;
   transition: all 0.4s var(--ease-lux);
 }
 
@@ -630,8 +633,8 @@ h2 {
 .report-header {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
-  margin-bottom: 24px;
+  align-items: center;
+  margin-bottom: 32px;
   padding-bottom: 20px;
   border-bottom: 1px solid var(--border-subtle);
 }
@@ -640,9 +643,11 @@ h2 {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 8px 16px;
+  padding: 8px 20px;
+  background: rgba(16, 185, 129, 0.1);
+  color: #10b981;
   border-radius: 100px;
-  font-size: 0.75rem;
+  font-size: 0.8rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -661,6 +666,7 @@ h2 {
 }
 
 .status-badge i {
+  font-size: 1.2rem;
   width: 18px;
   height: 18px;
 }
@@ -668,11 +674,13 @@ h2 {
 .report-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 16px;
-  margin-bottom: 20px;
+  gap: 24px;
 }
 
 .report-item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
   background: var(--bg-elevated);
   padding: 14px 16px;
   border-radius: 12px;
@@ -680,36 +688,28 @@ h2 {
 }
 
 .report-item label {
-  display: block;
-  font-size: 0.65rem;
+  font-size: 0.7rem;
   text-transform: uppercase;
-  letter-spacing: 1.2px;
+  letter-spacing: 1.5px;
   color: var(--text-muted);
   margin-bottom: 6px;
   font-weight: 600;
 }
 
 .report-item .value {
-  font-size: 0.9rem;
+  font-size: 1.1rem;
   color: var(--text-main);
   font-weight: 600;
   line-height: 1.3;
 }
 
 .report-footer {
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  padding: 16px;
-  background: var(--bg-elevated);
-  border-radius: 12px;
-  border: 1px solid var(--border-subtle);
-}
-
-.report-footer span {
-  font-size: 0.75rem;
-  line-height: 1.6;
+  margin-top: 32px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border-subtle);
+  font-size: 0.8rem;
   color: var(--text-muted);
+  line-height: 1.6;
 }
 
 /* Mobile optimization for verification report */
@@ -717,18 +717,18 @@ h2 {
   .verification-report {
     padding: 24px 20px;
   }
-  
+
   .report-grid {
     grid-template-columns: 1fr;
     gap: 12px;
   }
-  
+
   .report-header {
     flex-direction: column;
     gap: 12px;
     align-items: flex-start;
   }
-  
+
   .report-seal {
     top: 12px;
     right: 12px;
@@ -764,7 +764,7 @@ h2 {
 /* STRATEGIC DETAIL SECTION */
 .strategic-detail {
   padding: 150px 0;
-  /* Made the background theme-aware so dark text doesn't disappear */
+  /* Updated background to be theme-aware for contrast */
   background: var(--bg-surface);
   border-top: 1px solid var(--border-subtle);
   border-bottom: 1px solid var(--border-subtle);
@@ -1040,17 +1040,9 @@ footer::before {
   transform: translateY(-9px) rotate(-45deg);
 }
 
-/* =====================================================
-   MOBILE RESPONSIVENESS & PREMIUM POLISH
-*/
-/* Refined circle UI for all buttons and interactive cards */
-.btn-primary,
-.btn-secondary,
-.nav-cta,
-.lookup-btn,
-.theme-toggle,
-.luxury-card,
-.v-card,
-.portal-card {
-  border-radius: 100px !important; /* Forces perfect circle/pill shape where applicable */
+@media (max-width: 768px) {
+  .navbar {
+    background: var(--nav-bg); /* Use theme-aware variable instead of hardcoded black */
+    padding: 12px 0;
+  }
 }
