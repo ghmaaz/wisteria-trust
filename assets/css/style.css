@@ -12,7 +12,9 @@
   --text-main: #2d3136; /* Soft charcoal, not pure black */
   --text-muted: #64748b;
   --border-subtle: rgba(0, 0, 0, 0.05);
-  --nav-bg: rgba(252, 251, 249, 0.85);
+  --nav-bg: rgba(252, 251, 249, 0.9);
+  --gradient-start: rgba(180, 138, 29, 0.05);
+  --overlay-bg: rgba(252, 251, 249, 0.9);
   --radius-xl: 32px;
   --radius-lg: 20px;
   --ease-lux: cubic-bezier(0.16, 1, 0.3, 1);
@@ -28,7 +30,9 @@ body.dark-theme {
   --text-main: #f1f5f9; /* Soft white */
   --text-muted: #94a3b8;
   --border-subtle: rgba(255, 255, 255, 0.06);
-  --nav-bg: rgba(13, 15, 18, 0.85);
+  --nav-bg: rgba(13, 15, 18, 0.9);
+  --gradient-start: #161b22;
+  --overlay-bg: rgba(13, 15, 18, 0.92);
 }
 
 * {
@@ -54,7 +58,7 @@ body {
   position: relative;
   /* Added a very subtle transition for theme switching and interactions */
   transition: background-color 0.5s ease, color 0.5s ease;
-  background: radial-gradient(circle at 50% 0%, #161b22 0%, var(--bg-main) 70%);
+  background: radial-gradient(circle at 50% 0%, var(--gradient-start) 0%, var(--bg-main) 70%);
 }
 
 .container {
@@ -526,7 +530,7 @@ h2 {
 /* Updated input text color to ensure visibility in light mode and redesigned report */
 .input-group input {
   width: 100%;
-  background: rgba(255, 255, 255, 0.03);
+  background: var(--bg-elevated);
   border: 1px solid var(--border-subtle);
   padding: 20px 30px;
   font-size: 1.1rem;
@@ -693,8 +697,7 @@ h2 {
 .strategic-detail {
   padding: 150px 0;
   background-attachment: fixed;
-  background-image: linear-gradient(rgba(6, 8, 11, 0.9), rgba(6, 8, 11, 0.9)),
-    url("/placeholder.svg?height=800&width=1600");
+  background-image: linear-gradient(var(--overlay-bg), var(--overlay-bg)), url("/placeholder.svg?height=800&width=1600");
   background-size: cover;
   text-align: center;
 }
@@ -1045,126 +1048,4 @@ footer::before {
   color: var(--primary);
   margin-bottom: 16px;
   letter-spacing: 2px;
-}
-
-/* RESPONSIVE */
-
-/* Enhanced smooth transitions for interactive elements */
-a,
-button,
-.v-card,
-.luxury-card {
-  transition: all 0.4s var(--ease-lux);
-}
-
-@media (max-width: 991px) {
-  /* Optimized grid spacing for tablet/desktop transition */
-  .mission-grid,
-  .info-grid,
-  .value-grid,
-  .timeline-grid,
-  .footer-grid {
-    grid-template-columns: 1fr !important;
-    gap: 40px !important;
-  }
-  .container {
-    padding: 0 30px;
-  }
-  .mission-grid {
-    grid-template-columns: 1fr !important;
-    gap: 48px;
-  }
-  .value-grid {
-    grid-template-columns: 1fr;
-  }
-  .footer-grid {
-    grid-template-columns: 1fr;
-    gap: 64px;
-  }
-}
-
-@media (max-width: 768px) {
-  .container {
-    padding: 0 20px; /* Reduced padding for mobile screens */
-  }
-  /* Improved hero layout for mobile devices */
-  .hero {
-    padding: 140px 0 60px;
-    width: 100%;
-    max-width: 100vw;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    overflow: hidden;
-  }
-  .hero-content {
-    width: 100%;
-    max-width: 100%;
-  }
-  .hero h1 {
-    font-size: 2.4rem;
-    margin-bottom: 20px;
-    width: 100%;
-  }
-  .hero p {
-    font-size: 0.95rem;
-    margin-bottom: 32px;
-    width: 100%;
-  }
-  .hero-stats {
-    flex-direction: row;
-    justify-content: center;
-    gap: 32px;
-    margin-top: 40px;
-    flex-wrap: wrap;
-    width: 100%;
-  }
-  .stat-num {
-    font-size: 2rem;
-  }
-  .mission {
-    padding: 60px 0;
-  }
-  .mission-grid {
-    gap: 40px !important;
-  }
-  .luxury-card {
-    padding: 24px;
-  }
-  .portal-card {
-    padding: 40px 20px;
-  }
-  .footer-grid {
-    text-align: center;
-  }
-  .footer-links-container {
-    grid-template-columns: 1fr;
-    gap: 40px;
-  }
-  .f-col a {
-    margin: 0 auto 12px;
-  }
-}
-
-@media (max-width: 768px) {
-  .navbar {
-    background: rgba(10, 12, 16, 0.95);
-    padding: 12px 0;
-  }
-
-  .brand span {
-    font-size: 1rem;
-  }
-
-  .nav-cta {
-    padding: 8px 16px;
-    font-size: 0.7rem;
-  }
-}
-
-@media (max-width: 768px) {
-  .hero {
-    height: auto;
-    padding: 120px 0 80px;
-  }
 }
