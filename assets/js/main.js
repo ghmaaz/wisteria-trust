@@ -147,9 +147,11 @@ async function verifySeller() {
             <div class="status-badge ${statusClass}">
               <i data-lucide="${icon}"></i> ${msg}
             </div>
-            <span style="font-size: 0.65rem; color: var(--text-muted); font-weight: 700;">WTID: ${v}</span>
+            <div style="text-align: right;">
+              <div style="font-size: 0.6rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px;">Record Reference</div>
+              <div style="font-size: 0.8rem; color: var(--text-main); font-weight: 800;">${v}</div>
+            </div>
           </div>
-          <p style="color: var(--text-main); font-weight: 500;">${detail}</p>
         </div>
       `
       window.lucide.createIcons() // Declare lucide variable before using it
@@ -160,40 +162,43 @@ async function verifySeller() {
     // ✅ VERIFIED - Professional Report Card
     out.innerHTML = `
       <div class="verification-report">
-        <div class="report-seal">WISTERIA</div>
+        <div class="report-seal">OFFICIAL</div>
         <div class="report-header">
           <div class="status-badge verified">
-            <i data-lucide="shield-check"></i> Seller Verified
+            <i data-lucide="shield-check"></i> Sovereign Verified
           </div>
-          <span style="font-size: 0.65rem; color: var(--text-muted); font-weight: 700;">WTID: ${v}</span>
+          <div style="text-align: right;">
+            <div style="font-size: 0.6rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px;">Record Reference</div>
+            <div style="font-size: 0.8rem; color: var(--text-main); font-weight: 800;">${v}</div>
+          </div>
         </div>
         
         <div class="report-grid">
           <div class="report-item">
-            <label>Authorized Entity</label>
+            <label>Authorized Institution</label>
             <div class="value">${data.sellerName}</div>
           </div>
           <div class="report-item">
-            <label>Institutional Role</label>
-            <div class="value">${data.businessName || "Registered Member"}</div>
+            <label>Sovereign Mandate</label>
+            <div class="value">${data.businessName || "Principal Member"}</div>
           </div>
           <div class="report-item">
-            <label>Protocol Status</label>
-            <div class="value" style="color: #10b981;">${data.status}</div>
+            <label>Registry Status</label>
+            <div class="value" style="color: #10b981;">Active / Certified</div>
           </div>
           <div class="report-item">
-            <label>Issuance Period</label>
-            <div class="value">Valid Until ${new Date(data.validTill).toLocaleDateString(undefined, { year: "numeric", month: "long", day: "numeric" })}</div>
+            <label>Authority Period</label>
+            <div class="value">Until ${new Date(data.validTill).toLocaleDateString(undefined, { year: "numeric", month: "long", day: "numeric" })}</div>
           </div>
         </div>
 
         <div class="report-footer">
-          <i data-lucide="info" style="width: 14px; height: 14px;"></i>
-          <span>This document serves as an official confirmation of institutional legitimacy within the Wisteria Trust sovereign registry.</span>
+          <i data-lucide="award" style="width: 18px; height: 18px; color: var(--primary); flex-shrink: 0;"></i>
+          <span>This digital credential serves as an immutable confirmation of institutional legitimacy and commercial integrity within the Wisteria Trust sovereign verification registry.</span>
         </div>
       </div>
     `
-    window.lucide.createIcons() // Declare lucide variable before using it
+    window.lucide.createIcons()
     scrollToVerifyBox()
   } catch (err) {
     console.error("Verification error:", err)
