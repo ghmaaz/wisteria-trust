@@ -1356,3 +1356,39 @@ footer::before {
     font-size: 0.85rem !important;
   }
 }
+
+/* =====================================================
+   FIX: VERIFICATION REPORT ROW SPACING (IMAGE ISSUE)
+===================================================== */
+
+/* Reduce vertical distance between rows */
+.report-grid {
+  row-gap: 12px !important;   /* MAIN FIX */
+}
+
+/* Remove any implicit spacing on each item */
+.report-item {
+  min-height: unset !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* Keep label compact */
+.report-item label {
+  margin-bottom: 2px !important;
+  line-height: 1.2 !important;
+}
+
+/* Keep value close to label */
+.report-item .value {
+  line-height: 1.3 !important;
+}
+
+/* -----------------------------------------------------
+   MOBILE – EVEN TIGHTER (VERY IMPORTANT)
+----------------------------------------------------- */
+@media (max-width: 768px) {
+  .report-grid {
+    row-gap: 8px !important;
+  }
+}
