@@ -2,41 +2,40 @@
    WISTERIA TRUST LUXURY DESIGN SYSTEM
 ===================================================== */
 :root {
-  /* Premium Light Theme (Default) */
-  /* Refined default Light Theme to a premium warm parchment palette */
-  --bg-main: #fcfbf9; /* Warm off-white parchment */
+  /* Updated default theme to Light Mode with soft neutrals per mentor feedback */
+  /* Soft Light Theme (Now Default) */
+  --bg-main: #fcfbf9; /* Warm off-white */
   --bg-surface: #ffffff;
-  --bg-elevated: #f8f7f4;
-  --primary: #b48a1d; /* Trust-based luxury gold */
-  --primary-glow: rgba(180, 138, 29, 0.12);
-  --text-main: #1c1e21; /* Deep charcoal for high contrast readability */
-  --text-muted: #5e6672;
-  --border-subtle: rgba(0, 0, 0, 0.06);
-  --nav-bg: rgba(252, 251, 249, 0.88);
+  --bg-elevated: #f7f4f0;
+  --primary: #b48a1d; /* Trust-based gold */
+  --primary-glow: rgba(180, 138, 29, 0.15);
+  --text-main: #2d3136; /* Soft charcoal, not pure black */
+  --text-muted: #64748b;
+  --border-subtle: rgba(0, 0, 0, 0.05);
+  --nav-bg: rgba(252, 251, 249, 0.85);
   --radius-xl: 32px;
   --radius-lg: 20px;
   --ease-lux: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+/* Renamed dark class to be the toggleable one */
 body.dark-theme {
-  --bg-main: #0d0f12;
-  --bg-surface: #15181c;
-  --bg-elevated: #1a1e24;
+  --bg-main: #0d0f12; /* Not pure black */
+  --bg-surface: #161a20;
+  --bg-elevated: #1f242d;
   --primary: #d4af37;
   --primary-glow: rgba(212, 175, 55, 0.25);
-  --text-main: #f8fafc;
+  --text-main: #f1f5f9; /* Soft white */
   --text-muted: #94a3b8;
-  --border-subtle: rgba(255, 255, 255, 0.1);
-  --nav-bg: rgba(13, 15, 18, 0.9);
-  /* Added a specific variable for dark sections like Strategic Vision */
-  --bg-dark-section: #0d0f12;
+  --border-subtle: rgba(255, 255, 255, 0.06);
+  --nav-bg: rgba(13, 15, 18, 0.85);
 }
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  /* Added smooth scrolling */
+  /* Added global smooth scroll */
   scroll-behavior: smooth;
 }
 
@@ -45,18 +44,17 @@ html {
 }
 
 body {
-  /* Enhanced global typography settings for premium readability */
+  /* Improved typography: neutral, professional, clean */
   font-family: "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   background-color: var(--bg-main);
   color: var(--text-main);
-  line-height: 1.85; /* Luxury spacing between lines */
-  letter-spacing: 0.015em;
+  line-height: 1.7; /* Improved line-height for readability */
   overflow-x: hidden;
   width: 100%;
   position: relative;
-  transition: background-color 0.5s var(--ease-lux), color 0.5s var(--ease-lux);
-  /* Simplified background to avoid contrast issues with radial gradients */
-  background-color: var(--bg-main);
+  /* Added a very subtle transition for theme switching and interactions */
+  transition: background-color 0.5s ease, color 0.5s ease;
+  background: radial-gradient(circle at 50% 0%, #161b22 0%, var(--bg-main) 70%);
 }
 
 .container {
@@ -79,32 +77,18 @@ h3,
   letter-spacing: -0.01em;
   color: var(--text-main);
 }
-/* Ensuring all headings explicitly use the text-main variable for contrast */
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  color: var(--text-main);
-}
 
 h1 {
   font-size: clamp(2.5rem, 7vw, 5.5rem);
   line-height: 1.15;
   letter-spacing: -0.03em;
   margin-bottom: 24px;
-  /* Explicitly using text-main for all headings */
-  color: var(--text-main);
 }
 
 h1 em {
   font-style: italic;
   font-weight: 500;
-  /* Increasing opacity for better readability on both themes */
-  opacity: 1;
-  /* Ensuring emphasized text stays visible in light mode */
-  color: var(--primary); /* Luxury highlight for emphasized text */
+  opacity: 0.9;
 }
 
 h2 {
@@ -130,9 +114,8 @@ h2 {
   left: 0;
   width: 100%;
   z-index: 1000;
-  padding: 24px 0;
+  padding: 24px 0; /* Default padding */
   transition: all 0.4s var(--ease-lux);
-  /* Updated to use theme-aware nav-bg variable */
   background: var(--nav-bg);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid transparent;
@@ -299,11 +282,9 @@ h2 {
 
 .hero p {
   font-size: 1.25rem;
-  /* Ensuring subtext has enough contrast while remaining 'muted' */
   color: var(--text-muted);
   max-width: 600px;
   margin-bottom: 48px;
-  line-height: 1.6;
 }
 
 .hero-actions {
@@ -544,12 +525,11 @@ h2 {
 
 .input-group input {
   width: 100%;
-  background: var(--bg-elevated);
+  background: rgba(255, 255, 255, 0.03);
   border: 1px solid var(--border-subtle);
   padding: 20px 30px;
   font-size: 1.1rem;
-  /* Fixed text color visibility for both themes */
-  color: var(--text-main);
+  color: #fff;
   font-family: inherit;
   transition: all 0.4s var(--ease-lux);
   border-radius: 100px; /* circle shape */
@@ -589,154 +569,6 @@ h2 {
   margin-top: 48px;
 }
 
-/* =====================================================
-   VERIFICATION REPORT STYLES
-===================================================== */
-/* Redesigned Verification Report as a Professional Compact Card */
-.verification-report {
-  max-width: 620px;
-  margin: 40px auto;
-  background: var(--bg-surface);
-  border: 1px solid var(--border-subtle);
-  border-radius: 28px;
-  padding: 40px;
-  position: relative;
-  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.08);
-  text-align: left;
-  transition: all 0.4s var(--ease-lux);
-  overflow: hidden;
-}
-
-.verification-report:hover {
-  transform: translateY(-4px);
-  border-color: var(--primary);
-  box-shadow: 0 32px 64px rgba(0, 0, 0, 0.12);
-}
-
-.report-seal {
-  position: absolute;
-  top: 18px;
-  right: -30px;
-  transform: rotate(45deg);
-  font-size: 0.55rem;
-  font-weight: 800;
-  letter-spacing: 2px;
-  color: #fff;
-  background: var(--primary);
-  padding: 6px 40px;
-  text-transform: uppercase;
-  box-shadow: 0 4px 12px var(--primary-glow);
-}
-
-.report-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  margin-bottom: 32px;
-  padding-bottom: 24px;
-  border-bottom: 1px solid var(--border-subtle);
-}
-
-.status-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  padding: 10px 24px;
-  border-radius: 100px;
-  font-size: 0.85rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 1.2px;
-}
-
-.status-badge.verified {
-  background: rgba(16, 185, 129, 0.1);
-  color: #059669;
-  border: 1px solid rgba(16, 185, 129, 0.2);
-}
-
-.status-badge.revoked {
-  background: rgba(239, 68, 68, 0.1);
-  color: #dc2626;
-  border: 1px solid rgba(239, 68, 68, 0.2);
-}
-
-.status-badge i {
-  font-size: 1.2rem;
-  width: 18px;
-  height: 18px;
-}
-
-.report-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
-}
-
-.report-item {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  background: var(--bg-elevated);
-  padding: 16px 20px;
-  border-radius: 16px;
-  border: 1px solid var(--border-subtle);
-}
-
-.report-item label {
-  font-size: 0.65rem;
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
-  color: var(--text-muted);
-  font-weight: 700;
-}
-
-.report-item .value {
-  font-size: 1.05rem;
-  color: var(--text-main);
-  font-weight: 600;
-  line-height: 1.4;
-}
-
-.report-footer {
-  margin-top: 32px;
-  padding-top: 24px;
-  border-top: 1px solid var(--border-subtle);
-  font-size: 0.8rem;
-  color: var(--text-muted);
-  line-height: 1.7;
-  display: flex;
-  gap: 12px;
-  align-items: flex-start;
-}
-
-.report-footer i {
-  color: var(--primary);
-  margin-top: 3px;
-}
-
-/* Mobile optimization for verification report */
-@media (max-width: 768px) {
-  .verification-report {
-    padding: 32px 24px;
-  }
-  .report-grid {
-    grid-template-columns: 1fr;
-    gap: 12px;
-  }
-  .report-header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 16px;
-  }
-  .report-seal {
-    top: 12px;
-    right: -20px; /* Adjusted from -30px for better fit on small screens */
-    font-size: 0.5rem;
-    padding: 4px 30px;
-  }
-}
-
 /* Added project info and strategic detail section styles with premium animations */
 .project-info {
   padding: 100px 0;
@@ -761,20 +593,13 @@ h2 {
   margin-bottom: 20px;
 }
 
-/* STRATEGIC DETAIL SECTION */
 .strategic-detail {
   padding: 150px 0;
-  /* Updated background to be theme-aware for contrast */
-  background: var(--bg-surface);
-  border-top: 1px solid var(--border-subtle);
-  border-bottom: 1px solid var(--border-subtle);
+  background-attachment: fixed;
+  background-image: linear-gradient(rgba(6, 8, 11, 0.9), rgba(6, 8, 11, 0.9)),
+    url("/placeholder.svg?height=800&width=1600");
+  background-size: cover;
   text-align: center;
-}
-
-/* Ensuring text inside strategic-detail is readable */
-.strategic-detail h2,
-.strategic-detail p {
-  color: var(--text-main);
 }
 
 .detail-content {
@@ -869,12 +694,6 @@ footer::before {
   color: var(--primary);
   letter-spacing: 1px;
   text-transform: uppercase;
-}
-
-.cert-badge i {
-  width: 16px;
-  height: 16px;
-  color: #10b981; /* Example color for an icon */
 }
 
 .footer-links-container {
@@ -1040,9 +859,216 @@ footer::before {
   transform: translateY(-9px) rotate(-45deg);
 }
 
-@media (max-width: 768px) {
-  .navbar {
-    background: var(--nav-bg); /* Use theme-aware variable instead of hardcoded black */
-    padding: 12px 0;
+/* =====================================================
+   MOBILE RESPONSIVENESS & PREMIUM POLISH
+*/
+/* Refined circle UI for all buttons and interactive cards */
+.btn-primary,
+.btn-secondary,
+.nav-cta,
+.lookup-btn,
+.theme-toggle,
+.luxury-card,
+.v-card,
+.portal-card {
+  border-radius: 100px !important; /* Forces perfect circle/pill shape where applicable */
+}
+
+.luxury-card,
+.v-card,
+.portal-card {
+  border-radius: 40px !important; /* Refined rounded corners for larger containers */
+}
+
+/* Added high-fidelity marquee and timeline animations */
+.trust-marquee {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background: rgba(197, 160, 89, 0.05);
+  border-top: 1px solid var(--border-subtle);
+  padding: 12px 0;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.marquee-content {
+  display: inline-block;
+  animation: marquee 40s linear infinite;
+}
+
+.marquee-content span {
+  display: inline-block;
+  padding: 0 40px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--primary);
+  opacity: 0.6;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
   }
 }
+
+.authority-timeline {
+  padding: 150px 0;
+  background: var(--bg-main);
+  border-top: 1px solid var(--border-subtle);
+}
+
+.timeline-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+}
+
+.timeline-item {
+  padding: 40px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 32px;
+  position: relative;
+  transition: transform 0.6s var(--ease-lux);
+}
+
+.timeline-item:hover {
+  transform: translateY(-10px);
+  border-color: var(--primary);
+}
+
+.t-year {
+  font-family: "Playfair Display", serif;
+  font-size: 0.8rem;
+  color: var(--primary);
+  margin-bottom: 16px;
+  letter-spacing: 2px;
+}
+
+/* RESPONSIVE */
+
+/* Enhanced smooth transitions for interactive elements */
+a,
+button,
+.v-card,
+.luxury-card {
+  transition: all 0.4s var(--ease-lux);
+}
+
+@media (max-width: 991px) {
+  /* Optimized grid spacing for tablet/desktop transition */
+  .mission-grid,
+  .info-grid,
+  .value-grid,
+  .timeline-grid,
+  .footer-grid {
+    grid-template-columns: 1fr !important;
+    gap: 40px !important;
+  }
+  .container {
+    padding: 0 30px;
+  }
+  .mission-grid {
+    grid-template-columns: 1fr !important;
+    gap: 48px;
+  }
+  .value-grid {
+    grid-template-columns: 1fr;
+  }
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 64px;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 20px; /* Reduced padding for mobile screens */
+  }
+  /* Improved hero layout for mobile devices */
+  .hero {
+    padding: 140px 0 60px;
+    width: 100%;
+    max-width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+  }
+  .hero-content {
+    width: 100%;
+    max-width: 100%;
+  }
+  .hero h1 {
+    font-size: 2.4rem;
+    margin-bottom: 20px;
+    width: 100%;
+  }
+  .hero p {
+    font-size: 0.95rem;
+    margin-bottom: 32px;
+    width: 100%;
+  }
+  .hero-stats {
+    flex-direction: row;
+    justify-content: center;
+    gap: 32px;
+    margin-top: 40px;
+    flex-wrap: wrap;
+    width: 100%;
+  }
+  .stat-num {
+    font-size: 2rem;
+  }
+  .mission {
+    padding: 60px 0;
+  }
+  .mission-grid {
+    gap: 40px !important;
+  }
+  .luxury-card {
+    padding: 24px;
+  }
+  .portal-card {
+    padding: 40px 20px;
+  }
+  .footer-grid {
+    text-align: center;
+  }
+  .footer-links-container {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .f-col a {
+    margin: 0 auto 12px;
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    background: rgba(10, 12, 16, 0.95);
+    padding: 12px 0;
+  }
+
+  .brand span {
+    font-size: 1rem;
+  }
+
+  .nav-cta {
+    padding: 8px 16px;
+    font-size: 0.7rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    height: auto;
+    padding: 120px 0 80px;
+  }
+}
+
