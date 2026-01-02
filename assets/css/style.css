@@ -2,14 +2,13 @@
    WISTERIA TRUST LUXURY DESIGN SYSTEM
 ===================================================== */
 :root {
-  /* Updated default theme to Light Mode with soft neutrals per mentor feedback */
-  /* Soft Light Theme (Now Default) */
-  --bg-main: #fcfbf9; /* Warm off-white */
+  /* Updated default theme to Premium Light Mode with soft neutrals */
+  --bg-main: #fcfbf9; /* Premium warm parchment */
   --bg-surface: #ffffff;
   --bg-elevated: #f7f4f0;
-  --primary: #b48a1d; /* Trust-based gold */
-  --primary-glow: rgba(180, 138, 29, 0.15);
-  --text-main: #2d3136; /* Soft charcoal, not pure black */
+  --primary: #b48a1d; /* Refined luxury gold */
+  --primary-glow: rgba(180, 138, 29, 0.12);
+  --text-main: #2d3136; /* Soft charcoal for better readability */
   --text-muted: #64748b;
   --border-subtle: rgba(0, 0, 0, 0.05);
   --nav-bg: rgba(252, 251, 249, 0.85);
@@ -18,14 +17,14 @@
   --ease-lux: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Renamed dark class to be the toggleable one */
+/* Dark Mode is now the secondary option */
 body.dark-theme {
-  --bg-main: #0d0f12; /* Not pure black */
+  --bg-main: #0d0f12;
   --bg-surface: #161a20;
   --bg-elevated: #1f242d;
   --primary: #d4af37;
-  --primary-glow: rgba(212, 175, 55, 0.25);
-  --text-main: #f1f5f9; /* Soft white */
+  --primary-glow: rgba(212, 175, 55, 0.2);
+  --text-main: #f1f5f9;
   --text-muted: #94a3b8;
   --border-subtle: rgba(255, 255, 255, 0.06);
   --nav-bg: rgba(13, 15, 18, 0.85);
@@ -44,16 +43,16 @@ html {
 }
 
 body {
-  /* Improved typography: neutral, professional, clean */
+  /* Refined typography settings for a more professional look */
   font-family: "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   background-color: var(--bg-main);
   color: var(--text-main);
-  line-height: 1.7; /* Improved line-height for readability */
+  line-height: 1.8; /* Increased line-height for luxury readability */
+  letter-spacing: 0.01em;
   overflow-x: hidden;
   width: 100%;
   position: relative;
-  /* Added a very subtle transition for theme switching and interactions */
-  transition: background-color 0.5s ease, color 0.5s ease;
+  transition: background-color 0.5s var(--ease-lux), color 0.5s var(--ease-lux);
   background: radial-gradient(circle at 50% 0%, #161b22 0%, var(--bg-main) 70%);
 }
 
@@ -1071,4 +1070,3 @@ button,
     padding: 120px 0 80px;
   }
 }
-
