@@ -3,15 +3,16 @@
 ===================================================== */
 :root {
   /* Premium Light Theme (Default) */
-  --bg-main: #fcfbf9; /* Warm parchment off-white */
+  /* Refined default Light Theme to a premium warm parchment palette */
+  --bg-main: #fcfbf9; /* Warm off-white parchment */
   --bg-surface: #ffffff;
-  --bg-elevated: #f7f4f0;
-  --primary: #b48a1d; /* Refined luxury gold */
-  --primary-glow: rgba(180, 138, 29, 0.15);
-  --text-main: #1a1c1e; /* Deep charcoal for readability */
-  --text-muted: #5c646d;
-  --border-subtle: rgba(0, 0, 0, 0.08);
-  --nav-bg: rgba(252, 251, 249, 0.85);
+  --bg-elevated: #f8f7f4;
+  --primary: #b48a1d; /* Trust-based luxury gold */
+  --primary-glow: rgba(180, 138, 29, 0.12);
+  --text-main: #1c1e21; /* Deep charcoal for high contrast readability */
+  --text-muted: #5e6672;
+  --border-subtle: rgba(0, 0, 0, 0.06);
+  --nav-bg: rgba(252, 251, 249, 0.88);
   --radius-xl: 32px;
   --radius-lg: 20px;
   --ease-lux: cubic-bezier(0.16, 1, 0.3, 1);
@@ -44,13 +45,12 @@ html {
 }
 
 body {
-  /* Refined typography settings for a more professional look */
+  /* Enhanced global typography settings for premium readability */
   font-family: "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   background-color: var(--bg-main);
   color: var(--text-main);
-  /* Improved line-height for premium readability */
-  line-height: 1.8; /* Increased line-height for luxury readability */
-  letter-spacing: 0.01em;
+  line-height: 1.85; /* Luxury spacing between lines */
+  letter-spacing: 0.015em;
   overflow-x: hidden;
   width: 100%;
   position: relative;
@@ -544,11 +544,12 @@ h2 {
 
 .input-group input {
   width: 100%;
-  background: rgba(255, 255, 255, 0.03);
+  background: var(--bg-elevated);
   border: 1px solid var(--border-subtle);
   padding: 20px 30px;
   font-size: 1.1rem;
-  color: var(--text-main); /* Dynamically changes with theme */
+  /* Fixed text color visibility for both themes */
+  color: var(--text-main);
   font-family: inherit;
   transition: all 0.4s var(--ease-lux);
   border-radius: 100px; /* circle shape */
@@ -591,78 +592,73 @@ h2 {
 /* =====================================================
    VERIFICATION REPORT STYLES
 ===================================================== */
-/* Added professional compact verification report styles */
-/* =====================================================
-   VERIFICATION REPORT - PROFESSIONAL COMPACT CERTIFICATE
-===================================================== */
 /* Redesigned Verification Report as a Professional Compact Card */
 .verification-report {
-  max-width: 600px;
+  max-width: 620px;
   margin: 40px auto;
   background: var(--bg-surface);
   border: 1px solid var(--border-subtle);
-  border-radius: 24px;
+  border-radius: 28px;
   padding: 40px;
   position: relative;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.08);
   text-align: left;
   transition: all 0.4s var(--ease-lux);
+  overflow: hidden;
 }
 
 .verification-report:hover {
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
+  transform: translateY(-4px);
   border-color: var(--primary);
+  box-shadow: 0 32px 64px rgba(0, 0, 0, 0.12);
 }
 
 .report-seal {
   position: absolute;
-  top: 16px;
-  right: 16px;
-  font-size: 0.5rem;
+  top: 18px;
+  right: -30px;
+  transform: rotate(45deg);
+  font-size: 0.55rem;
   font-weight: 800;
   letter-spacing: 2px;
-  color: var(--primary);
-  opacity: 0.3;
+  color: #fff;
+  background: var(--primary);
+  padding: 6px 40px;
   text-transform: uppercase;
-  border: 1px solid var(--primary);
-  padding: 4px 12px;
-  border-radius: 100px;
-  background: var(--primary-glow);
+  box-shadow: 0 4px 12px var(--primary-glow);
 }
 
 .report-header {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-end;
   margin-bottom: 32px;
-  padding-bottom: 20px;
+  padding-bottom: 24px;
   border-bottom: 1px solid var(--border-subtle);
 }
 
 .status-badge {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 8px 20px;
-  background: rgba(16, 185, 129, 0.1);
-  color: #10b981;
+  gap: 10px;
+  padding: 10px 24px;
   border-radius: 100px;
-  font-size: 0.8rem;
+  font-size: 0.85rem;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 1.2px;
 }
 
 .status-badge.verified {
   background: rgba(16, 185, 129, 0.1);
-  color: #10b981;
-  border: 1px solid rgba(16, 185, 129, 0.3);
+  color: #059669;
+  border: 1px solid rgba(16, 185, 129, 0.2);
 }
 
 .status-badge.revoked {
   background: rgba(239, 68, 68, 0.1);
-  color: #ef4444;
-  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: #dc2626;
+  border: 1px solid rgba(239, 68, 68, 0.2);
 }
 
 .status-badge i {
@@ -674,7 +670,7 @@ h2 {
 .report-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 24px;
+  gap: 20px;
 }
 
 .report-item {
@@ -682,58 +678,62 @@ h2 {
   flex-direction: column;
   gap: 6px;
   background: var(--bg-elevated);
-  padding: 14px 16px;
-  border-radius: 12px;
+  padding: 16px 20px;
+  border-radius: 16px;
   border: 1px solid var(--border-subtle);
 }
 
 .report-item label {
-  font-size: 0.7rem;
+  font-size: 0.65rem;
   text-transform: uppercase;
   letter-spacing: 1.5px;
   color: var(--text-muted);
-  margin-bottom: 6px;
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .report-item .value {
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   color: var(--text-main);
   font-weight: 600;
-  line-height: 1.3;
+  line-height: 1.4;
 }
 
 .report-footer {
   margin-top: 32px;
-  padding-top: 20px;
+  padding-top: 24px;
   border-top: 1px solid var(--border-subtle);
   font-size: 0.8rem;
   color: var(--text-muted);
-  line-height: 1.6;
+  line-height: 1.7;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.report-footer i {
+  color: var(--primary);
+  margin-top: 3px;
 }
 
 /* Mobile optimization for verification report */
 @media (max-width: 768px) {
   .verification-report {
-    padding: 24px 20px;
+    padding: 32px 24px;
   }
-
   .report-grid {
     grid-template-columns: 1fr;
     gap: 12px;
   }
-
   .report-header {
     flex-direction: column;
-    gap: 12px;
     align-items: flex-start;
+    gap: 16px;
   }
-
   .report-seal {
     top: 12px;
-    right: 12px;
-    font-size: 0.45rem;
-    padding: 3px 10px;
+    right: -20px; /* Adjusted from -30px for better fit on small screens */
+    font-size: 0.5rem;
+    padding: 4px 30px;
   }
 }
 
