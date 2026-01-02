@@ -1017,6 +1017,7 @@ footer::before {
 }
 
 /* Added comprehensive mobile media queries to ensure the site is fully responsive on all devices */
+/* Updated media queries for better mobile stacking and spacing */
 @media (max-width: 1200px) {
   .container {
     padding: 0 32px;
@@ -1030,7 +1031,7 @@ footer::before {
   .timeline-grid,
   .footer-grid {
     grid-template-columns: 1fr;
-    gap: 48px;
+    gap: 40px;
   }
 
   .nav-links {
@@ -1043,13 +1044,85 @@ footer::before {
 
   .hero-stats {
     gap: 32px;
+    flex-wrap: wrap;
+    justify-content: center;
   }
 
   .hero h1 {
-    font-size: 3rem; /* Slightly smaller for tablets */
+    font-size: clamp(2.5rem, 8vw, 3.5rem);
   }
 
   .mission-visual {
     order: -1; /* Image on top in mobile/tablet */
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-actions {
+    flex-direction: column;
+    width: 100%;
+    max-width: 320px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hero-actions .btn-primary,
+  .hero-actions .btn-secondary {
+    width: 100%;
+    text-align: center;
+  }
+
+  .section-header h2,
+  .mission-text h2 {
+    font-size: 2.2rem;
+  }
+
+  .hero-stats {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .footer-links-container {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .portal-card {
+    padding: 32px 20px;
+  }
+
+  .verify-form {
+    flex-direction: column;
+  }
+
+  .lookup-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* Fixed mobile padding for all main sections */
+  section {
+    padding: 60px 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero h1 {
+    font-size: 2.2rem;
+  }
+
+  .hero-label {
+    font-size: 0.65rem;
+  }
+
+  .logo-mark {
+    width: 32px;
+    height: 32px;
+    font-size: 0.9rem;
+  }
+
+  .brand span {
+    font-size: 1rem;
   }
 }
