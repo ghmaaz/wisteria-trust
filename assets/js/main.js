@@ -98,50 +98,100 @@ async function verifySeller() {
     return
   }
 
-  out.innerHTML = "<div class='result'>Checking verification...</div>"
+  out.innerHTML = `
+    <div class="verification-report" style="text-align:center;">
+      <div class="status-badge" style="margin: 0 auto 20px; width: fit-content;">
+        <i data-lucide="loader-2" class="animate-spin"></i> Initializing Security Scan...
+      </div>
+      <p style="color: var(--text-muted);">Retrieving official records from registry...</p>
+    </div>
+  `
+  window.lucide.createIcons() // Declare lucide variable before using it
   scrollToVerifyBox()
 
   try {
     const res = await fetch(`https://wisteria-backend.onrender.com/api/verify/${encodeURIComponent(v)}`)
-
     const data = await res.json()
 
     // ❌ NOT VERIFIED / REVOKED / EXPIRED
     if (!res.ok || data.verified === false) {
-      let msg = "❌ This seller is not verified by Wisteria Trust."
+      const icon = "shield-alert"
+      const statusClass = "revoked"
+      let msg = "Not Verified"
+      let detail = "This entity has no active record in our sovereign registry."
 
       if (data.status === "REVOKED") {
-        msg = "❌ This verification has been revoked by Wisteria Trust."
+        msg = "Revoked"
+        detail = "This verification has been officially revoked due to compliance failure."
       }
 
       if (data.status === "EXPIRED") {
-        msg = "⏰ This verification has expired."
+        msg = "Expired"
+        detail = "The verification period for this entity has lapsed."
       }
 
-      out.innerHTML = `<div class="result error">${msg}</div>`
+      out.innerHTML = `
+        <div class="verification-report">
+          <div class="report-header">
+            <div class="status-badge ${statusClass}">
+              <i data-lucide="${icon}"></i> ${msg}
+            </div>
+            <span style="font-size: 0.7rem; color: var(--text-muted); font-weight: 700;">WTID: ${v}</span>
+          </div>
+          <p style="color: var(--text-main); font-weight: 500;">${detail}</p>
+        </div>
+      `
+      window.lucide.createIcons() // Declare lucide variable before using it
       scrollToVerifyBox()
       return
     }
 
-    // ✅ VERIFIED
+    // ✅ VERIFIED - Professional Report Card
     out.innerHTML = `
-      <div class="result success">
-        ✅ <strong>Seller Verified</strong><br><br>
-        <strong>Seller:</strong> ${data.sellerName}<br>
-        <strong>Business:</strong> ${data.businessName || "N/A"}<br>
-        <strong>Status:</strong> ${data.status}<br>
-        <strong>Valid Till:</strong> ${new Date(data.validTill).toDateString()}
+      <div class="verification-report">
+        <div class="report-seal">WISTERIA</div>
+        <div class="report-header">
+          <div class="status-badge verified">
+            <i data-lucide="shield-check"></i> Seller Verified
+          </div>
+          <span style="font-size: 0.7rem; color: var(--text-muted); font-weight: 700;">WTID: ${v}</span>
+        </div>
+        
+        <div class="report-grid">
+          <div class="report-item">
+            <label>Authorized Entity</label>
+            <div class="value">${data.sellerName}</div>
+          </div>
+          <div class="report-item">
+            <label>Institutional Role</label>
+            <div class="value">${data.businessName || "Registered Member"}</div>
+          </div>
+          <div class="report-item">
+            <label>Protocol Status</label>
+            <div class="value" style="color: #10b981;">${data.status}</div>
+          </div>
+          <div class="report-item">
+            <label>Issuance Period</label>
+            <div class="value">Valid Until ${new Date(data.validTill).toLocaleDateString(undefined, { year: "numeric", month: "long", day: "numeric" })}</div>
+          </div>
+        </div>
+
+        <div style="margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--border-subtle); font-size: 0.75rem; color: var(--text-muted);">
+          <i data-lucide="info" style="width: 12px; height: 12px; vertical-align: middle; margin-right: 4px;"></i>
+          This document serves as an official confirmation of institutional legitimacy within the Wisteria Trust sovereign registry.
+        </div>
       </div>
     `
-
+    window.lucide.createIcons() // Declare lucide variable before using it
     scrollToVerifyBox()
   } catch (err) {
     console.error("Verification error:", err)
     out.innerHTML = `
-      <div class="result error">
-        ⚠️ Unable to verify at the moment. Please try again later.
+      <div class="verification-report revoked">
+        <i data-lucide="alert-triangle"></i> Registry Connection Error. Please try again later.
       </div>
     `
+    window.lucide.createIcons() // Declare lucide variable before using it
     scrollToVerifyBox()
   }
 }
