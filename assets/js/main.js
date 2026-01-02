@@ -136,7 +136,7 @@ async function verifySeller() {
             <div class="status-badge ${statusClass}">
               <i data-lucide="${icon}"></i> ${msg}
             </div>
-            <span style="font-size: 0.7rem; color: var(--text-muted); font-weight: 700;">WTID: ${v}</span>
+            <span style="font-size: 0.65rem; color: var(--text-muted); font-weight: 700;">WTID: ${v}</span>
           </div>
           <p style="color: var(--text-main); font-weight: 500;">${detail}</p>
         </div>
@@ -154,7 +154,7 @@ async function verifySeller() {
           <div class="status-badge verified">
             <i data-lucide="shield-check"></i> Seller Verified
           </div>
-          <span style="font-size: 0.7rem; color: var(--text-muted); font-weight: 700;">WTID: ${v}</span>
+          <span style="font-size: 0.65rem; color: var(--text-muted); font-weight: 700;">WTID: ${v}</span>
         </div>
         
         <div class="report-grid">
@@ -176,9 +176,9 @@ async function verifySeller() {
           </div>
         </div>
 
-        <div style="margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--border-subtle); font-size: 0.75rem; color: var(--text-muted);">
-          <i data-lucide="info" style="width: 12px; height: 12px; vertical-align: middle; margin-right: 4px;"></i>
-          This document serves as an official confirmation of institutional legitimacy within the Wisteria Trust sovereign registry.
+        <div class="report-footer">
+          <i data-lucide="info" style="width: 14px; height: 14px;"></i>
+          <span>This document serves as an official confirmation of institutional legitimacy within the Wisteria Trust sovereign registry.</span>
         </div>
       </div>
     `
