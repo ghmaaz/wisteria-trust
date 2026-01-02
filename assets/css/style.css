@@ -1280,3 +1280,79 @@ footer::before {
   }
 }
 
+
+/* =====================================================
+   FORCE COMPACT VERIFICATION LOOKUP (FINAL FIX)
+===================================================== */
+
+/* Overall lookup container tighten */
+.lookup-result {
+  margin-top: 24px !important;
+}
+
+/* Card compact */
+.verification-report {
+  padding: 22px 24px !important;
+  max-width: 520px;
+  margin: 24px auto 0 !important;
+}
+
+/* Header tighten */
+.report-header {
+  margin-bottom: 14px !important;
+  padding-bottom: 12px !important;
+}
+
+/* Badge compact */
+.status-badge {
+  padding: 6px 12px !important;
+  font-size: 0.7rem !important;
+}
+
+/* Grid spacing FIX (MAIN ISSUE) */
+.report-grid {
+  gap: 10px !important;
+  margin-bottom: 14px !important;
+}
+
+/* Remove excess vertical spacing */
+.report-item {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Label & value closer */
+.report-item label {
+  margin-bottom: 2px !important;
+  font-size: 0.6rem !important;
+}
+
+.report-item .value {
+  font-size: 0.9rem !important;
+  line-height: 1.3 !important;
+}
+
+/* Footer compact */
+.report-footer {
+  padding: 10px 12px !important;
+  margin-top: 12px !important;
+  font-size: 0.7rem !important;
+}
+
+/* -----------------------------------------
+   MOBILE – VERY COMPACT VERSION
+------------------------------------------ */
+@media (max-width: 768px) {
+  .verification-report {
+    padding: 16px 14px !important;
+  }
+
+  .report-grid {
+    grid-template-columns: 1fr;
+    gap: 8px !important;
+  }
+
+  .report-item .value {
+    font-size: 0.85rem !important;
+  }
+}
