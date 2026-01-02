@@ -1392,3 +1392,68 @@ footer::before {
     row-gap: 8px !important;
   }
 }
+/* =====================================================
+   ULTRA COMPACT REGISTRY REPORT (FINAL)
+===================================================== */
+
+/* HARD reduce grid row spacing */
+.report-grid {
+  row-gap: 6px !important;
+  column-gap: 12px !important;
+  margin-bottom: 10px !important;
+}
+
+/* Kill any vertical stretch */
+.report-item {
+  min-height: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* Labels: very tight */
+.report-item label {
+  margin-bottom: 1px !important;
+  line-height: 1.1 !important;
+  font-size: 0.55rem !important;
+  letter-spacing: 1px !important;
+}
+
+/* Values: registry-style compact */
+.report-item .value {
+  line-height: 1.15 !important;
+  font-size: 0.85rem !important;
+  margin: 0 !important;
+}
+
+/* Header separation minimal */
+.report-header {
+  margin-bottom: 10px !important;
+  padding-bottom: 8px !important;
+}
+
+/* Footer note closer */
+.report-footer {
+  margin-top: 8px !important;
+  padding: 8px 10px !important;
+  font-size: 0.65rem !important;
+}
+
+/* Status badge even tighter */
+.status-badge {
+  padding: 5px 10px !important;
+  font-size: 0.65rem !important;
+}
+
+/* -----------------------------------------------------
+   MOBILE: MAXIMUM DENSITY
+----------------------------------------------------- */
+@media (max-width: 768px) {
+  .report-grid {
+    row-gap: 5px !important;
+  }
+
+  .report-item .value {
+    font-size: 0.8rem !important;
+  }
+}
+
