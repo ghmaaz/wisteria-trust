@@ -111,13 +111,13 @@ async function verifySeller() {
 
   out.innerHTML = `
     <div class="verification-report" style="text-align:center;">
-      <div class="status-badge" style="margin: 0 auto 20px; width: fit-content;">
-        <i data-lucide="loader-2" class="animate-spin"></i> Initializing Security Scan...
+      <div class="status-badge" style="margin: 0 auto 16px; width: fit-content; background: var(--bg-elevated);">
+        <i data-lucide="loader-2" class="animate-spin"></i> Securing Connection...
       </div>
-      <p style="color: var(--text-muted);">Retrieving official records from registry...</p>
+      <p style="font-size: 0.8rem; color: var(--text-muted); font-family: var(--font-main);">Scanning sovereign registry for Record Reference: ${v}</p>
     </div>
   `
-  window.lucide.createIcons() // Declare lucide variable before using it
+  window.lucide.createIcons()
   scrollToVerifyBox()
 
   try {
@@ -129,72 +129,64 @@ async function verifySeller() {
       const icon = "shield-alert"
       const statusClass = "revoked"
       let msg = "Not Verified"
-      let detail = "This entity has no active record in our sovereign registry."
 
-      if (data.status === "REVOKED") {
-        msg = "Revoked"
-        detail = "This verification has been officially revoked due to compliance failure."
-      }
-
-      if (data.status === "EXPIRED") {
-        msg = "Expired"
-        detail = "The verification period for this entity has lapsed."
-      }
+      if (data.status === "REVOKED") msg = "Revoked"
+      if (data.status === "EXPIRED") msg = "Expired"
 
       out.innerHTML = `
-        <div class="verification-report">
-          <div class="report-header">
-            <div class="status-badge ${statusClass}">
+        <div class="verification-report revoked">
+          <div class="report-header" style="border-bottom: none; margin-bottom: 0;">
+            <div class="status-badge revoked">
               <i data-lucide="${icon}"></i> ${msg}
             </div>
             <div style="text-align: right;">
-              <div style="font-size: 0.6rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px;">Record Reference</div>
-              <div style="font-size: 0.8rem; color: var(--text-main); font-weight: 800;">${v}</div>
+              <div style="font-size: 0.55rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 2px;">Record Reference</div>
+              <div style="font-size: 0.85rem; color: var(--text-main); font-weight: 700;">${v}</div>
             </div>
           </div>
         </div>
       `
-      window.lucide.createIcons() // Declare lucide variable before using it
+      window.lucide.createIcons()
       scrollToVerifyBox()
       return
     }
 
-    // ✅ VERIFIED - Professional Report Card
+    // ✅ VERIFIED - Professional Compact Report Card
     out.innerHTML = `
       <div class="verification-report">
-        <div class="report-seal">OFFICIAL</div>
+        <div class="report-seal">AUTHENTIC</div>
         <div class="report-header">
           <div class="status-badge verified">
-            <i data-lucide="shield-check"></i> Sovereign Verified
+            <i data-lucide="shield-check"></i> Verified Entity
           </div>
           <div style="text-align: right;">
-            <div style="font-size: 0.6rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px;">Record Reference</div>
-            <div style="font-size: 0.8rem; color: var(--text-main); font-weight: 800;">${v}</div>
+            <div style="font-size: 0.55rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 2px;">Registry ID</div>
+            <div style="font-size: 0.85rem; color: var(--text-main); font-weight: 700;">${v}</div>
           </div>
         </div>
         
         <div class="report-grid">
           <div class="report-item">
-            <label>Authorized Institution</label>
+            <label>Legal Entity</label>
             <div class="value">${data.sellerName}</div>
           </div>
           <div class="report-item">
-            <label>Sovereign Mandate</label>
+            <label>Sovereign Status</label>
+            <div class="value" style="color: #10b981;">Active</div>
+          </div>
+          <div class="report-item">
+            <label>Institutional Role</label>
             <div class="value">${data.businessName || "Principal Member"}</div>
           </div>
           <div class="report-item">
-            <label>Registry Status</label>
-            <div class="value" style="color: #10b981;">Active / Certified</div>
-          </div>
-          <div class="report-item">
-            <label>Authority Period</label>
-            <div class="value">Until ${new Date(data.validTill).toLocaleDateString(undefined, { year: "numeric", month: "long", day: "numeric" })}</div>
+            <label>Validity Until</label>
+            <div class="value">${new Date(data.validTill).toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" })}</div>
           </div>
         </div>
 
         <div class="report-footer">
-          <i data-lucide="award" style="width: 18px; height: 18px; color: var(--primary); flex-shrink: 0;"></i>
-          <span>This digital credential serves as an immutable confirmation of institutional legitimacy and commercial integrity within the Wisteria Trust sovereign verification registry.</span>
+          <i data-lucide="award" style="width: 20px; height: 20px; color: var(--primary); flex-shrink: 0;"></i>
+          <span>Official digital credential confirming institutional legitimacy within the Wisteria Trust global sovereign registry.</span>
         </div>
       </div>
     `
@@ -203,11 +195,13 @@ async function verifySeller() {
   } catch (err) {
     console.error("Verification error:", err)
     out.innerHTML = `
-      <div class="verification-report revoked">
-        <i data-lucide="alert-triangle"></i> Registry Connection Error. Please try again later.
+      <div class="verification-report revoked" style="text-align: center;">
+        <i data-lucide="alert-triangle" style="margin-bottom: 12px; color: #ef4444;"></i>
+        <div style="font-weight: 600; font-size: 0.9rem;">Registry Connection Error</div>
+        <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">Please verify your connection and try again later.</div>
       </div>
     `
-    window.lucide.createIcons() // Declare lucide variable before using it
+    window.lucide.createIcons()
     scrollToVerifyBox()
   }
 }
