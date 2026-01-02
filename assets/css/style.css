@@ -1021,10 +1021,6 @@ footer::before {
   .container {
     padding: 0 32px;
   }
-
-  .footer-grid {
-    gap: 60px;
-  }
 }
 
 @media (max-width: 991px) {
@@ -1037,6 +1033,10 @@ footer::before {
     gap: 48px;
   }
 
+  .nav-links {
+    display: none; /* Hide desktop nav links */
+  }
+
   .footer-links-container {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -1046,99 +1046,10 @@ footer::before {
   }
 
   .hero h1 {
-    font-size: 3.5rem;
-  }
-}
-
-@media (max-width: 768px) {
-  .container {
-    padding: 0 24px;
+    font-size: 3rem; /* Slightly smaller for tablets */
   }
 
-  .hero {
-    padding-top: 140px;
+  .mission-visual {
+    order: -1; /* Image on top in mobile/tablet */
   }
-
-  .hero-actions {
-    flex-direction: column;
-    width: 100%;
-    max-width: 300px;
-  }
-
-  .hero-stats {
-    flex-direction: column;
-    gap: 24px;
-    align-items: center;
-  }
-
-  .footer-links-container {
-    grid-template-columns: 1fr;
-    gap: 40px;
-  }
-
-  .bottom-inner {
-    flex-direction: column;
-    gap: 24px;
-    text-align: center;
-  }
-
-  .portal-card {
-    padding: 40px 24px;
-  }
-
-  .mission {
-    padding: 100px 0;
-  }
-}
-
-@media (max-width: 480px) {
-  .hero h1 {
-    font-size: 2.8rem;
-  }
-
-  .brand span {
-    display: none;
-  }
-
-  .nav-cta {
-    display: none;
-  }
-
-  .section-tag {
-    letter-spacing: 2px;
-  }
-}
-
-.authority-timeline {
-  padding: 150px 0;
-  background: var(--bg-main);
-  border-top: 1px solid var(--border-subtle);
-}
-
-.timeline-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 40px;
-}
-
-.timeline-item {
-  padding: 40px;
-  background: var(--bg-surface);
-  border: 1px solid var(--border-subtle);
-  border-radius: 32px;
-  position: relative;
-  transition: transform 0.6s var(--ease-lux);
-}
-
-.timeline-item:hover {
-  transform: translateY(-10px);
-  border-color: var(--primary);
-}
-
-.t-year {
-  font-family: "Playfair Display", serif;
-  font-size: 0.8rem;
-  color: var(--primary);
-  margin-bottom: 16px;
-  letter-spacing: 2px;
 }
