@@ -111,10 +111,10 @@ async function verifySeller() {
 
   out.innerHTML = `
     <div class="verification-report" style="text-align:center;">
-      <div class="status-badge" style="margin: 0 auto 16px; width: fit-content; background: var(--bg-elevated);">
-        <i data-lucide="loader-2" class="animate-spin"></i> Securing Connection...
+      <div class="status-badge" style="margin: 0 auto 20px; width: fit-content; background: var(--bg-elevated);">
+        <i data-lucide="loader-2" class="animate-spin"></i> Initializing Security Scan...
       </div>
-      <p style="font-size: 0.8rem; color: var(--text-muted); font-family: var(--font-main);">Scanning sovereign registry for Record Reference: ${v}</p>
+      <p style="font-size: 0.85rem; color: var(--text-muted);">Retrieving official records from sovereign registry...</p>
     </div>
   `
   window.lucide.createIcons()
@@ -140,8 +140,8 @@ async function verifySeller() {
               <i data-lucide="${icon}"></i> ${msg}
             </div>
             <div style="text-align: right;">
-              <div style="font-size: 0.55rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 2px;">Record Reference</div>
-              <div style="font-size: 0.85rem; color: var(--text-main); font-weight: 700;">${v}</div>
+              <div style="font-size: 0.6rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 4px;">Record Ref</div>
+              <div style="font-size: 0.9rem; color: var(--text-main); font-weight: 700;">${v}</div>
             </div>
           </div>
         </div>
@@ -151,17 +151,17 @@ async function verifySeller() {
       return
     }
 
-    // ✅ VERIFIED - Professional Compact Report Card
+    // ✅ VERIFIED - Professional Compact Certificate
     out.innerHTML = `
       <div class="verification-report">
-        <div class="report-seal">OFFICIAL RECORD</div>
+        <div class="report-seal">CERTIFIED</div>
         <div class="report-header">
           <div class="status-badge verified">
             <i data-lucide="shield-check"></i> Institutional Integrity Verified
           </div>
           <div style="text-align: right;">
             <div style="font-size: 0.6rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 4px;">Registry ID</div>
-            <div style="font-size: 0.9rem; color: var(--text-main); font-weight: 700; letter-spacing: 0.5px;">${v}</div>
+            <div style="font-size: 0.95rem; color: var(--text-main); font-weight: 700;">${v}</div>
           </div>
         </div>
         
@@ -172,8 +172,8 @@ async function verifySeller() {
           </div>
           <div class="report-item">
             <label>Protocol Status</label>
-            <div class="value" style="color: #10b981; display: flex; align-items: center; gap: 6px;">
-              <span style="width: 8px; height: 8px; background: #10b981; border-radius: 50%;"></span>
+            <div class="value" style="color: #059669; display: flex; align-items: center; gap: 8px;">
+              <span style="width: 8px; height: 8px; background: #059669; border-radius: 50%;"></span>
               Active
             </div>
           </div>
@@ -183,12 +183,12 @@ async function verifySeller() {
           </div>
           <div class="report-item">
             <label>Issuance Period</label>
-            <div class="value">Until ${new Date(data.validTill).toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" })}</div>
+            <div class="value">Valid Until ${new Date(data.validTill).toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" })}</div>
           </div>
         </div>
 
         <div class="report-footer">
-          <i data-lucide="award" style="width: 20px; height: 20px; color: var(--primary); flex-shrink: 0; margin-top: 2px;"></i>
+          <i data-lucide="award" style="width: 20px; height: 20px; color: var(--primary); flex-shrink: 0;"></i>
           <span>This document serves as an official confirmation of institutional legitimacy within the Wisteria Trust sovereign registry.</span>
         </div>
       </div>
@@ -199,9 +199,9 @@ async function verifySeller() {
     console.error("Verification error:", err)
     out.innerHTML = `
       <div class="verification-report revoked" style="text-align: center;">
-        <i data-lucide="alert-triangle" style="margin-bottom: 12px; color: #ef4444;"></i>
-        <div style="font-weight: 600; font-size: 0.9rem;">Registry Connection Error</div>
-        <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">Please verify your connection and try again later.</div>
+        <i data-lucide="alert-triangle" style="margin-bottom: 12px; color: #dc2626;"></i>
+        <div style="font-weight: 600;">Registry Connection Error</div>
+        <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">Please check your connection and try again later.</div>
       </div>
     `
     window.lucide.createIcons()
