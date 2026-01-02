@@ -62,10 +62,21 @@ if (themeToggle) {
 
 document.querySelectorAll(".contact-trigger").forEach((anchor) => {
   anchor.addEventListener("click", (e) => {
-    e.preventDefault()
-    const footer = document.querySelector("#footer")
-    if (footer) {
-      footer.scrollIntoView({ behavior: "smooth" })
+    // Check if it's an internal link
+    if (anchor.getAttribute("href").startsWith("#")) {
+      e.preventDefault()
+      const targetId = anchor.getAttribute("href")
+      const targetElement = document.querySelector(targetId)
+      if (targetElement) {
+        targetElement.scrollIntoView({ behavior: "smooth" })
+      }
+
+      // Close mobile menu if open
+      if (mobileMenu && mobileMenu.classList.contains("active")) {
+        mobileMenu.classList.remove("active")
+        if (menuBtn) menuBtn.classList.remove("menu-open")
+        document.body.style.overflow = "auto"
+      }
     }
   })
 })
