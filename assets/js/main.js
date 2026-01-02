@@ -154,14 +154,14 @@ async function verifySeller() {
     // ✅ VERIFIED - Professional Compact Report Card
     out.innerHTML = `
       <div class="verification-report">
-        <div class="report-seal">AUTHENTIC</div>
+        <div class="report-seal">OFFICIAL RECORD</div>
         <div class="report-header">
           <div class="status-badge verified">
-            <i data-lucide="shield-check"></i> Verified Entity
+            <i data-lucide="shield-check"></i> Institutional Integrity Verified
           </div>
           <div style="text-align: right;">
-            <div style="font-size: 0.55rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 2px;">Registry ID</div>
-            <div style="font-size: 0.85rem; color: var(--text-main); font-weight: 700;">${v}</div>
+            <div style="font-size: 0.6rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 4px;">Registry ID</div>
+            <div style="font-size: 0.9rem; color: var(--text-main); font-weight: 700; letter-spacing: 0.5px;">${v}</div>
           </div>
         </div>
         
@@ -171,22 +171,25 @@ async function verifySeller() {
             <div class="value">${data.sellerName}</div>
           </div>
           <div class="report-item">
-            <label>Sovereign Status</label>
-            <div class="value" style="color: #10b981;">Active</div>
+            <label>Protocol Status</label>
+            <div class="value" style="color: #10b981; display: flex; align-items: center; gap: 6px;">
+              <span style="width: 8px; height: 8px; background: #10b981; border-radius: 50%;"></span>
+              Active
+            </div>
           </div>
           <div class="report-item">
-            <label>Institutional Role</label>
-            <div class="value">${data.businessName || "Principal Member"}</div>
+            <label>Authorized Member</label>
+            <div class="value">${data.businessName || "Wisteria Principal"}</div>
           </div>
           <div class="report-item">
-            <label>Validity Until</label>
-            <div class="value">${new Date(data.validTill).toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" })}</div>
+            <label>Issuance Period</label>
+            <div class="value">Until ${new Date(data.validTill).toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" })}</div>
           </div>
         </div>
 
         <div class="report-footer">
-          <i data-lucide="award" style="width: 20px; height: 20px; color: var(--primary); flex-shrink: 0;"></i>
-          <span>Official digital credential confirming institutional legitimacy within the Wisteria Trust global sovereign registry.</span>
+          <i data-lucide="award" style="width: 20px; height: 20px; color: var(--primary); flex-shrink: 0; margin-top: 2px;"></i>
+          <span>This document serves as an official confirmation of institutional legitimacy within the Wisteria Trust sovereign registry.</span>
         </div>
       </div>
     `
