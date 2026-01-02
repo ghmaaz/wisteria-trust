@@ -45,21 +45,30 @@ if (menuBtn && mobileMenu) {
 const themeToggle = document.getElementById("themeToggle")
 const body = document.body
 
-// Check for saved theme or default to dark
-const savedTheme = localStorage.getItem("theme") || "dark-theme"
+const savedTheme = localStorage.getItem("theme") || "light-theme"
 body.className = savedTheme
 
 if (themeToggle) {
   themeToggle.onclick = () => {
-    if (body.classList.contains("dark-theme")) {
-      body.classList.replace("dark-theme", "light-theme")
-      localStorage.setItem("theme", "light-theme")
-    } else {
+    if (body.classList.contains("light-theme")) {
       body.classList.replace("light-theme", "dark-theme")
       localStorage.setItem("theme", "dark-theme")
+    } else {
+      body.classList.replace("dark-theme", "light-theme")
+      localStorage.setItem("theme", "light-theme")
     }
   }
 }
+
+document.querySelectorAll(".contact-trigger").forEach((anchor) => {
+  anchor.addEventListener("click", (e) => {
+    e.preventDefault()
+    const footer = document.querySelector("#footer")
+    if (footer) {
+      footer.scrollIntoView({ behavior: "smooth" })
+    }
+  })
+})
 
 /* ===============================
    HELPER: SCROLL TO VERIFY BOX
