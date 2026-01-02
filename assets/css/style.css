@@ -54,8 +54,7 @@ body {
   position: relative;
   /* Added a very subtle transition for theme switching and interactions */
   transition: background-color 0.5s ease, color 0.5s ease;
-  /* Updated gradient to use CSS variables instead of hardcoded dark colors to prevent contrast issues */
-  background: radial-gradient(circle at 50% 0%, var(--bg-elevated) 0%, var(--bg-main) 70%);
+  background: radial-gradient(circle at 50% 0%, #161b22 0%, var(--bg-main) 70%);
 }
 
 .container {
@@ -243,8 +242,6 @@ h2 {
   overflow: hidden;
   padding: 120px 20px 80px; /* Added horizontal padding */
   text-align: center;
-  /* Added relative background to ensure text is always readable against the hero image */
-  background-color: var(--bg-main);
 }
 
 .hero-bg {
@@ -253,8 +250,7 @@ h2 {
   background-image: url("/placeholder.svg?height=1080&width=1920");
   background-size: cover;
   background-position: center;
-  /* Reduced opacity to ensure heading text pops */
-  opacity: 0.15;
+  opacity: 0.3;
   z-index: -1;
 }
 
@@ -529,13 +525,11 @@ h2 {
 
 .input-group input {
   width: 100%;
-  /* Changed hardcoded white background to surface variable for theme consistency */
-  background: var(--bg-elevated);
+  background: rgba(255, 255, 255, 0.03);
   border: 1px solid var(--border-subtle);
   padding: 20px 30px;
   font-size: 1.1rem;
-  /* Changed hardcoded white text to main text variable */
-  color: var(--text-main);
+  color: #fff;
   font-family: inherit;
   transition: all 0.4s var(--ease-lux);
   border-radius: 100px; /* circle shape */
@@ -575,98 +569,6 @@ h2 {
   margin-top: 48px;
 }
 
-/* Added professional Verification Report Card styles */
-.verification-report {
-  background: var(--bg-surface);
-  border: 1px solid var(--border-subtle);
-  border-radius: 16px;
-  padding: 24px;
-  text-align: left;
-  position: relative;
-  overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-  animation: slideUp 0.5s var(--ease-lux);
-  max-width: 500px;
-  margin: 0 auto;
-}
-
-.report-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-  padding-bottom: 16px;
-  border-bottom: 1px solid var(--border-subtle);
-}
-
-.report-seal {
-  position: absolute;
-  top: -10px;
-  right: -10px;
-  font-size: 4rem;
-  font-weight: 900;
-  color: var(--text-muted);
-  opacity: 0.03;
-  transform: rotate(-15deg);
-  pointer-events: none;
-  user-select: none;
-}
-
-.report-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 16px 20px;
-}
-
-.report-item label {
-  display: block;
-  font-size: 0.65rem;
-  color: var(--text-muted);
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  margin-bottom: 4px;
-  font-weight: 700;
-}
-
-.report-item .value {
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: var(--text-main);
-  line-height: 1.2;
-}
-
-.report-footer {
-  margin-top: 20px;
-  padding-top: 16px;
-  border-top: 1px solid var(--border-subtle);
-  font-size: 0.7rem;
-  color: var(--text-muted);
-  display: flex;
-  align-items: flex-start;
-  gap: 8px;
-}
-
-.report-footer i {
-  flex-shrink: 0;
-  margin-top: 2px;
-}
-
-@media (max-width: 480px) {
-  .verification-report {
-    padding: 20px;
-    border-radius: 12px;
-  }
-
-  .report-grid {
-    grid-template-columns: 1fr;
-    gap: 12px;
-  }
-
-  .report-item .value {
-    font-size: 1rem;
-  }
-}
-
 /* Added project info and strategic detail section styles with premium animations */
 .project-info {
   padding: 100px 0;
@@ -691,16 +593,13 @@ h2 {
   margin-bottom: 20px;
 }
 
-/* STRATEGIC VISION SECTION */
 .strategic-detail {
   padding: 150px 0;
   background-attachment: fixed;
-  /* Replaced hardcoded dark overlay with theme-aware overlay for light mode support */
-  background-image: linear-gradient(var(--bg-main), var(--bg-main)), url("/placeholder.svg?height=800&width=1600");
+  background-image: linear-gradient(rgba(6, 8, 11, 0.9), rgba(6, 8, 11, 0.9)),
+    url("/placeholder.svg?height=800&width=1600");
   background-size: cover;
   text-align: center;
-  /* Added explicit text color to ensure readability in dark sections */
-  color: var(--text-main);
 }
 
 .detail-content {
@@ -886,8 +785,7 @@ footer::before {
   justify-content: center;
   opacity: 0;
   visibility: hidden;
-  /* Slowed down the transition for a more "luxurious" and smooth feel as requested */
-  transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.4s var(--ease-lux);
   transform: translateY(-20px);
 }
 
@@ -989,6 +887,9 @@ footer::before {
   width: 100%;
   background: rgba(197, 160, 89, 0.05);
   border-top: 1px solid var(--border-subtle);
+  padding: 12px 0;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 .marquee-content {
@@ -1030,4 +931,143 @@ footer::before {
 .timeline-item {
   padding: 40px;
   background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 32px;
+  position: relative;
+  transition: transform 0.6s var(--ease-lux);
+}
+
+.timeline-item:hover {
+  transform: translateY(-10px);
+  border-color: var(--primary);
+}
+
+.t-year {
+  font-family: "Playfair Display", serif;
+  font-size: 0.8rem;
+  color: var(--primary);
+  margin-bottom: 16px;
+  letter-spacing: 2px;
+}
+
+/* RESPONSIVE */
+
+/* Enhanced smooth transitions for interactive elements */
+a,
+button,
+.v-card,
+.luxury-card {
+  transition: all 0.4s var(--ease-lux);
+}
+
+@media (max-width: 991px) {
+  /* Optimized grid spacing for tablet/desktop transition */
+  .mission-grid,
+  .info-grid,
+  .value-grid,
+  .timeline-grid,
+  .footer-grid {
+    grid-template-columns: 1fr !important;
+    gap: 40px !important;
+  }
+  .container {
+    padding: 0 30px;
+  }
+  .mission-grid {
+    grid-template-columns: 1fr !important;
+    gap: 48px;
+  }
+  .value-grid {
+    grid-template-columns: 1fr;
+  }
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 64px;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 20px; /* Reduced padding for mobile screens */
+  }
+  /* Improved hero layout for mobile devices */
+  .hero {
+    padding: 140px 0 60px;
+    width: 100%;
+    max-width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+  }
+  .hero-content {
+    width: 100%;
+    max-width: 100%;
+  }
+  .hero h1 {
+    font-size: 2.4rem;
+    margin-bottom: 20px;
+    width: 100%;
+  }
+  .hero p {
+    font-size: 0.95rem;
+    margin-bottom: 32px;
+    width: 100%;
+  }
+  .hero-stats {
+    flex-direction: row;
+    justify-content: center;
+    gap: 32px;
+    margin-top: 40px;
+    flex-wrap: wrap;
+    width: 100%;
+  }
+  .stat-num {
+    font-size: 2rem;
+  }
+  .mission {
+    padding: 60px 0;
+  }
+  .mission-grid {
+    gap: 40px !important;
+  }
+  .luxury-card {
+    padding: 24px;
+  }
+  .portal-card {
+    padding: 40px 20px;
+  }
+  .footer-grid {
+    text-align: center;
+  }
+  .footer-links-container {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .f-col a {
+    margin: 0 auto 12px;
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    background: rgba(10, 12, 16, 0.95);
+    padding: 12px 0;
+  }
+
+  .brand span {
+    font-size: 1rem;
+  }
+
+  .nav-cta {
+    padding: 8px 16px;
+    font-size: 0.7rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    height: auto;
+    padding: 120px 0 80px;
+  }
 }
