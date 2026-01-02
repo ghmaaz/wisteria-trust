@@ -1080,8 +1080,9 @@ button,
 }
 
 @media (max-width: 768px) {
+  /* fixed mobile navbar background to match light/dark theme instead of hardcoded dark */
   .navbar {
-    background: rgba(10, 12, 16, 0.95);
+    background: var(--nav-bg);
     padding: 12px 0;
   }
 
