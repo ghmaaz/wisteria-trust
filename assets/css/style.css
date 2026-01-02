@@ -54,7 +54,8 @@ body {
   position: relative;
   /* Added a very subtle transition for theme switching and interactions */
   transition: background-color 0.5s ease, color 0.5s ease;
-  background: radial-gradient(circle at 50% 0%, #161b22 0%, var(--bg-main) 70%);
+  /* Updated gradient to use CSS variables instead of hardcoded dark colors to prevent contrast issues */
+  background: radial-gradient(circle at 50% 0%, var(--bg-elevated) 0%, var(--bg-main) 70%);
 }
 
 .container {
@@ -242,6 +243,8 @@ h2 {
   overflow: hidden;
   padding: 120px 20px 80px; /* Added horizontal padding */
   text-align: center;
+  /* Added relative background to ensure text is always readable against the hero image */
+  background-color: var(--bg-main);
 }
 
 .hero-bg {
@@ -250,7 +253,8 @@ h2 {
   background-image: url("/placeholder.svg?height=1080&width=1920");
   background-size: cover;
   background-position: center;
-  opacity: 0.3;
+  /* Reduced opacity to ensure heading text pops */
+  opacity: 0.15;
   z-index: -1;
 }
 
@@ -525,11 +529,13 @@ h2 {
 
 .input-group input {
   width: 100%;
-  background: rgba(255, 255, 255, 0.03);
+  /* Changed hardcoded white background to surface variable for theme consistency */
+  background: var(--bg-elevated);
   border: 1px solid var(--border-subtle);
   padding: 20px 30px;
   font-size: 1.1rem;
-  color: #fff;
+  /* Changed hardcoded white text to main text variable */
+  color: var(--text-main);
   font-family: inherit;
   transition: all 0.4s var(--ease-lux);
   border-radius: 100px; /* circle shape */
@@ -593,13 +599,16 @@ h2 {
   margin-bottom: 20px;
 }
 
+/* STRATEGIC VISION SECTION */
 .strategic-detail {
   padding: 150px 0;
   background-attachment: fixed;
-  background-image: linear-gradient(rgba(6, 8, 11, 0.9), rgba(6, 8, 11, 0.9)),
-    url("/placeholder.svg?height=800&width=1600");
+  /* Replaced hardcoded dark overlay with theme-aware overlay for light mode support */
+  background-image: linear-gradient(var(--bg-main), var(--bg-main)), url("/placeholder.svg?height=800&width=1600");
   background-size: cover;
   text-align: center;
+  /* Added explicit text color to ensure readability in dark sections */
+  color: var(--text-main);
 }
 
 .detail-content {
@@ -785,7 +794,8 @@ footer::before {
   justify-content: center;
   opacity: 0;
   visibility: hidden;
-  transition: all 0.4s var(--ease-lux);
+  /* Slowed down the transition for a more "luxurious" and smooth feel as requested */
+  transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
   transform: translateY(-20px);
 }
 
@@ -1051,7 +1061,9 @@ button,
 
 @media (max-width: 768px) {
   .navbar {
-    background: rgba(10, 12, 16, 0.95);
+    /* Removed hardcoded dark background to ensure consistency with the selected theme (Light/Dark) */
+    background: var(--nav-bg);
+    backdrop-filter: blur(12px);
     padding: 12px 0;
   }
 
