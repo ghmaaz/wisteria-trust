@@ -1143,3 +1143,140 @@ footer::before {
   letter-spacing: 2px;
 }
 
+/* =====================================================
+   MOBILE CENTER ALIGNMENT FIX (ADD AT END)
+===================================================== */
+
+/* ---- GLOBAL MOBILE SAFETY ---- */
+@media (max-width: 768px) {
+  body {
+    overflow-x: hidden;
+  }
+
+  section {
+    width: 100%;
+  }
+}
+
+/* -----------------------------------------------------
+   FIX: "The Architecture of Global Trust" (Timeline)
+----------------------------------------------------- */
+@media (max-width: 768px) {
+  .authority-timeline {
+    padding: 100px 0;
+    text-align: center;
+  }
+
+  .timeline-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    justify-items: center;
+  }
+
+  .timeline-item {
+    width: 100%;
+    max-width: 420px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .timeline-item h3 {
+    font-size: 1.2rem;
+  }
+
+  .timeline-item p {
+    font-size: 0.95rem;
+  }
+}
+
+/* -----------------------------------------------------
+   FIX: SECOND PAGE / PROJECT INFO BLOCK CENTERING
+----------------------------------------------------- */
+@media (max-width: 768px) {
+  .project-info {
+    padding: 80px 0;
+    text-align: center;
+  }
+
+  .info-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .info-item {
+    margin: 0 auto;
+    padding: 32px 24px;
+    border-left: none;
+    border-top: 1px solid var(--primary);
+    max-width: 420px;
+  }
+
+  .info-item h3 {
+    font-size: 1.25rem;
+  }
+}
+
+/* -----------------------------------------------------
+   FIX: FOOTER LEFT SHIFT ISSUE (MOBILE)
+----------------------------------------------------- */
+@media (max-width: 768px) {
+  footer {
+    text-align: center;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+
+  .footer-brand,
+  .footer-links-container {
+    justify-content: center;
+    align-items: center;
+  }
+
+  .footer-desc {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .f-col {
+    align-items: center;
+    text-align: center;
+  }
+
+  .f-col a {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+/* -----------------------------------------------------
+   FIX: HERO STATS CENTERING (MOBILE)
+----------------------------------------------------- */
+@media (max-width: 768px) {
+  .hero-stats {
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+  }
+
+  .stat-item {
+    align-items: center;
+    text-align: center;
+  }
+}
+
+/* -----------------------------------------------------
+   FIX: NAVBAR SPACING & CENTER SAFETY
+----------------------------------------------------- */
+@media (max-width: 768px) {
+  .navbar {
+    padding: 14px 0;
+  }
+
+  .brand {
+    justify-content: center;
+  }
+}
+
