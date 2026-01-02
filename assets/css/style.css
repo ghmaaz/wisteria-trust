@@ -61,7 +61,6 @@ body {
   background: radial-gradient(circle at 50% 0%, var(--gradient-start) 0%, var(--bg-main) 70%);
 }
 
-/* refining container padding for better mobile experience */
 .container {
   max-width: 1400px;
   margin: 0 auto;
@@ -69,12 +68,6 @@ body {
   width: 100%;
   max-width: 100vw;
   box-sizing: border-box;
-}
-
-@media (max-width: 768px) {
-  .container {
-    padding: 0 24px;
-  }
 }
 
 /* TYPOGRAPHY */
@@ -243,7 +236,7 @@ h2 {
   gap: 16px;
 }
 
-/* making hero section fully responsive with adaptive font sizes */
+/* HERO SECTION */
 .hero {
   min-height: 100vh;
   display: flex;
@@ -251,32 +244,8 @@ h2 {
   justify-content: center;
   position: relative;
   overflow: hidden;
-  padding: 120px 20px 80px;
+  padding: 120px 20px 80px; /* Added horizontal padding */
   text-align: center;
-}
-
-@media (max-width: 768px) {
-  .hero {
-    padding: 140px 20px 60px;
-  }
-
-  .hero h1 {
-    font-size: 3rem !important;
-  }
-
-  .hero-actions {
-    flex-direction: column;
-    gap: 16px;
-    width: 100%;
-    max-width: 300px;
-  }
-
-  .btn-primary,
-  .btn-secondary {
-    width: 100%;
-    text-align: center;
-    padding: 16px 32px;
-  }
 }
 
 .hero-bg {
@@ -707,22 +676,10 @@ h2 {
   background: linear-gradient(to bottom, var(--bg-surface), var(--bg-main));
 }
 
-/* making info-grid and value-grid responsive (switching from columns to single stack) */
 .info-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 60px;
-}
-
-@media (max-width: 991px) {
-  .info-grid {
-    grid-template-columns: 1fr;
-    gap: 40px;
-  }
-
-  .info-item {
-    padding: 30px 20px;
-  }
 }
 
 .info-item {
@@ -770,23 +727,6 @@ h2 {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 40px;
-}
-
-@media (max-width: 1024px) {
-  .value-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 768px) {
-  .value-grid {
-    grid-template-columns: 1fr;
-    gap: 24px;
-  }
-
-  .v-card {
-    padding: 40px 24px;
-  }
 }
 
 .v-card {
@@ -854,10 +794,6 @@ footer::before {
   color: var(--primary);
   letter-spacing: 1px;
   text-transform: uppercase;
-}
-
-.cert-badge i {
-  color: var(--primary);
 }
 
 .footer-links-container {
@@ -994,32 +930,12 @@ footer::before {
   z-index: 1001;
 }
 
-/* finalizing mobile menu and overall mobile layout polish */
 @media (max-width: 991px) {
   .nav-links {
-    display: none;
+    display: none; /* Hide desktop links on tablet/mobile */
   }
   .mobile-menu-toggle {
-    display: flex;
-  }
-
-  /* Ensuring strategic detail section looks good on small screens */
-  .strategic-detail {
-    padding: 100px 0;
-  }
-
-  .detail-content h2 {
-    font-size: 2.5rem !important;
-  }
-}
-
-@media (max-width: 480px) {
-  .brand-text {
-    font-size: 1rem;
-  }
-
-  .hero h1 {
-    font-size: 2.5rem !important;
+    display: flex; /* Show toggle on mobile/tablet */
   }
 }
 
@@ -1056,4 +972,173 @@ footer::before {
 .v-card,
 .portal-card {
   border-radius: 100px !important; /* Forces perfect circle/pill shape where applicable */
+}
+
+.luxury-card,
+.v-card,
+.portal-card {
+  border-radius: 40px !important; /* Refined rounded corners for larger containers */
+}
+
+/* Added high-fidelity marquee and timeline animations */
+.trust-marquee {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background: rgba(197, 160, 89, 0.05);
+  border-top: 1px solid var(--border-subtle);
+  padding: 12px 0;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.marquee-content {
+  display: inline-block;
+  animation: marquee 40s linear infinite;
+}
+
+.marquee-content span {
+  display: inline-block;
+  padding: 0 40px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--primary);
+  opacity: 0.6;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* Added comprehensive mobile media queries to ensure the site is fully responsive on all devices */
+@media (max-width: 1200px) {
+  .container {
+    padding: 0 32px;
+  }
+
+  .footer-grid {
+    gap: 60px;
+  }
+}
+
+@media (max-width: 991px) {
+  .mission-grid,
+  .info-grid,
+  .value-grid,
+  .timeline-grid,
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+
+  .footer-links-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .hero-stats {
+    gap: 32px;
+  }
+
+  .hero h1 {
+    font-size: 3.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 24px;
+  }
+
+  .hero {
+    padding-top: 140px;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .hero-stats {
+    flex-direction: column;
+    gap: 24px;
+    align-items: center;
+  }
+
+  .footer-links-container {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .bottom-inner {
+    flex-direction: column;
+    gap: 24px;
+    text-align: center;
+  }
+
+  .portal-card {
+    padding: 40px 24px;
+  }
+
+  .mission {
+    padding: 100px 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero h1 {
+    font-size: 2.8rem;
+  }
+
+  .brand span {
+    display: none;
+  }
+
+  .nav-cta {
+    display: none;
+  }
+
+  .section-tag {
+    letter-spacing: 2px;
+  }
+}
+
+.authority-timeline {
+  padding: 150px 0;
+  background: var(--bg-main);
+  border-top: 1px solid var(--border-subtle);
+}
+
+.timeline-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+}
+
+.timeline-item {
+  padding: 40px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 32px;
+  position: relative;
+  transition: transform 0.6s var(--ease-lux);
+}
+
+.timeline-item:hover {
+  transform: translateY(-10px);
+  border-color: var(--primary);
+}
+
+.t-year {
+  font-family: "Playfair Display", serif;
+  font-size: 0.8rem;
+  color: var(--primary);
+  margin-bottom: 16px;
+  letter-spacing: 2px;
 }
