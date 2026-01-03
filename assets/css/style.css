@@ -1527,3 +1527,33 @@ footer::before {
     font-size: 0.78rem !important;
   }
 }
+
+/* =====================================================
+   MICRO GAP CONTROL – FINAL SAFETY OVERRIDE
+===================================================== */
+
+/* Force medium-tight row spacing (not airy, not tight) */
+.report-grid {
+  row-gap: 14px !important;   /* THIS is the key line */
+}
+
+/* Ensure each row hugs content */
+.report-item {
+  min-height: auto !important;
+}
+
+/* Labels slightly separated */
+.report-item label {
+  margin-bottom: 4px !important;
+  line-height: 1.25 !important;
+}
+
+/* Values stay close but readable */
+.report-item .value {
+  line-height: 1.35 !important;
+}
+
+/* Footer distance controlled */
+.report-footer {
+  margin-top: 10px !important;
+}
