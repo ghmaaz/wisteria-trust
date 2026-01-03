@@ -1457,3 +1457,77 @@ footer::before {
   }
 }
 
+/* =====================================================
+   EXTREME COMPACT REGISTRY REPORT (MAX DENSITY)
+===================================================== */
+
+/* Force grid rows ultra-tight */
+.report-grid {
+  row-gap: 2px !important;
+  column-gap: 10px !important;
+  margin-bottom: 6px !important;
+}
+
+/* Remove ALL spacing from items */
+.report-item {
+  padding: 0 !important;
+  margin: 0 !important;
+  min-height: 0 !important;
+}
+
+/* Labels: micro-spacing */
+.report-item label {
+  margin: 0 !important;
+  padding: 0 !important;
+  font-size: 0.5rem !important;
+  line-height: 1 !important;
+  letter-spacing: 0.8px !important;
+}
+
+/* Values: ledger style */
+.report-item .value {
+  margin: 0 !important;
+  padding: 0 !important;
+  font-size: 0.78rem !important;
+  line-height: 1.05 !important;
+}
+
+/* Header ultra-tight */
+.report-header {
+  margin-bottom: 6px !important;
+  padding-bottom: 4px !important;
+}
+
+/* Status badge micro */
+.status-badge {
+  padding: 4px 8px !important;
+  font-size: 0.6rem !important;
+  line-height: 1 !important;
+}
+
+/* Footer note almost attached */
+.report-footer {
+  margin-top: 4px !important;
+  padding: 6px 8px !important;
+  font-size: 0.6rem !important;
+  line-height: 1.2 !important;
+}
+
+/* Registry seal reduce */
+.report-seal {
+  font-size: 3rem !important;
+}
+
+/* -----------------------------------------------------
+   MOBILE: ABSOLUTE MINIMUM
+----------------------------------------------------- */
+@media (max-width: 768px) {
+  .report-grid {
+    row-gap: 1px !important;
+  }
+
+  .report-item .value {
+    font-size: 0.75rem !important;
+  }
+}
+
